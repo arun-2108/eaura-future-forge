@@ -64,10 +64,12 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-card-2: var(--card-2);
   --color-sand: var(--sand);
   --color-clay: var(--clay);
   --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
   --color-accent-blue: var(--accent-blue);
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-violet: var(--accent-violet);
