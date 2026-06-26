@@ -64,10 +64,12 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-card-2: var(--card-2);
   --color-sand: var(--sand);
   --color-clay: var(--clay);
   --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
   --color-accent-blue: var(--accent-blue);
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-violet: var(--accent-violet);
@@ -76,38 +78,40 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  /* EAURA warm sand palette */
-  --bg: #faf8f5;
-  --surface: #f0ebe3;
+  --radius: 0.75rem;
+  /* EAURA — Apple/Google/Microsoft inspired premium light system */
+  --bg: #ffffff;
+  --surface: #f5f5f7;        /* Apple light gray */
+  --surface-2: #fbfbfd;      /* whisper gray */
   --card-2: #ffffff;
-  --sand: #c9b99a;
-  --clay: #8b7355;
-  --ink: #1a1a1a;
-  --accent-blue: #8b7355;
-  --accent-cyan: #c9b99a;
-  --accent-violet: #8b7355;
-  --text-secondary: rgba(26,26,26,0.62);
-  --hairline: rgba(139,115,85,0.18);
-  --background: #faf8f5;
-  --foreground: #1a1a1a;
+  --sand: #f5f5f7;
+  --clay: #0071e3;           /* Apple blue */
+  --ink: #1d1d1f;            /* Apple near-black */
+  --ink-2: #424245;
+  --accent-blue: #0071e3;
+  --accent-cyan: #06b6d4;
+  --accent-violet: #5e5ce6;
+  --text-secondary: rgba(29,29,31,0.66);
+  --hairline: rgba(0,0,0,0.08);
+  --background: #ffffff;
+  --foreground: #1d1d1f;
   --card: #ffffff;
-  --card-foreground: #1a1a1a;
+  --card-foreground: #1d1d1f;
   --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #1a1a1a;
-  --primary-foreground: #faf8f5;
-  --secondary: #f0ebe3;
-  --secondary-foreground: #1a1a1a;
-  --muted: #f0ebe3;
-  --muted-foreground: rgba(26,26,26,0.6);
-  --accent: #c9b99a;
-  --accent-foreground: #1a1a1a;
+  --popover-foreground: #1d1d1f;
+  --primary: #1d1d1f;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f7;
+  --secondary-foreground: #1d1d1f;
+  --muted: #f5f5f7;
+  --muted-foreground: rgba(29,29,31,0.6);
+  --accent: #0071e3;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: rgba(139,115,85,0.18);
-  --input: rgba(139,115,85,0.22);
-  --ring: #8b7355;
+  --border: rgba(0,0,0,0.08);
+  --input: rgba(0,0,0,0.12);
+  --ring: #0071e3;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);

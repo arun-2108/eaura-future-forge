@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
   ArrowRight,
+  ChevronRight,
   Cpu,
   Bot,
   Network,
@@ -10,9 +10,6 @@ import {
   Workflow,
   ShieldCheck,
   Linkedin,
-  Mail,
-  MapPin,
-  Sparkles,
 } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Reveal } from "@/components/site/Reveal";
@@ -21,619 +18,475 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "EAURA — Engineering Intelligent Systems" },
+      { title: "EAURA — Engineering the autonomic age" },
       {
         name: "description",
         content:
-          "EAURA Pvt. Ltd. is an engineering and technology company building deep-tech products across AI, robotics, infrastructure and intelligent automation.",
+          "EAURA Pvt. Ltd. is a deep-technology company building the systems layer for intelligent infrastructure — artificial intelligence, robotics, and large-scale automation.",
       },
     ],
   }),
 });
 
-// ── Section label helper ──────────────────────────────────────
-function SectionLabel({ index, title }: { index: string; title: string }) {
+// ── Inline CTA link (Apple-style) ─────────────────────────────
+function CTA({ href, children, light = false }: { href: string; children: React.ReactNode; light?: boolean }) {
   return (
-    <div className="flex items-center gap-4 text-clay">
-      <span className="font-mono text-[11px] tracking-[0.2em]">{index}</span>
-      <span className="h-px w-8 bg-clay/40" />
-      <span className="text-[11px] font-semibold uppercase tracking-[0.22em]">
-        {title}
-      </span>
-    </div>
+    <a
+      href={href}
+      className={`group inline-flex items-center gap-1 text-[17px] font-medium tracking-tight transition-colors ${
+        light ? "text-clay hover:text-[#2997ff]" : "text-clay hover:opacity-80"
+      }`}
+    >
+      {children}
+      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+    </a>
   );
 }
 
-// ── Tile wrapper ──────────────────────────────────────────────
-function Tile({
-  children,
-  className = "",
-  tone = "surface",
-}: {
-  children: React.ReactNode;
-  className?: string;
-  tone?: "surface" | "card" | "ink" | "clay" | "sand";
-}) {
-  const tones: Record<string, string> = {
-    surface: "bg-surface border border-hairline",
-    card: "bg-card-2 border border-hairline",
-    ink: "bg-ink text-bg",
-    clay: "bg-clay text-bg",
-    sand: "bg-sand text-ink",
-  };
+function PillButton({ href, children, variant = "primary" }: { href: string; children: React.ReactNode; variant?: "primary" | "ghost" }) {
+  const base = "inline-flex items-center justify-center rounded-full px-5 py-2.5 text-[15px] font-medium tracking-tight transition-all";
+  const styles =
+    variant === "primary"
+      ? "bg-clay text-white hover:bg-[#0077ed]"
+      : "bg-white/10 text-white hover:bg-white/20 backdrop-blur";
   return (
-    <div
-      className={`relative rounded-3xl ${tones[tone]} transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgba(139,115,85,0.35)] ${className}`}
-    >
+    <a href={href} className={`${base} ${styles}`}>
       {children}
-    </div>
+    </a>
   );
 }
 
 // ─────────────────────────────────────────────────────────────
 function Home() {
   return (
-    <div className="min-h-screen bg-bg text-ink">
+    <div className="min-h-screen bg-bg text-ink antialiased">
       <Nav />
 
-      {/* HERO ─────────────────────────────────────────────────── */}
-      <section id="company" className="relative pt-28 pb-10 md:pt-36 md:pb-16">
-        <div className="absolute inset-0 dot-bg opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_70%)] pointer-events-none" />
-        <div className="relative mx-auto max-w-7xl px-6">
+      {/* HERO — Apple-style large centered ──────────────────── */}
+      <section id="company" className="relative overflow-hidden bg-surface">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[1100px] rounded-full bg-[radial-gradient(closest-side,rgba(0,113,227,0.10),transparent_70%)]" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-6 pt-36 pb-20 md:pt-44 md:pb-28 text-center">
           <Reveal>
-            <div className="grid grid-cols-12 gap-4 md:gap-6">
-              {/* Primary hero tile */}
-              <Tile
-                tone="surface"
-                className="col-span-12 lg:col-span-8 p-8 md:p-14 lg:p-16 flex flex-col justify-between min-h-[520px] overflow-hidden"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-clay/30 bg-bg/60 px-3 py-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-clay animate-pulse" />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-clay">
-                      EAURA Pvt. Ltd. · Est. 2024
-                    </span>
-                  </div>
-                  <div className="hidden md:block text-right">
-                    <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-clay border-b border-clay/30 pb-1">
-                      Corporate Brief / 26 · Vol I
-                    </div>
-                  </div>
+            <p className="text-[13px] md:text-[14px] font-medium text-clay tracking-tight">
+              Introducing EAURA
+            </p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h1 className="mt-3 font-display font-semibold tracking-[-0.04em] text-[44px] leading-[1.05] md:text-[88px] md:leading-[0.98] text-balance">
+              Engineering the
+              <br className="hidden md:block" />{" "}
+              <span className="bg-gradient-to-r from-ink via-ink-2 to-clay bg-clip-text text-transparent">
+                autonomic age.
+              </span>
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-6 max-w-2xl text-[19px] md:text-[22px] leading-snug text-ink-2 tracking-tight">
+              EAURA is a deep-technology company building the systems layer
+              for intelligent infrastructure — across AI, robotics, and
+              automation at scale.
+            </p>
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+              <CTA href="#products">See our products</CTA>
+              <CTA href="#capabilities">Explore capabilities</CTA>
+            </div>
+          </Reveal>
+
+          {/* Visual hero artifact — gradient device card */}
+          <Reveal delay={0.2}>
+            <div className="relative mt-16 md:mt-20 mx-auto max-w-5xl">
+              <div className="relative aspect-[16/9] rounded-[28px] overflow-hidden bg-gradient-to-br from-[#0a1733] via-[#0f2a52] to-[#1a4a8a] shadow-[0_30px_80px_-30px_rgba(15,42,82,0.45)]">
+                {/* subtle grid */}
+                <div className="absolute inset-0 opacity-40"
+                     style={{
+                       backgroundImage:
+                         "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
+                       backgroundSize: "48px 48px",
+                       maskImage: "radial-gradient(ellipse at center, black 35%, transparent 75%)",
+                     }}
+                />
+                {/* orb */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[440px] md:h-[440px] rounded-full bg-[radial-gradient(circle_at_30%_30%,#7cb8ff,#2563eb_45%,#0a1733_75%)] blur-[2px]"
+                />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] md:w-[580px] md:h-[580px] rounded-full border border-white/15"
+                />
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 60, ease: "linear", repeat: Infinity }}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[540px] h-[540px] md:w-[760px] md:h-[760px] rounded-full border border-white/8"
+                />
+
+                {/* corner labels */}
+                <div className="absolute top-6 left-6 font-mono text-[10px] uppercase tracking-[0.22em] text-white/60">
+                  EAURA · Systems Layer
                 </div>
-
-                <div className="mt-12">
-                  <h1 className="font-display text-5xl md:text-7xl lg:text-[88px] font-bold leading-[1.02] tracking-[-0.02em] text-balance">
-                    Engineering the <br />
-                    <span className="text-clay">autonomic age.</span>
-                  </h1>
-                  <p className="mt-8 max-w-xl text-lg md:text-xl text-text-secondary leading-relaxed">
-                    EAURA is a deep-technology company building the systems
-                    layer for intelligent infrastructure — across artificial
-                    intelligence, robotics, and large-scale automation.
-                  </p>
+                <div className="absolute top-6 right-6 font-mono text-[10px] uppercase tracking-[0.22em] text-white/60">
+                  v01 · 2026
                 </div>
-
-                <div className="mt-12 flex flex-wrap items-center gap-3">
-                  <a
-                    href="#capabilities"
-                    className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-[14px] font-semibold text-bg transition-all hover:bg-clay"
-                  >
-                    Explore our work
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </a>
-                  <a
-                    href="#products"
-                    className="group inline-flex items-center gap-2 rounded-full border border-clay/40 bg-bg/40 px-6 py-3.5 text-[14px] font-semibold text-ink transition-all hover:bg-bg"
-                  >
-                    Our products
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </a>
-                </div>
-              </Tile>
-
-              {/* Right column */}
-              <div className="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4 md:gap-6">
-                <Tile tone="ink" className="p-7 flex flex-col justify-between min-h-[170px] lg:min-h-[250px]">
-                  <div className="flex items-center justify-between">
-                    <div className="h-9 w-9 rounded-lg bg-clay grid place-items-center font-display font-bold">
-                      E
-                    </div>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-bg/40">
-                      Mission
-                    </span>
-                  </div>
-                  <p className="font-display text-lg md:text-xl leading-snug">
-                    To make advanced technology a foundation, not a feature —
-                    quietly, reliably, at scale.
-                  </p>
-                </Tile>
-
-                <Tile tone="sand" className="p-7 flex flex-col justify-between min-h-[170px] lg:min-h-[250px]">
-                  <div className="flex items-center justify-between">
-                    <Sparkles className="h-5 w-5 text-ink/70" />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">
-                      Now
-                    </span>
-                  </div>
+                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
                   <div>
-                    <div className="font-display text-3xl md:text-4xl font-bold">
-                      04
-                    </div>
-                    <div className="mt-1 text-sm text-ink/70">
-                      Active product lines across AI, robotics & infrastructure
-                    </div>
+                    <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/50">Now Operating</div>
+                    <div className="mt-1 font-display text-2xl md:text-3xl font-semibold tracking-tight">99.98% reliability across product lines</div>
                   </div>
-                </Tile>
+                  <div className="hidden md:flex items-center gap-2">
+                    <PillButton href="#products">Discover</PillButton>
+                  </div>
+                </div>
               </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-              {/* Bottom ribbon */}
-              <Tile
-                tone="card"
-                className="col-span-12 px-6 md:px-8 py-5 flex flex-wrap items-center justify-between gap-6"
-              >
-                <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
+      {/* TRUST STRIP ──────────────────────────────────────────── */}
+      <section className="border-y border-hairline bg-white">
+        <div className="mx-auto max-w-6xl px-6 py-8">
+          <div className="flex flex-wrap items-center justify-between gap-x-10 gap-y-4 text-[12px] font-medium uppercase tracking-[0.18em] text-ink-2/70">
+            <span>EAURA Pvt. Ltd.</span>
+            <span>Engineering · India · Global</span>
+            <span>04 Active Product Lines</span>
+            <span>99.98% Reliability</span>
+            <span>Est. 2024</span>
+          </div>
+        </div>
+      </section>
+
+      {/* CAPABILITIES — Google Cloud–style 3-col ──────────────── */}
+      <section id="capabilities" className="bg-bg py-28 md:py-40">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal>
+            <div className="max-w-3xl">
+              <p className="text-[13px] font-medium text-clay tracking-tight">Capabilities</p>
+              <h2 className="mt-3 font-display text-[40px] md:text-[60px] font-semibold tracking-[-0.03em] leading-[1.02]">
+                Six disciplines.
+                <br /> <span className="text-ink-2">One engineering philosophy.</span>
+              </h2>
+              <p className="mt-6 text-[18px] md:text-[19px] text-ink-2 max-w-xl leading-relaxed">
+                Each capability is a long-horizon practice — staffed, instrumented,
+                and held to the same standard of rigour.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-hairline rounded-[28px] overflow-hidden border border-hairline">
+              {[
+                { Icon: Cpu, title: "Applied AI", desc: "Production-grade models, retrieval and reasoning systems engineered for industrial reliability." },
+                { Icon: Bot, title: "Robotics", desc: "Perception, control and embodied autonomy for physical systems and operations." },
+                { Icon: Network, title: "Infrastructure", desc: "Compute, networking and orchestration purpose-built for high-load workloads." },
+                { Icon: Workflow, title: "Automation", desc: "Workflow systems that remove human latency from real operations." },
+                { Icon: Layers, title: "Developer Platforms", desc: "SDKs and tools engineers actually want to build their next product on." },
+                { Icon: ShieldCheck, title: "Intelligent Systems", desc: "Closed-loop systems that sense, decide and act — safely, at scale." },
+              ].map(({ Icon, title, desc }) => (
+                <div
+                  key={title}
+                  className="group relative bg-bg p-10 transition-colors hover:bg-surface-2"
+                >
+                  <div className="h-11 w-11 rounded-2xl bg-surface grid place-items-center text-ink transition-colors group-hover:bg-clay group-hover:text-white">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-6 font-display text-[22px] font-semibold tracking-[-0.01em]">
+                    {title}
+                  </h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{desc}</p>
+                  <div className="mt-6">
+                    <span className="inline-flex items-center text-[14px] font-medium text-clay">
+                      Learn more
+                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* PRODUCT — ENVX (dark, Apple Pro-style) ──────────────── */}
+      <section id="products" className="bg-bg pb-px">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <Reveal>
+            <article className="relative overflow-hidden rounded-[32px] bg-[#0b1220] text-white min-h-[640px] md:min-h-[720px] flex items-center">
+              <div className="absolute inset-0">
+                <div className="absolute -top-40 -right-32 w-[700px] h-[700px] rounded-full bg-[radial-gradient(closest-side,rgba(41,151,255,0.35),transparent_70%)]" />
+                <div className="absolute -bottom-40 -left-32 w-[700px] h-[700px] rounded-full bg-[radial-gradient(closest-side,rgba(94,92,230,0.28),transparent_70%)]" />
+              </div>
+              <div className="relative mx-auto w-full max-w-5xl px-8 md:px-14 py-20 md:py-28 text-center">
+                <p className="text-[13px] font-medium text-[#2997ff] tracking-tight">Product · ENVX</p>
+                <h3 className="mt-4 font-display text-[44px] md:text-[80px] font-semibold tracking-[-0.04em] leading-[0.98]">
+                  The environment for
+                  <br />
+                  <span className="bg-gradient-to-r from-white via-[#a5c8ff] to-[#2997ff] bg-clip-text text-transparent">
+                    serious builders.
+                  </span>
+                </h3>
+                <p className="mx-auto mt-6 max-w-2xl text-[18px] md:text-[20px] text-white/70 tracking-tight">
+                  ENVX is an AI-native engineering environment — intelligent tooling,
+                  infrastructure and workflow on a single, opinionated surface.
+                </p>
+                <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+                  <PillButton href="#">Visit ENVX</PillButton>
+                  <a href="#" className="text-[15px] font-medium text-[#2997ff] hover:text-white transition-colors">
+                    Read the technical brief →
+                  </a>
+                </div>
+
+                <div className="mt-14 grid grid-cols-3 max-w-xl mx-auto gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
                   {[
-                    ["Engineering", "AI · Robotics · Systems"],
-                    ["Headquarters", "India · Global"],
-                    ["Phase", "Scale R&D · Vol I"],
-                    ["Reliability", "99.98% uptime"],
-                  ].map(([k, v]) => (
-                    <div key={k} className="flex flex-col">
-                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-clay">
-                        {k}
-                      </span>
-                      <span className="text-sm font-semibold text-ink mt-0.5">
-                        {v}
-                      </span>
+                    ["99.98%", "Uptime"],
+                    ["24ms", "p95 latency"],
+                    ["18", "Regions"],
+                  ].map(([v, k]) => (
+                    <div key={k as string} className="bg-[#0b1220] py-5">
+                      <div className="font-display text-2xl md:text-3xl font-semibold">{v}</div>
+                      <div className="mt-1 text-[11px] uppercase tracking-[0.18em] text-white/50">{k}</div>
                     </div>
                   ))}
                 </div>
-                <a
-                  href="#research"
-                  className="group inline-flex items-center gap-2 text-sm font-semibold text-ink"
+              </div>
+            </article>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* PRODUCT — NOVA (light, Microsoft-style) ─────────────── */}
+      <section className="bg-bg py-6">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <Reveal>
+            <article className="relative overflow-hidden rounded-[32px] bg-surface min-h-[560px] md:min-h-[640px] grid md:grid-cols-2">
+              <div className="relative z-10 p-10 md:p-16 flex flex-col justify-center">
+                <p className="text-[13px] font-medium text-clay tracking-tight">Product · NOVA</p>
+                <h3 className="mt-3 font-display text-[40px] md:text-[64px] font-semibold tracking-[-0.035em] leading-[1.02] text-ink">
+                  A control plane for embodied intelligence.
+                </h3>
+                <p className="mt-5 text-[17px] md:text-[19px] text-ink-2 max-w-md leading-relaxed">
+                  NOVA orchestrates robotic agents, sensors and operational
+                  workflows across industrial environments — safely, reliably,
+                  and at scale.
+                </p>
+                <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <CTA href="#">Request access</CTA>
+                  <span className="inline-flex items-center gap-2 text-[13px] font-medium text-ink-2/70">
+                    <span className="h-1.5 w-1.5 rounded-full bg-clay animate-pulse" />
+                    Private beta · 2026
+                  </span>
+                </div>
+              </div>
+              <div className="relative min-h-[320px] md:min-h-full bg-gradient-to-br from-[#eaf2ff] via-[#dde9ff] to-[#cbdcff] overflow-hidden">
+                <div className="absolute inset-0"
+                     style={{
+                       backgroundImage:
+                         "radial-gradient(circle at 20% 30%, rgba(0,113,227,0.25), transparent 45%), radial-gradient(circle at 75% 75%, rgba(94,92,230,0.25), transparent 50%)",
+                     }}
+                />
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] md:w-[360px] md:h-[360px] rounded-[40px] bg-white/70 backdrop-blur-md border border-white shadow-[0_30px_80px_-20px_rgba(0,60,150,0.25)] grid place-items-center"
                 >
-                  Read the corporate brief
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </a>
-              </Tile>
-            </div>
+                  <div className="text-center">
+                    <div className="font-display text-5xl md:text-6xl font-semibold text-ink">N</div>
+                    <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.22em] text-ink-2/70">
+                      NOVA · Core
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </article>
           </Reveal>
         </div>
       </section>
 
-      {/* CAPABILITIES ─────────────────────────────────────────── */}
-      <section id="capabilities" className="relative py-24 md:py-32">
-        <div className="mx-auto max-w-7xl px-6">
+      {/* RESEARCH PIPELINE — Microsoft-style horizontal ──────── */}
+      <section id="research" className="bg-bg py-28 md:py-40">
+        <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-              <div className="max-w-2xl">
-                <SectionLabel index="01" title="Capabilities" />
-                <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
-                  Six disciplines, <br />
-                  one engineering philosophy.
-                </h2>
-              </div>
-              <p className="max-w-sm text-text-secondary leading-relaxed">
-                Each capability is a long-horizon practice — staffed,
-                instrumented, and held to the same standard of rigour.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal>
-            <div className="grid grid-cols-12 gap-4 md:gap-6 auto-rows-[180px]">
-              {/* Big tile */}
-              <Tile tone="surface" className="col-span-12 lg:col-span-6 row-span-2 p-8 md:p-10 flex flex-col justify-between">
-                <div className="flex items-start justify-between">
-                  <div className="h-11 w-11 rounded-xl bg-ink text-bg grid place-items-center">
-                    <Cpu className="h-5 w-5" />
-                  </div>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-clay">
-                    01 · Core
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-display text-2xl md:text-3xl font-semibold tracking-tight">
-                    Applied Artificial Intelligence
-                  </h3>
-                  <p className="mt-3 text-text-secondary leading-relaxed max-w-md">
-                    Production-grade models, retrieval systems, and reasoning
-                    pipelines engineered for industrial reliability — not demo
-                    novelty.
-                  </p>
-                </div>
-              </Tile>
-
-              {/* Medium */}
-              <Tile tone="card" className="col-span-12 md:col-span-6 lg:col-span-3 row-span-2 p-7 flex flex-col justify-between">
-                <Bot className="h-6 w-6 text-clay" />
-                <div>
-                  <h3 className="font-display text-xl font-semibold tracking-tight">
-                    Robotics
-                  </h3>
-                  <p className="mt-2 text-sm text-text-secondary">
-                    Perception, control and embodied autonomy for physical
-                    systems.
-                  </p>
-                </div>
-              </Tile>
-
-              <Tile tone="sand" className="col-span-12 md:col-span-6 lg:col-span-3 row-span-2 p-7 flex flex-col justify-between">
-                <Network className="h-6 w-6 text-ink/70" />
-                <div>
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
-                    Infrastructure
-                  </h3>
-                  <p className="mt-2 text-sm text-ink/70">
-                    Compute, networking and orchestration for high-load
-                    workloads.
-                  </p>
-                </div>
-              </Tile>
-
-              <Tile tone="card" className="col-span-12 md:col-span-4 p-7 flex flex-col justify-between">
-                <Workflow className="h-5 w-5 text-clay" />
-                <div>
-                  <h3 className="font-display text-lg font-semibold tracking-tight">
-                    Automation
-                  </h3>
-                  <p className="mt-1 text-sm text-text-secondary">
-                    Workflow systems that remove human latency from operations.
-                  </p>
-                </div>
-              </Tile>
-
-              <Tile tone="card" className="col-span-12 md:col-span-4 p-7 flex flex-col justify-between">
-                <Layers className="h-5 w-5 text-clay" />
-                <div>
-                  <h3 className="font-display text-lg font-semibold tracking-tight">
-                    Developer Platforms
-                  </h3>
-                  <p className="mt-1 text-sm text-text-secondary">
-                    Tools and SDKs that engineers actually want to build on.
-                  </p>
-                </div>
-              </Tile>
-
-              <Tile tone="card" className="col-span-12 md:col-span-4 p-7 flex flex-col justify-between">
-                <ShieldCheck className="h-5 w-5 text-clay" />
-                <div>
-                  <h3 className="font-display text-lg font-semibold tracking-tight">
-                    Intelligent Systems
-                  </h3>
-                  <p className="mt-1 text-sm text-text-secondary">
-                    Closed-loop systems that sense, decide and act — safely.
-                  </p>
-                </div>
-              </Tile>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* PRODUCTS ─────────────────────────────────────────────── */}
-      <section id="products" className="relative py-24 md:py-32 bg-surface/60">
-        <div className="mx-auto max-w-7xl px-6">
-          <Reveal>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-              <div className="max-w-2xl">
-                <SectionLabel index="02" title="Products" />
-                <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
-                  A growing portfolio, <br />engineered in-house.
-                </h2>
-              </div>
-              <p className="max-w-sm text-text-secondary leading-relaxed">
-                Each product is a long-running line of work — not a release.
-                ENVX is one of several initiatives currently underway.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal>
-            <div className="grid grid-cols-12 gap-4 md:gap-6">
-              {/* ENVX */}
-              <Tile tone="ink" className="col-span-12 lg:col-span-7 p-8 md:p-12 min-h-[420px] flex flex-col justify-between overflow-hidden">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="h-11 w-11 rounded-xl bg-clay grid place-items-center font-display font-bold">
-                      E
-                    </div>
-                    <div>
-                      <div className="font-display text-2xl font-bold tracking-tight">
-                        ENVX
-                      </div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-bg/40 mt-0.5">
-                        Product · 01
-                      </div>
-                    </div>
-                  </div>
-                  <span className="rounded-full border border-bg/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-bg/70">
-                    In market
-                  </span>
-                </div>
-
-                <div className="mt-10">
-                  <h3 className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight max-w-xl">
-                    An AI-native environment for builders shipping serious
-                    software.
-                  </h3>
-                  <p className="mt-5 max-w-xl text-bg/60 leading-relaxed">
-                    ENVX combines intelligent tooling, infrastructure and
-                    workflow into a single, opinionated surface for modern
-                    engineering teams.
-                  </p>
-                </div>
-
-                <div className="mt-10 flex items-center justify-between border-t border-bg/10 pt-6">
-                  <div className="flex items-center gap-8">
-                    <div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-bg/40">
-                        Uptime
-                      </div>
-                      <div className="font-display text-lg font-semibold">
-                        99.98%
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-bg/40">
-                        Latency
-                      </div>
-                      <div className="font-display text-lg font-semibold">
-                        24ms
-                      </div>
-                    </div>
-                  </div>
-                  <a
-                    href="#"
-                    className="group inline-flex items-center gap-2 text-sm font-semibold text-bg"
-                  >
-                    Visit ENVX
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </a>
-                </div>
-              </Tile>
-
-              {/* Right column products */}
-              <div className="col-span-12 lg:col-span-5 grid grid-cols-1 gap-4 md:gap-6">
-                <Tile tone="sand" className="p-8 flex flex-col justify-between min-h-[200px]">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-xl bg-bg grid place-items-center font-display font-bold text-ink">
-                        N
-                      </div>
-                      <div>
-                        <div className="font-display text-xl font-bold text-ink">
-                          NOVA
-                        </div>
-                        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/50 mt-0.5">
-                          Product · 02
-                        </div>
-                      </div>
-                    </div>
-                    <span className="rounded-full border border-ink/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/70">
-                      Private beta
-                    </span>
-                  </div>
-                  <p className="text-sm text-ink/70 max-w-sm">
-                    A robotics control plane for orchestrating embodied agents
-                    in industrial environments.
-                  </p>
-                </Tile>
-
-                <Tile tone="card" className="p-8 flex flex-col justify-between min-h-[200px]">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-xl bg-surface border border-hairline grid place-items-center font-display font-bold text-clay">
-                        ·
-                      </div>
-                      <div>
-                        <div className="font-display text-xl font-bold text-ink">
-                          More in progress
-                        </div>
-                        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-clay mt-0.5">
-                          Internal · R&D
-                        </div>
-                      </div>
-                    </div>
-                    <span className="rounded-full border border-clay/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-clay">
-                      Soon
-                    </span>
-                  </div>
-                  <p className="text-sm text-text-secondary max-w-sm">
-                    Additional product lines across infrastructure and applied
-                    AI are in active development and will be announced.
-                  </p>
-                </Tile>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* RESEARCH / PIPELINE ──────────────────────────────────── */}
-      <section id="research" className="relative py-24 md:py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <Reveal>
-            <div className="max-w-3xl mb-14">
-              <SectionLabel index="03" title="Research → Scale" />
-              <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
-                How an idea becomes infrastructure.
+            <div className="max-w-3xl">
+              <p className="text-[13px] font-medium text-clay tracking-tight">Research → Scale</p>
+              <h2 className="mt-3 font-display text-[40px] md:text-[60px] font-semibold tracking-[-0.03em] leading-[1.02]">
+                How an idea becomes <span className="text-ink-2">infrastructure.</span>
               </h2>
-              <p className="mt-5 text-text-secondary leading-relaxed max-w-xl">
-                EAURA operates as a long-cycle engineering studio. Each product
-                line moves through the same disciplined progression — from
-                first principles to production scale.
+              <p className="mt-6 text-[18px] md:text-[19px] text-ink-2 max-w-xl leading-relaxed">
+                EAURA operates as a long-cycle engineering studio. Every product
+                line moves through the same disciplined progression.
               </p>
             </div>
           </Reveal>
 
           <Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              {[
-                ["Research", "First-principles exploration with a clear engineering thesis."],
-                ["Prototype", "Tight loops, internal benchmarks, real hardware in the loop."],
-                ["Pilot", "Live deployments with design partners; instrumented every layer."],
-                ["Scale", "Hardened systems, SLAs, and the boring reliability that lasts."],
-              ].map(([title, body], i) => (
-                <Tile
-                  key={title as string}
-                  tone={i === 0 || i === 3 ? "surface" : "card"}
-                  className="p-7 min-h-[220px] flex flex-col justify-between"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
-                      Stage 0{i + 1}
-                    </span>
-                    <motion.span
-                      className="h-1.5 w-1.5 rounded-full bg-clay"
-                      animate={{ opacity: [0.3, 1, 0.3] }}
-                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-2xl font-semibold tracking-tight">
+            <ol className="mt-16 relative">
+              <div className="absolute left-0 right-0 top-5 h-px bg-hairline hidden md:block" />
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6">
+                {[
+                  ["01", "Research", "First-principles exploration with a clear engineering thesis."],
+                  ["02", "Prototype", "Tight loops, internal benchmarks, real hardware in the loop."],
+                  ["03", "Pilot", "Live deployments with design partners; every layer instrumented."],
+                  ["04", "Scale", "Hardened systems, SLAs, and the boring reliability that lasts."],
+                ].map(([num, title, body]) => (
+                  <li key={num} className="relative">
+                    <div className="flex items-center gap-3">
+                      <span className="grid place-items-center h-10 w-10 rounded-full bg-bg border border-hairline font-mono text-[12px] font-medium text-ink">
+                        {num}
+                      </span>
+                    </div>
+                    <h3 className="mt-5 font-display text-[22px] font-semibold tracking-[-0.01em]">
                       {title}
                     </h3>
-                    <p className="mt-2 text-sm text-text-secondary leading-relaxed">
-                      {body}
-                    </p>
-                  </div>
-                </Tile>
-              ))}
-            </div>
+                    <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{body}</p>
+                  </li>
+                ))}
+              </div>
+            </ol>
           </Reveal>
         </div>
       </section>
 
       {/* LEADERSHIP ───────────────────────────────────────────── */}
-      <section id="founders" className="relative py-24 md:py-32 bg-surface/60">
-        <div className="mx-auto max-w-7xl px-6">
+      <section id="founders" className="bg-surface py-28 md:py-40">
+        <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-              <div className="max-w-2xl">
-                <SectionLabel index="04" title="Leadership" />
-                <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
-                  Founded and led <br />by three engineers.
-                </h2>
-              </div>
-              <p className="max-w-sm text-text-secondary leading-relaxed">
-                The directors set the engineering culture and stay close to the
-                work. Each one runs a discipline end-to-end.
-              </p>
+            <div className="max-w-3xl">
+              <p className="text-[13px] font-medium text-clay tracking-tight">Leadership</p>
+              <h2 className="mt-3 font-display text-[40px] md:text-[60px] font-semibold tracking-[-0.03em] leading-[1.02]">
+                Founded and led
+                <br />
+                <span className="text-ink-2">by three engineers.</span>
+              </h2>
             </div>
           </Reveal>
 
           <Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
                   name: "Director · One",
-                  role: "Chief Executive",
-                  bio: "Sets the long-term technical agenda and leads the company across products, hiring and partnerships.",
-                  tone: "ink" as const,
-                  initial: "01",
+                  role: "Chief Executive Officer",
+                  bio: "Sets the long-term technical agenda. Leads the company across products, hiring and partnerships.",
+                  gradient: "from-[#0a1733] via-[#1e3a8a] to-[#2997ff]",
                 },
                 {
                   name: "Director · Two",
                   role: "Chief Technology Officer",
-                  bio: "Owns the engineering org — architecture, reliability and the platform that every EAURA product is built on.",
-                  tone: "surface" as const,
-                  initial: "02",
+                  bio: "Owns the engineering org — architecture, reliability, and the platform every EAURA product is built on.",
+                  gradient: "from-[#1a1a1a] via-[#3a3a3a] to-[#6e6e73]",
                 },
                 {
                   name: "Director · Three",
                   role: "Chief Product Officer",
-                  bio: "Translates research into products customers can rely on; runs go-to-market and the product portfolio.",
-                  tone: "surface" as const,
-                  initial: "03",
+                  bio: "Translates research into products customers can rely on. Runs go-to-market and the product portfolio.",
+                  gradient: "from-[#1b3a2e] via-[#2d6a4f] to-[#5e5ce6]",
                 },
               ].map((p) => (
-                <Tile key={p.name} tone={p.tone} className="p-8 min-h-[360px] flex flex-col justify-between">
-                  <div className="flex items-start justify-between">
-                    <div className={`h-12 w-12 rounded-xl grid place-items-center font-display font-bold ${p.tone === "ink" ? "bg-clay text-bg" : "bg-ink text-bg"}`}>
-                      {p.initial}
+                <article
+                  key={p.name}
+                  className="group relative overflow-hidden rounded-[24px] bg-white border border-hairline transition-all hover:shadow-[0_24px_60px_-30px_rgba(0,0,0,0.18)] hover:-translate-y-0.5"
+                >
+                  <div className={`aspect-[4/3] bg-gradient-to-br ${p.gradient} relative overflow-hidden`}>
+                    <div className="absolute inset-0 opacity-30"
+                         style={{
+                           backgroundImage:
+                             "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 50%)",
+                         }}
+                    />
+                    <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between">
+                      <div className="text-white">
+                        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
+                          {p.role}
+                        </div>
+                        <div className="mt-1 font-display text-xl font-semibold tracking-tight">
+                          {p.name}
+                        </div>
+                      </div>
+                      <a
+                        href="#"
+                        aria-label={`${p.name} on LinkedIn`}
+                        className="h-9 w-9 rounded-full bg-white/15 backdrop-blur grid place-items-center text-white hover:bg-white/25 transition-colors"
+                      >
+                        <Linkedin className="h-4 w-4" />
+                      </a>
                     </div>
-                    <a
-                      href="#"
-                      aria-label={`${p.name} on LinkedIn`}
-                      className={`h-9 w-9 rounded-full grid place-items-center transition-colors ${
-                        p.tone === "ink"
-                          ? "bg-bg/10 text-bg hover:bg-bg/20"
-                          : "bg-bg text-ink hover:bg-clay hover:text-bg"
-                      }`}
-                    >
-                      <Linkedin className="h-4 w-4" />
-                    </a>
                   </div>
-                  <div>
-                    <div className={`font-mono text-[10px] uppercase tracking-[0.22em] ${p.tone === "ink" ? "text-bg/50" : "text-clay"}`}>
-                      {p.role}
-                    </div>
-                    <h3 className={`mt-2 font-display text-2xl font-semibold tracking-tight ${p.tone === "ink" ? "text-bg" : "text-ink"}`}>
-                      {p.name}
-                    </h3>
-                    <p className={`mt-3 text-sm leading-relaxed ${p.tone === "ink" ? "text-bg/60" : "text-text-secondary"}`}>
-                      {p.bio}
-                    </p>
+                  <div className="p-6">
+                    <p className="text-[15px] leading-relaxed text-ink-2">{p.bio}</p>
                   </div>
-                </Tile>
+                </article>
               ))}
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* CONTACT ──────────────────────────────────────────────── */}
-      <section id="contact" className="relative py-24 md:py-32">
-        <div className="mx-auto max-w-7xl px-6">
+      {/* CTA / CONTACT ───────────────────────────────────────── */}
+      <section id="contact" className="bg-bg py-28 md:py-36">
+        <div className="mx-auto max-w-4xl px-6 text-center">
           <Reveal>
-            <Tile tone="ink" className="overflow-hidden p-8 md:p-16">
-              <div className="grid grid-cols-12 gap-8 items-end">
-                <div className="col-span-12 lg:col-span-8">
-                  <SectionLabel index="05" title="Contact" />
-                  <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-bg">
-                    Build with EAURA.
-                  </h2>
-                  <p className="mt-5 max-w-xl text-bg/60 leading-relaxed">
-                    For partnerships, enterprise enquiries, or to work with us
-                    on a problem worth solving — reach the team directly.
-                  </p>
-                </div>
-                <div className="col-span-12 lg:col-span-4 flex flex-col gap-3">
-                  <a
-                    href="mailto:hello@eaura.com"
-                    className="group inline-flex items-center justify-between gap-2 rounded-full bg-bg px-6 py-4 text-sm font-semibold text-ink transition-all hover:bg-clay hover:text-bg"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <Mail className="h-4 w-4" />
-                      hello@eaura.com
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </a>
-                  <div className="inline-flex items-center gap-2 rounded-full border border-bg/15 px-6 py-4 text-sm text-bg/70">
-                    <MapPin className="h-4 w-4" />
-                    India · Operating Globally
-                  </div>
-                </div>
-              </div>
-            </Tile>
+            <h2 className="font-display text-[44px] md:text-[80px] font-semibold tracking-[-0.04em] leading-[1.0]">
+              Build with <span className="text-clay">EAURA.</span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-[18px] md:text-[20px] text-ink-2 tracking-tight">
+              For partnerships, enterprise enquiries, or to work with us on a
+              problem worth solving — reach the team directly.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <a
+                href="mailto:hello@eaura.com"
+                className="inline-flex items-center justify-center rounded-full bg-ink text-white px-6 py-3 text-[15px] font-medium tracking-tight transition-all hover:bg-clay"
+              >
+                hello@eaura.com
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+              <CTA href="#">View open roles</CTA>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* FOOTER ───────────────────────────────────────────────── */}
-      <footer className="border-t border-hairline">
-        <div className="mx-auto max-w-7xl px-6 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-7 w-7 place-items-center rounded-md bg-ink text-bg text-[11px] font-bold font-display">
-              E
-            </span>
-            <span className="font-display text-[15px] font-semibold tracking-[0.22em]">
-              EAURA
-            </span>
+      {/* FOOTER ──────────────────────────────────────────────── */}
+      <footer className="border-t border-hairline bg-surface">
+        <div className="mx-auto max-w-6xl px-6 py-12">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-[13px]">
+            <div className="col-span-2">
+              <div className="flex items-center gap-2.5">
+                <span className="grid h-7 w-7 place-items-center rounded-md bg-ink text-bg text-[11px] font-bold font-display">E</span>
+                <span className="font-display text-[15px] font-semibold tracking-[0.22em]">EAURA</span>
+              </div>
+              <p className="mt-4 max-w-xs text-ink-2 leading-relaxed">
+                Engineering the autonomic age. Deep-tech systems for intelligent infrastructure.
+              </p>
+            </div>
+            {[
+              ["Company", ["About", "Leadership", "Research", "Careers"]],
+              ["Products", ["ENVX", "NOVA", "Roadmap"]],
+              ["Contact", ["hello@eaura.com", "Press", "Partners"]],
+            ].map(([title, items]) => (
+              <div key={title as string}>
+                <div className="font-semibold text-ink">{title}</div>
+                <ul className="mt-3 space-y-2 text-ink-2">
+                  {(items as string[]).map((i) => (
+                    <li key={i}><a href="#" className="hover:text-ink transition-colors">{i}</a></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-clay">
-            © {new Date().getFullYear()} EAURA Pvt. Ltd. · All rights reserved
+          <div className="mt-12 pt-6 border-t border-hairline flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[12px] text-ink-2">
+            <div>© {new Date().getFullYear()} EAURA Pvt. Ltd. All rights reserved.</div>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-ink transition-colors">Privacy</a>
+              <a href="#" className="hover:text-ink transition-colors">Terms</a>
+              <a href="#" className="hover:text-ink transition-colors">Security</a>
+            </div>
           </div>
         </div>
       </footer>
