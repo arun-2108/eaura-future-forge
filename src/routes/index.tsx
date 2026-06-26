@@ -3,608 +3,640 @@ import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   ArrowRight,
-  Brain,
   Cpu,
   Bot,
+  Network,
+  Layers,
   Workflow,
-  CircuitBoard,
-  Cloud,
-  Shield,
-  Code2,
-  Sparkles,
-  Telescope,
-  Linkedin as LinkedinIcon,
+  ShieldCheck,
+  Linkedin,
   Mail,
-  CheckCircle2,
+  MapPin,
+  Sparkles,
 } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
-import { NetworkBackground } from "@/components/site/NetworkBackground";
-import { HeroOrb } from "@/components/site/HeroOrb";
 import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/")({
+  component: Home,
   head: () => ({
     meta: [
-      { title: "EAURA — Engineering the Future Through Intelligent Technology" },
+      { title: "EAURA — Engineering Intelligent Systems" },
       {
         name: "description",
         content:
-          "EAURA Pvt. Ltd. builds deep technology products across AI, Developer Infrastructure, Robotics, Automation and Intelligent Systems.",
+          "EAURA Pvt. Ltd. is an engineering and technology company building deep-tech products across AI, robotics, infrastructure and intelligent automation.",
       },
-      { property: "og:title", content: "EAURA — Engineering the Future" },
-      {
-        property: "og:description",
-        content:
-          "Deep technology products across AI, Developer Infrastructure, Robotics, Automation and Intelligent Systems.",
-      },
-      { property: "og:url", content: "/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
   }),
-  component: Index,
 });
 
-function Index() {
+// ── Section label helper ──────────────────────────────────────
+function SectionLabel({ index, title }: { index: string; title: string }) {
   return (
-    <div className="min-h-screen bg-bg text-white antialiased">
-      <Nav />
-      <main>
-        <Hero />
-        <WhoWeAre />
-        <Technology />
-        <Products />
-        <WhyEaura />
-        <Innovation />
-        <Founders />
-        <CTA />
-      </main>
-      <Footer />
+    <div className="flex items-center gap-4 text-clay">
+      <span className="font-mono text-[11px] tracking-[0.2em]">{index}</span>
+      <span className="h-px w-8 bg-clay/40" />
+      <span className="text-[11px] font-semibold uppercase tracking-[0.22em]">
+        {title}
+      </span>
     </div>
   );
 }
 
-/* ---------------- HERO ---------------- */
-function Hero() {
+// ── Tile wrapper ──────────────────────────────────────────────
+function Tile({
+  children,
+  className = "",
+  tone = "surface",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  tone?: "surface" | "card" | "ink" | "clay" | "sand";
+}) {
+  const tones: Record<string, string> = {
+    surface: "bg-surface border border-hairline",
+    card: "bg-card-2 border border-hairline",
+    ink: "bg-ink text-bg",
+    clay: "bg-clay text-bg",
+    sand: "bg-sand text-ink",
+  };
   return (
-    <section id="home" className="relative isolate overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 grid-bg radial-fade opacity-60" />
-        <NetworkBackground className="absolute inset-0 h-full w-full" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-bg" />
-      </div>
-
-      <div className="mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-12 px-6 pt-32 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:pt-40">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-text-secondary"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan" />
-            EAURA Pvt. Ltd. — Deep Technology
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
-            className="mt-7 text-balance text-[clamp(2.6rem,6.2vw,5.2rem)] font-semibold leading-[1.02] tracking-[-0.035em]"
-          >
-            Engineering the Future Through{" "}
-            <span className="bg-gradient-to-r from-accent-cyan via-accent-blue to-accent-violet bg-clip-text text-transparent">
-              Intelligent Technology.
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-7 max-w-xl text-[17px] leading-relaxed text-text-secondary"
-          >
-            EAURA builds deep technology products across AI, Developer
-            Infrastructure, Robotics, Automation and Intelligent Systems.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            className="mt-9 flex flex-wrap items-center gap-3"
-          >
-            <a
-              href="#products"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[14px] font-medium text-[#050816] transition-all hover:scale-[1.02] hover:bg-white/90"
-            >
-              Explore Products
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="#about"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.02] px-5 py-2.5 text-[14px] font-medium text-white transition-all hover:bg-white/[0.06]"
-            >
-              About EAURA
-            </a>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="mt-14 grid grid-cols-3 gap-6 border-t border-white/5 pt-6 text-xs text-text-secondary sm:max-w-md"
-          >
-            <div>
-              <div className="font-mono text-white">06</div>
-              <div className="mt-1">Technology Pillars</div>
-            </div>
-            <div>
-              <div className="font-mono text-white">02+</div>
-              <div className="mt-1">Products Building</div>
-            </div>
-            <div>
-              <div className="font-mono text-white">∞</div>
-              <div className="mt-1">Long-term Horizon</div>
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          className="relative flex items-center justify-center"
-        >
-          <HeroOrb />
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- SECTION HEADER ---------------- */
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.22em] text-text-secondary">
-      <span className="h-px w-6 bg-text-secondary/60" />
+    <div
+      className={`relative rounded-3xl ${tones[tone]} transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgba(139,115,85,0.35)] ${className}`}
+    >
       {children}
     </div>
   );
 }
 
-/* ---------------- WHO WE ARE ---------------- */
-function WhoWeAre() {
+// ─────────────────────────────────────────────────────────────
+function Home() {
   return (
-    <section id="about" className="relative border-t border-white/5 py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal>
-          <Eyebrow>Who We Are</Eyebrow>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="mt-6 max-w-5xl text-balance text-[clamp(2rem,4.4vw,3.6rem)] font-semibold leading-[1.08] tracking-[-0.03em]">
-            We don't just build software.{" "}
-            <span className="text-text-secondary">
-              We engineer technologies that solve real-world problems.
-            </span>
-          </h2>
-        </Reveal>
+    <div className="min-h-screen bg-bg text-ink">
+      <Nav />
 
-        <div className="mt-16 grid gap-10 text-[16px] leading-relaxed text-text-secondary md:grid-cols-2">
-          <Reveal delay={0.1}>
-            <p>
-              EAURA Pvt. Ltd. is a deep technology company founded to engineer
-              systems at the intersection of intelligence, infrastructure and
-              physical computing. We work across the full stack — from low-level
-              embedded firmware to high-level developer platforms — with a
-              singular focus on solving problems that meaningfully advance how
-              software, hardware and people work together.
-            </p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p>
-              Our work is guided by long-term thinking. We invest in research,
-              design and engineering practices that compound over years, not
-              quarters. Every product we ship is a deliberate step toward a
-              future where intelligent systems are secure, accessible, and built
-              with the same care as the most enduring tools of our industry.
-            </p>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- TECHNOLOGY ---------------- */
-const PILLARS = [
-  { icon: Brain, title: "Artificial Intelligence", desc: "Foundational models, reasoning systems and applied intelligence for production." },
-  { icon: Code2, title: "Developer Infrastructure", desc: "Secure platforms and primitives that engineering teams build on every day." },
-  { icon: Bot, title: "Robotics", desc: "Autonomous machines and perception systems engineered for the real world." },
-  { icon: Workflow, title: "Automation", desc: "Intelligent workflows that compress engineering and operational complexity." },
-  { icon: CircuitBoard, title: "Embedded Systems", desc: "Firmware, edge compute and hardware-software co-design for intelligent devices." },
-  { icon: Cloud, title: "Cloud Engineering", desc: "Distributed systems and resilient infrastructure at planetary scale." },
-];
-
-function Technology() {
-  return (
-    <section id="technology" className="relative border-t border-white/5 py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+      {/* HERO ─────────────────────────────────────────────────── */}
+      <section id="company" className="relative pt-28 pb-10 md:pt-36 md:pb-16">
+        <div className="absolute inset-0 dot-bg opacity-60 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_70%)] pointer-events-none" />
+        <div className="relative mx-auto max-w-7xl px-6">
           <Reveal>
-            <Eyebrow>Technology Pillars</Eyebrow>
-            <h2 className="mt-6 max-w-2xl text-balance text-[clamp(1.9rem,4vw,3.2rem)] font-semibold leading-[1.08] tracking-[-0.03em]">
-              Six disciplines. One engineering philosophy.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="max-w-md text-[15px] text-text-secondary">
-              The technologies we invest in are chosen for durability. Each
-              pillar is treated as a long-term engineering practice.
-            </p>
+            <div className="grid grid-cols-12 gap-4 md:gap-6">
+              {/* Primary hero tile */}
+              <Tile
+                tone="surface"
+                className="col-span-12 lg:col-span-8 p-8 md:p-14 lg:p-16 flex flex-col justify-between min-h-[520px] overflow-hidden"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-clay/30 bg-bg/60 px-3 py-1">
+                    <span className="h-1.5 w-1.5 rounded-full bg-clay animate-pulse" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-clay">
+                      EAURA Pvt. Ltd. · Est. 2024
+                    </span>
+                  </div>
+                  <div className="hidden md:block text-right">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-clay border-b border-clay/30 pb-1">
+                      Corporate Brief / 26 · Vol I
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-12">
+                  <h1 className="font-display text-5xl md:text-7xl lg:text-[88px] font-bold leading-[1.02] tracking-[-0.02em] text-balance">
+                    Engineering the <br />
+                    <span className="text-clay">autonomic age.</span>
+                  </h1>
+                  <p className="mt-8 max-w-xl text-lg md:text-xl text-text-secondary leading-relaxed">
+                    EAURA is a deep-technology company building the systems
+                    layer for intelligent infrastructure — across artificial
+                    intelligence, robotics, and large-scale automation.
+                  </p>
+                </div>
+
+                <div className="mt-12 flex flex-wrap items-center gap-3">
+                  <a
+                    href="#capabilities"
+                    className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-[14px] font-semibold text-bg transition-all hover:bg-clay"
+                  >
+                    Explore our work
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </a>
+                  <a
+                    href="#products"
+                    className="group inline-flex items-center gap-2 rounded-full border border-clay/40 bg-bg/40 px-6 py-3.5 text-[14px] font-semibold text-ink transition-all hover:bg-bg"
+                  >
+                    Our products
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                </div>
+              </Tile>
+
+              {/* Right column */}
+              <div className="col-span-12 lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4 md:gap-6">
+                <Tile tone="ink" className="p-7 flex flex-col justify-between min-h-[170px] lg:min-h-[250px]">
+                  <div className="flex items-center justify-between">
+                    <div className="h-9 w-9 rounded-lg bg-clay grid place-items-center font-display font-bold">
+                      E
+                    </div>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-bg/40">
+                      Mission
+                    </span>
+                  </div>
+                  <p className="font-display text-lg md:text-xl leading-snug">
+                    To make advanced technology a foundation, not a feature —
+                    quietly, reliably, at scale.
+                  </p>
+                </Tile>
+
+                <Tile tone="sand" className="p-7 flex flex-col justify-between min-h-[170px] lg:min-h-[250px]">
+                  <div className="flex items-center justify-between">
+                    <Sparkles className="h-5 w-5 text-ink/70" />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">
+                      Now
+                    </span>
+                  </div>
+                  <div>
+                    <div className="font-display text-3xl md:text-4xl font-bold">
+                      04
+                    </div>
+                    <div className="mt-1 text-sm text-ink/70">
+                      Active product lines across AI, robotics & infrastructure
+                    </div>
+                  </div>
+                </Tile>
+              </div>
+
+              {/* Bottom ribbon */}
+              <Tile
+                tone="card"
+                className="col-span-12 px-6 md:px-8 py-5 flex flex-wrap items-center justify-between gap-6"
+              >
+                <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
+                  {[
+                    ["Engineering", "AI · Robotics · Systems"],
+                    ["Headquarters", "India · Global"],
+                    ["Phase", "Scale R&D · Vol I"],
+                    ["Reliability", "99.98% uptime"],
+                  ].map(([k, v]) => (
+                    <div key={k} className="flex flex-col">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-clay">
+                        {k}
+                      </span>
+                      <span className="text-sm font-semibold text-ink mt-0.5">
+                        {v}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <a
+                  href="#research"
+                  className="group inline-flex items-center gap-2 text-sm font-semibold text-ink"
+                >
+                  Read the corporate brief
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </a>
+              </Tile>
+            </div>
           </Reveal>
         </div>
+      </section>
 
-        <div className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 sm:grid-cols-2 lg:grid-cols-3">
-          {PILLARS.map((p, i) => (
-            <Reveal key={p.title} delay={i * 0.05}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative flex h-full flex-col justify-between gap-12 bg-[#0a1020] p-8"
-              >
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] text-white transition-colors group-hover:border-accent-blue/50 group-hover:text-accent-blue">
-                  <p.icon className="h-5 w-5" strokeWidth={1.5} />
+      {/* CAPABILITIES ─────────────────────────────────────────── */}
+      <section id="capabilities" className="relative py-24 md:py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+              <div className="max-w-2xl">
+                <SectionLabel index="01" title="Capabilities" />
+                <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+                  Six disciplines, <br />
+                  one engineering philosophy.
+                </h2>
+              </div>
+              <p className="max-w-sm text-text-secondary leading-relaxed">
+                Each capability is a long-horizon practice — staffed,
+                instrumented, and held to the same standard of rigour.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div className="grid grid-cols-12 gap-4 md:gap-6 auto-rows-[180px]">
+              {/* Big tile */}
+              <Tile tone="surface" className="col-span-12 lg:col-span-6 row-span-2 p-8 md:p-10 flex flex-col justify-between">
+                <div className="flex items-start justify-between">
+                  <div className="h-11 w-11 rounded-xl bg-ink text-bg grid place-items-center">
+                    <Cpu className="h-5 w-5" />
+                  </div>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-clay">
+                    01 · Core
+                  </span>
                 </div>
                 <div>
-                  <h3 className="text-[17px] font-semibold tracking-tight">{p.title}</h3>
-                  <p className="mt-3 text-[14px] leading-relaxed text-text-secondary">{p.desc}</p>
+                  <h3 className="font-display text-2xl md:text-3xl font-semibold tracking-tight">
+                    Applied Artificial Intelligence
+                  </h3>
+                  <p className="mt-3 text-text-secondary leading-relaxed max-w-md">
+                    Production-grade models, retrieval systems, and reasoning
+                    pipelines engineered for industrial reliability — not demo
+                    novelty.
+                  </p>
                 </div>
-                <span className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent-blue/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-              </motion.div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+              </Tile>
 
-/* ---------------- PRODUCTS ---------------- */
-const PRODUCTS = [
-  {
-    name: "ENVX",
-    status: "Live",
-    statusColor: "bg-emerald-400",
-    desc: "A secure developer infrastructure platform for encrypted environment variable management and team collaboration.",
-    tag: "Developer Infrastructure",
-    icon: Shield,
-    cta: "Learn More",
-  },
-  {
-    name: "NOVA",
-    status: "Coming Soon",
-    statusColor: "bg-accent-blue",
-    desc: "AI-powered intelligent companion platform combining software and hardware.",
-    tag: "Artificial Intelligence",
-    icon: Sparkles,
-    cta: "Notify Me",
-  },
-  {
-    name: "Future Products",
-    status: "Research",
-    statusColor: "bg-accent-violet",
-    desc: "Research initiatives and upcoming innovations currently under development.",
-    tag: "R&D",
-    icon: Telescope,
-    cta: "Learn More",
-  },
-];
-
-function Products() {
-  return (
-    <section id="products" className="relative border-t border-white/5 py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal>
-          <Eyebrow>Products</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-balance text-[clamp(1.9rem,4vw,3.2rem)] font-semibold leading-[1.08] tracking-[-0.03em]">
-            Products engineered by EAURA.
-          </h2>
-        </Reveal>
-
-        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {PRODUCTS.map((p, i) => (
-            <Reveal key={p.name} delay={i * 0.08}>
-              <motion.article
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0c1426_0%,#080d1c_100%)] p-7"
-              >
-                <div
-                  className="pointer-events-none absolute -top-24 right-0 h-48 w-48 rounded-full opacity-30 blur-3xl transition-opacity group-hover:opacity-50"
-                  style={{
-                    background:
-                      "radial-gradient(circle, rgba(59,130,246,0.7), transparent 60%)",
-                  }}
-                />
-                <div className="flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04]">
-                    <p.icon className="h-5 w-5" strokeWidth={1.5} />
-                  </div>
-                  <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] text-text-secondary">
-                    <span className={`h-1.5 w-1.5 rounded-full ${p.statusColor}`} />
-                    {p.status}
-                  </div>
+              {/* Medium */}
+              <Tile tone="card" className="col-span-12 md:col-span-6 lg:col-span-3 row-span-2 p-7 flex flex-col justify-between">
+                <Bot className="h-6 w-6 text-clay" />
+                <div>
+                  <h3 className="font-display text-xl font-semibold tracking-tight">
+                    Robotics
+                  </h3>
+                  <p className="mt-2 text-sm text-text-secondary">
+                    Perception, control and embodied autonomy for physical
+                    systems.
+                  </p>
                 </div>
+              </Tile>
 
-                <div className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-text-secondary">
-                  {p.tag}
+              <Tile tone="sand" className="col-span-12 md:col-span-6 lg:col-span-3 row-span-2 p-7 flex flex-col justify-between">
+                <Network className="h-6 w-6 text-ink/70" />
+                <div>
+                  <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
+                    Infrastructure
+                  </h3>
+                  <p className="mt-2 text-sm text-ink/70">
+                    Compute, networking and orchestration for high-load
+                    workloads.
+                  </p>
                 </div>
-                <h3 className="mt-2 text-[28px] font-semibold tracking-tight">{p.name}</h3>
-                <p className="mt-3 text-[14px] leading-relaxed text-text-secondary">{p.desc}</p>
+              </Tile>
 
-                <div className="mt-8 flex-1" />
-                <a
-                  href="#contact"
-                  className="group/btn inline-flex items-center gap-1.5 text-[13px] font-medium text-white"
-                >
-                  {p.cta}
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
-                </a>
-              </motion.article>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- WHY EAURA ---------------- */
-const WHY = [
-  { title: "Engineering Excellence", desc: "We obsess over craft. Code, systems and products built to endure." },
-  { title: "Security First", desc: "Trust is engineered. Security is foundational to everything we ship." },
-  { title: "Developer Focused", desc: "We build the tools we wish existed for the engineers shaping the future." },
-  { title: "Built for the Future", desc: "Long-term thinking. Decisions made for the next decade, not the next quarter." },
-];
-
-function WhyEaura() {
-  return (
-    <section className="relative border-t border-white/5 py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal>
-          <Eyebrow>Why EAURA</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-balance text-[clamp(1.9rem,4vw,3.2rem)] font-semibold leading-[1.08] tracking-[-0.03em]">
-            Principles that shape everything we build.
-          </h2>
-        </Reveal>
-
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {WHY.map((w, i) => (
-            <Reveal key={w.title} delay={i * 0.06}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-                className="h-full rounded-2xl border border-white/10 bg-white/[0.02] p-6"
-              >
-                <CheckCircle2 className="h-5 w-5 text-accent-blue" strokeWidth={1.5} />
-                <h3 className="mt-6 text-[16px] font-semibold tracking-tight">{w.title}</h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-text-secondary">{w.desc}</p>
-              </motion.div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- INNOVATION TIMELINE ---------------- */
-const STAGES = ["Research", "Prototype", "Build", "Deploy", "Scale"];
-
-function Innovation() {
-  return (
-    <section className="relative border-t border-white/5 py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal>
-          <Eyebrow>Innovation</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-balance text-[clamp(1.9rem,4vw,3.2rem)] font-semibold leading-[1.08] tracking-[-0.03em]">
-            How we move from idea to impact.
-          </h2>
-        </Reveal>
-
-        <div className="mt-20 hidden items-center justify-between md:flex">
-          {STAGES.map((s, i) => (
-            <div key={s} className="flex flex-1 items-center last:flex-none">
-              <Reveal delay={i * 0.1}>
-                <div className="flex flex-col items-start gap-3">
-                  <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-text-secondary">
-                    0{i + 1}
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="h-2 w-2 rounded-full bg-accent-blue shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
-                    <span className="text-[18px] font-semibold tracking-tight">{s}</span>
-                  </div>
+              <Tile tone="card" className="col-span-12 md:col-span-4 p-7 flex flex-col justify-between">
+                <Workflow className="h-5 w-5 text-clay" />
+                <div>
+                  <h3 className="font-display text-lg font-semibold tracking-tight">
+                    Automation
+                  </h3>
+                  <p className="mt-1 text-sm text-text-secondary">
+                    Workflow systems that remove human latency from operations.
+                  </p>
                 </div>
-              </Reveal>
-              {i < STAGES.length - 1 && (
-                <div className="mx-4 h-px flex-1 bg-gradient-to-r from-white/15 to-white/[0.03]" />
-              )}
+              </Tile>
+
+              <Tile tone="card" className="col-span-12 md:col-span-4 p-7 flex flex-col justify-between">
+                <Layers className="h-5 w-5 text-clay" />
+                <div>
+                  <h3 className="font-display text-lg font-semibold tracking-tight">
+                    Developer Platforms
+                  </h3>
+                  <p className="mt-1 text-sm text-text-secondary">
+                    Tools and SDKs that engineers actually want to build on.
+                  </p>
+                </div>
+              </Tile>
+
+              <Tile tone="card" className="col-span-12 md:col-span-4 p-7 flex flex-col justify-between">
+                <ShieldCheck className="h-5 w-5 text-clay" />
+                <div>
+                  <h3 className="font-display text-lg font-semibold tracking-tight">
+                    Intelligent Systems
+                  </h3>
+                  <p className="mt-1 text-sm text-text-secondary">
+                    Closed-loop systems that sense, decide and act — safely.
+                  </p>
+                </div>
+              </Tile>
             </div>
-          ))}
+          </Reveal>
         </div>
+      </section>
 
-        {/* Mobile vertical */}
-        <div className="mt-16 space-y-6 md:hidden">
-          {STAGES.map((s, i) => (
-            <div key={s} className="flex items-center gap-4">
-              <div className="font-mono text-[11px] text-text-secondary">0{i + 1}</div>
-              <span className="h-2 w-2 rounded-full bg-accent-blue" />
-              <span className="text-lg font-semibold">{s}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- FOUNDERS ---------------- */
-const FOUNDERS = [
-  {
-    name: "Sundaravel Arunkumar",
-    role: "Director & Shareholder",
-    initials: "SA",
-    bio: "Engineering leader focused on building durable systems at the intersection of intelligence and infrastructure.",
-  },
-  {
-    name: "Giridhar Golla",
-    role: "Director & Shareholder",
-    initials: "GG",
-    bio: "Product and platform thinker driving EAURA's developer-focused product strategy and execution.",
-  },
-  {
-    name: "Rushyanth Reddy Venkata Dronadula",
-    role: "Director & Shareholder",
-    initials: "RD",
-    bio: "Systems engineer with a long-term view on automation, embedded computing and intelligent hardware.",
-  },
-];
-
-function Founders() {
-  return (
-    <section id="founders" className="relative border-t border-white/5 py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <Reveal>
-          <Eyebrow>Founders</Eyebrow>
-          <h2 className="mt-6 max-w-3xl text-balance text-[clamp(1.9rem,4vw,3.2rem)] font-semibold leading-[1.08] tracking-[-0.03em]">
-            The team building EAURA.
-          </h2>
-        </Reveal>
-
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {FOUNDERS.map((f, i) => (
-            <Reveal key={f.name} delay={i * 0.08}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(180deg,#0c1426_0%,#080d1c_100%)] p-7"
-              >
-                <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-accent-blue/30 to-accent-violet/20 text-xl font-semibold tracking-wide text-white">
-                  {f.initials}
-                </div>
-                <h3 className="mt-7 text-[18px] font-semibold tracking-tight">{f.name}</h3>
-                <div className="mt-1 text-[13px] text-text-secondary">{f.role}</div>
-                <p className="mt-4 text-[14px] leading-relaxed text-text-secondary">{f.bio}</p>
-
-                <a
-                  href="#"
-                  className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-[12px] font-medium text-white transition-colors hover:bg-white/[0.08]"
-                >
-                  <LinkedinIcon className="h-3.5 w-3.5" />
-                  LinkedIn
-                </a>
-              </motion.div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- CTA ---------------- */
-function CTA() {
-  return (
-    <section id="contact" className="relative border-t border-white/5 py-32">
-      <div className="mx-auto max-w-5xl px-6 text-center">
-        <Reveal>
-          <h2 className="text-balance text-[clamp(2.2rem,5vw,4.2rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
-            Let's Build the{" "}
-            <span className="bg-gradient-to-r from-accent-cyan via-accent-blue to-accent-violet bg-clip-text text-transparent">
-              Future Together.
-            </span>
-          </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <p className="mx-auto mt-6 max-w-xl text-[16px] text-text-secondary">
-            Partner with EAURA, explore our products, or join us in engineering
-            the next generation of intelligent systems.
-          </p>
-        </Reveal>
-        <Reveal delay={0.15}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href="mailto:contact@eaura.tech"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[14px] font-medium text-[#050816] transition-all hover:scale-[1.02]"
-            >
-              <Mail className="h-4 w-4" />
-              Contact Us
-            </a>
-            <a
-              href="#products"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.02] px-5 py-2.5 text-[14px] font-medium text-white transition-all hover:bg-white/[0.06]"
-            >
-              Explore Products
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- FOOTER ---------------- */
-function Footer() {
-  const cols = [
-    { title: "Company", links: ["About", "Founders", "Careers", "Press"] },
-    { title: "Products", links: ["ENVX", "NOVA", "Future Products"] },
-    { title: "Technology", links: ["AI", "Infrastructure", "Robotics", "Embedded"] },
-    { title: "Resources", links: ["Documentation", "Research", "Blog"] },
-    { title: "Contact", links: ["contact@eaura.tech", "Partnerships", "Support"] },
-  ];
-  return (
-    <footer className="border-t border-white/5 bg-[#04060f] py-16">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-2 gap-10 md:grid-cols-6">
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2">
-              <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-to-br from-accent-blue to-accent-violet text-[11px] font-bold">
-                E
-              </span>
-              <span className="text-[15px] font-semibold tracking-[0.18em]">EAURA</span>
-            </div>
-            <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-text-secondary">
-              Engineering the future through intelligent technology.
-            </p>
-          </div>
-          {cols.map((c) => (
-            <div key={c.title}>
-              <div className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white">
-                {c.title}
+      {/* PRODUCTS ─────────────────────────────────────────────── */}
+      <section id="products" className="relative py-24 md:py-32 bg-surface/60">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+              <div className="max-w-2xl">
+                <SectionLabel index="02" title="Products" />
+                <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+                  A growing portfolio, <br />engineered in-house.
+                </h2>
               </div>
-              <ul className="mt-5 space-y-3">
-                {c.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className="text-[13px] text-text-secondary transition-colors hover:text-white">
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <p className="max-w-sm text-text-secondary leading-relaxed">
+                Each product is a long-running line of work — not a release.
+                ENVX is one of several initiatives currently underway.
+              </p>
             </div>
-          ))}
-        </div>
+          </Reveal>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-6 text-[12px] text-text-secondary md:flex-row md:items-center">
-          <div>© {new Date().getFullYear()} EAURA Pvt. Ltd. All rights reserved.</div>
-          <div className="flex items-center gap-5">
-            <a href="#" className="transition-colors hover:text-white">LinkedIn</a>
-            <a href="#" className="transition-colors hover:text-white">GitHub</a>
-            <a href="#" className="transition-colors hover:text-white">X</a>
+          <Reveal>
+            <div className="grid grid-cols-12 gap-4 md:gap-6">
+              {/* ENVX */}
+              <Tile tone="ink" className="col-span-12 lg:col-span-7 p-8 md:p-12 min-h-[420px] flex flex-col justify-between overflow-hidden">
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="h-11 w-11 rounded-xl bg-clay grid place-items-center font-display font-bold">
+                      E
+                    </div>
+                    <div>
+                      <div className="font-display text-2xl font-bold tracking-tight">
+                        ENVX
+                      </div>
+                      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-bg/40 mt-0.5">
+                        Product · 01
+                      </div>
+                    </div>
+                  </div>
+                  <span className="rounded-full border border-bg/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-bg/70">
+                    In market
+                  </span>
+                </div>
+
+                <div className="mt-10">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight max-w-xl">
+                    An AI-native environment for builders shipping serious
+                    software.
+                  </h3>
+                  <p className="mt-5 max-w-xl text-bg/60 leading-relaxed">
+                    ENVX combines intelligent tooling, infrastructure and
+                    workflow into a single, opinionated surface for modern
+                    engineering teams.
+                  </p>
+                </div>
+
+                <div className="mt-10 flex items-center justify-between border-t border-bg/10 pt-6">
+                  <div className="flex items-center gap-8">
+                    <div>
+                      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-bg/40">
+                        Uptime
+                      </div>
+                      <div className="font-display text-lg font-semibold">
+                        99.98%
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-bg/40">
+                        Latency
+                      </div>
+                      <div className="font-display text-lg font-semibold">
+                        24ms
+                      </div>
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    className="group inline-flex items-center gap-2 text-sm font-semibold text-bg"
+                  >
+                    Visit ENVX
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                </div>
+              </Tile>
+
+              {/* Right column products */}
+              <div className="col-span-12 lg:col-span-5 grid grid-cols-1 gap-4 md:gap-6">
+                <Tile tone="sand" className="p-8 flex flex-col justify-between min-h-[200px]">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-xl bg-bg grid place-items-center font-display font-bold text-ink">
+                        N
+                      </div>
+                      <div>
+                        <div className="font-display text-xl font-bold text-ink">
+                          NOVA
+                        </div>
+                        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/50 mt-0.5">
+                          Product · 02
+                        </div>
+                      </div>
+                    </div>
+                    <span className="rounded-full border border-ink/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/70">
+                      Private beta
+                    </span>
+                  </div>
+                  <p className="text-sm text-ink/70 max-w-sm">
+                    A robotics control plane for orchestrating embodied agents
+                    in industrial environments.
+                  </p>
+                </Tile>
+
+                <Tile tone="card" className="p-8 flex flex-col justify-between min-h-[200px]">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-xl bg-surface border border-hairline grid place-items-center font-display font-bold text-clay">
+                        ·
+                      </div>
+                      <div>
+                        <div className="font-display text-xl font-bold text-ink">
+                          More in progress
+                        </div>
+                        <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-clay mt-0.5">
+                          Internal · R&D
+                        </div>
+                      </div>
+                    </div>
+                    <span className="rounded-full border border-clay/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-clay">
+                      Soon
+                    </span>
+                  </div>
+                  <p className="text-sm text-text-secondary max-w-sm">
+                    Additional product lines across infrastructure and applied
+                    AI are in active development and will be announced.
+                  </p>
+                </Tile>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* RESEARCH / PIPELINE ──────────────────────────────────── */}
+      <section id="research" className="relative py-24 md:py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <div className="max-w-3xl mb-14">
+              <SectionLabel index="03" title="Research → Scale" />
+              <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+                How an idea becomes infrastructure.
+              </h2>
+              <p className="mt-5 text-text-secondary leading-relaxed max-w-xl">
+                EAURA operates as a long-cycle engineering studio. Each product
+                line moves through the same disciplined progression — from
+                first principles to production scale.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              {[
+                ["Research", "First-principles exploration with a clear engineering thesis."],
+                ["Prototype", "Tight loops, internal benchmarks, real hardware in the loop."],
+                ["Pilot", "Live deployments with design partners; instrumented every layer."],
+                ["Scale", "Hardened systems, SLAs, and the boring reliability that lasts."],
+              ].map(([title, body], i) => (
+                <Tile
+                  key={title as string}
+                  tone={i === 0 || i === 3 ? "surface" : "card"}
+                  className="p-7 min-h-[220px] flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-clay">
+                      Stage 0{i + 1}
+                    </span>
+                    <motion.span
+                      className="h-1.5 w-1.5 rounded-full bg-clay"
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: i * 0.4 }}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-2xl font-semibold tracking-tight">
+                      {title}
+                    </h3>
+                    <p className="mt-2 text-sm text-text-secondary leading-relaxed">
+                      {body}
+                    </p>
+                  </div>
+                </Tile>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* LEADERSHIP ───────────────────────────────────────────── */}
+      <section id="founders" className="relative py-24 md:py-32 bg-surface/60">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+              <div className="max-w-2xl">
+                <SectionLabel index="04" title="Leadership" />
+                <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+                  Founded and led <br />by three engineers.
+                </h2>
+              </div>
+              <p className="max-w-sm text-text-secondary leading-relaxed">
+                The directors set the engineering culture and stay close to the
+                work. Each one runs a discipline end-to-end.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+              {[
+                {
+                  name: "Director · One",
+                  role: "Chief Executive",
+                  bio: "Sets the long-term technical agenda and leads the company across products, hiring and partnerships.",
+                  tone: "ink" as const,
+                  initial: "01",
+                },
+                {
+                  name: "Director · Two",
+                  role: "Chief Technology Officer",
+                  bio: "Owns the engineering org — architecture, reliability and the platform that every EAURA product is built on.",
+                  tone: "surface" as const,
+                  initial: "02",
+                },
+                {
+                  name: "Director · Three",
+                  role: "Chief Product Officer",
+                  bio: "Translates research into products customers can rely on; runs go-to-market and the product portfolio.",
+                  tone: "surface" as const,
+                  initial: "03",
+                },
+              ].map((p) => (
+                <Tile key={p.name} tone={p.tone} className="p-8 min-h-[360px] flex flex-col justify-between">
+                  <div className="flex items-start justify-between">
+                    <div className={`h-12 w-12 rounded-xl grid place-items-center font-display font-bold ${p.tone === "ink" ? "bg-clay text-bg" : "bg-ink text-bg"}`}>
+                      {p.initial}
+                    </div>
+                    <a
+                      href="#"
+                      aria-label={`${p.name} on LinkedIn`}
+                      className={`h-9 w-9 rounded-full grid place-items-center transition-colors ${
+                        p.tone === "ink"
+                          ? "bg-bg/10 text-bg hover:bg-bg/20"
+                          : "bg-bg text-ink hover:bg-clay hover:text-bg"
+                      }`}
+                    >
+                      <Linkedin className="h-4 w-4" />
+                    </a>
+                  </div>
+                  <div>
+                    <div className={`font-mono text-[10px] uppercase tracking-[0.22em] ${p.tone === "ink" ? "text-bg/50" : "text-clay"}`}>
+                      {p.role}
+                    </div>
+                    <h3 className={`mt-2 font-display text-2xl font-semibold tracking-tight ${p.tone === "ink" ? "text-bg" : "text-ink"}`}>
+                      {p.name}
+                    </h3>
+                    <p className={`mt-3 text-sm leading-relaxed ${p.tone === "ink" ? "text-bg/60" : "text-text-secondary"}`}>
+                      {p.bio}
+                    </p>
+                  </div>
+                </Tile>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* CONTACT ──────────────────────────────────────────────── */}
+      <section id="contact" className="relative py-24 md:py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal>
+            <Tile tone="ink" className="overflow-hidden p-8 md:p-16">
+              <div className="grid grid-cols-12 gap-8 items-end">
+                <div className="col-span-12 lg:col-span-8">
+                  <SectionLabel index="05" title="Contact" />
+                  <h2 className="mt-5 font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05] text-bg">
+                    Build with EAURA.
+                  </h2>
+                  <p className="mt-5 max-w-xl text-bg/60 leading-relaxed">
+                    For partnerships, enterprise enquiries, or to work with us
+                    on a problem worth solving — reach the team directly.
+                  </p>
+                </div>
+                <div className="col-span-12 lg:col-span-4 flex flex-col gap-3">
+                  <a
+                    href="mailto:hello@eaura.com"
+                    className="group inline-flex items-center justify-between gap-2 rounded-full bg-bg px-6 py-4 text-sm font-semibold text-ink transition-all hover:bg-clay hover:text-bg"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Mail className="h-4 w-4" />
+                      hello@eaura.com
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-bg/15 px-6 py-4 text-sm text-bg/70">
+                    <MapPin className="h-4 w-4" />
+                    India · Operating Globally
+                  </div>
+                </div>
+              </div>
+            </Tile>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FOOTER ───────────────────────────────────────────────── */}
+      <footer className="border-t border-hairline">
+        <div className="mx-auto max-w-7xl px-6 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="flex items-center gap-2.5">
+            <span className="grid h-7 w-7 place-items-center rounded-md bg-ink text-bg text-[11px] font-bold font-display">
+              E
+            </span>
+            <span className="font-display text-[15px] font-semibold tracking-[0.22em]">
+              EAURA
+            </span>
+          </div>
+          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-clay">
+            © {new Date().getFullYear()} EAURA Pvt. Ltd. · All rights reserved
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 }
