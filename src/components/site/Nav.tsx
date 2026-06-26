@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 const links = [
-  { href: "#home", label: "Home" },
+  { href: "#company", label: "Company" },
+  { href: "#capabilities", label: "Capabilities" },
   { href: "#products", label: "Products" },
-  { href: "#technology", label: "Technology" },
-  { href: "#about", label: "About" },
-  { href: "#founders", label: "Founders" },
+  { href: "#research", label: "Research" },
+  { href: "#founders", label: "Leadership" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -25,16 +25,16 @@ export function Nav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/5 bg-[#050816]/80 backdrop-blur-xl"
+          ? "border-b border-hairline bg-bg/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="#home" className="flex items-center gap-2">
-          <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-to-br from-accent-blue to-accent-violet text-[11px] font-bold tracking-tight">
+        <a href="#company" className="flex items-center gap-2.5">
+          <span className="grid h-7 w-7 place-items-center rounded-md bg-ink text-bg text-[11px] font-bold font-display">
             E
           </span>
-          <span className="text-[15px] font-semibold tracking-[0.18em]">EAURA</span>
+          <span className="text-[15px] font-semibold tracking-[0.22em] text-ink font-display">EAURA</span>
         </a>
 
         <nav className="hidden items-center gap-9 md:flex">
@@ -42,7 +42,7 @@ export function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className="text-[13px] text-text-secondary transition-colors hover:text-white"
+              className="text-[13px] text-text-secondary transition-colors hover:text-ink"
             >
               {l.label}
             </a>
@@ -51,16 +51,16 @@ export function Nav() {
 
         <div className="hidden md:block">
           <a
-            href="#products"
-            className="group inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[13px] font-medium text-white transition-all hover:bg-white/[0.08]"
+            href="#contact"
+            className="group inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-[13px] font-medium text-bg transition-all hover:bg-clay"
           >
-            Explore Products
+            Get in touch
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
         </div>
 
         <button
-          className="md:hidden text-text-secondary"
+          className="md:hidden text-ink"
           onClick={() => setOpen((v) => !v)}
           aria-label="Menu"
         >
@@ -72,14 +72,14 @@ export function Nav() {
       </div>
 
       {open && (
-        <div className="border-t border-white/5 bg-[#050816]/95 px-6 py-4 md:hidden">
+        <div className="border-t border-hairline bg-bg/95 px-6 py-4 md:hidden">
           <div className="flex flex-col gap-3">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-sm text-text-secondary hover:text-white"
+                className="text-sm text-text-secondary hover:text-ink"
               >
                 {l.label}
               </a>
