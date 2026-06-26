@@ -13,7 +13,7 @@ import {
   Code2,
   Sparkles,
   Telescope,
-  Linkedin,
+  Linkedin as LinkedinIcon,
   Mail,
   CheckCircle2,
 } from "lucide-react";
