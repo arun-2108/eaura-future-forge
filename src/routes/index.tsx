@@ -431,231 +431,248 @@ function Home() {
         </div>
       </section>
 
-      {/* PRODUCT — ENVX (Premium Premium Dark Card) ──────────────── */}
-      <section id="products" className="bg-bg py-16 md:py-24 relative">
+      {/* PRODUCTS SECTION — ELEKKI (Flagship) & Core Suites (ENVX, NOVA) ──────────────── */}
+      <section id="products" className="bg-bg py-24 md:py-32 border-t border-hairline relative">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <Card className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0a0f1d] via-[#05070d] to-[#020306] border border-white/10 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.35)] min-h-[640px] md:min-h-[700px] flex items-center p-8 md:p-16 hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.55)] transition-all duration-300">
+            <div className="max-w-3xl mb-16">
+              <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay">
+                Flagship Offering
+              </div>
+              <h2 className="mt-4 font-display text-[40px] md:text-[60px] font-bold tracking-[-0.03em] leading-[1.02] text-ink">
+                Intelligent infrastructure.
+                <br />
+                <span className="bg-gradient-to-r from-ink-2 to-clay bg-clip-text text-transparent">
+                  Designed for scale.
+                </span>
+              </h2>
+            </div>
+          </Reveal>
+
+          {/* 1. Flagship Product: ELEKKI */}
+          <Reveal delay={0.05}>
+            <Card className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#080711] via-[#030206] to-[#010103] border border-violet-500/20 shadow-[0_30px_90px_-20px_rgba(94,92,230,0.15)] min-h-[500px] flex items-center p-8 md:p-16 hover:shadow-[0_40px_100px_-20px_rgba(94,92,230,0.25)] transition-all duration-300 group">
               {/* Subtle ambient lighting */}
               <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute -top-40 -right-32 w-[650px] h-[650px] rounded-full bg-[radial-gradient(closest-side,rgba(41,151,255,0.08),transparent_80%)]" />
-                <div className="absolute -bottom-40 -left-32 w-[650px] h-[650px] rounded-full bg-[radial-gradient(closest-side,rgba(94,92,230,0.08),transparent_80%)]" />
+                <div className="absolute -top-40 -right-32 w-[650px] h-[650px] rounded-full bg-[radial-gradient(closest-side,rgba(94,92,230,0.12),transparent_80%)]" />
+                <div className="absolute -bottom-40 -left-32 w-[650px] h-[650px] rounded-full bg-[radial-gradient(closest-side,rgba(6,182,212,0.06),transparent_80%)]" />
               </div>
 
-              <div className="relative mx-auto w-full max-w-4xl py-12 text-center flex flex-col items-center z-10">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/5 bg-white/5 px-3 py-1 text-[11px] font-mono tracking-[0.2em] uppercase text-[#2997ff]">
-                  CORE SUITE // ENVX
-                </div>
-
-                <h3 className="mt-6 font-display text-[44px] md:text-[76px] font-bold tracking-[-0.04em] leading-[1.0] text-white">
-                  The environment for
-                  <br />
-                  <span className="bg-gradient-to-b from-white via-white/90 to-white/60 bg-clip-text text-transparent">
-                    critical operations.
-                  </span>
-                </h3>
-
-                <p className="mx-auto mt-6 max-w-2xl text-[17px] md:text-[19px] leading-relaxed text-white/70 tracking-tight">
-                  ENVX is an AI-native engineering studio. We combine sandboxed orchestration,
-                  autonomous code compilation, and hardware-in-the-loop debugging onto a single
-                  interface.
-                </p>
-
-                <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className="rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30 transition-all duration-200"
-                  >
-                    <a href="#contact">Request Early Access</a>
-                  </Button>
-                  <CTA href="#">Read the technical architecture brief</CTA>
-                </div>
-
-                {/* Mock code terminal container */}
-                <div className="w-full max-w-2xl mt-12 bg-[#020408] rounded-xl border border-white/5 overflow-hidden text-left shadow-2xl font-mono text-[12px] leading-relaxed">
-                  {/* Window chrome header */}
-                  <div className="bg-[#0b0f19] px-4 py-3 border-b border-white/5 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-                      <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-                      <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
-                    </div>
-                    <div className="text-[11px] text-white/40 uppercase tracking-widest font-mono">
-                      envx // control_loop.rs
-                    </div>
-                    <div className="w-12" />
+              <div className="relative w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-center z-10">
+                <div className="text-left flex flex-col items-start">
+                  <div className="flex flex-wrap items-center gap-2 mb-6">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-[11px] font-mono tracking-[0.15em] uppercase text-violet-400">
+                      FLAGSHIP PLATFORM
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-mono tracking-[0.15em] uppercase text-emerald-400">
+                      COMING SOON
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-mono tracking-[0.15em] uppercase text-white/50">
+                      BUILT BY EAURA
+                    </span>
                   </div>
-                  {/* Console body */}
-                  <div className="p-5 overflow-x-auto text-white/80 select-none">
-                    <div className="text-[#80cbc4] font-normal">
-                      // Initializing telemetry feedback controller...
-                    </div>
-                    <div className="text-[#f77669]">
-                      <span className="text-[#c792ea]">use</span> eaura_systems::prelude::*;
-                    </div>
-                    <div className="text-[#c792ea] mt-2">
-                      fn <span className="text-[#82aaff]">optimize_flowrate</span>(node: &amp;mut
-                      TelemetryNode) -&gt; Result&lt;(), CoreError&gt; &#123;
-                    </div>
-                    <div className="pl-4 text-[#89ddff]">
-                      <span className="text-[#c792ea]">let</span> rate = node.read_flowrate();
-                    </div>
-                    <div className="pl-4 text-[#89ddff]">
-                      <span className="text-[#c792ea]">if</span> rate &gt;{" "}
-                      <span className="text-[#f78c6c]">480_000</span> &#123;
-                    </div>
-                    <div className="pl-8 text-[#f07178]">
-                      node.dampen_latency(<span className="text-[#c792ea]">Duration</span>
-                      ::from_millis(<span className="text-[#f78c6c]">18</span>))?;
-                    </div>
-                    <div className="pl-8 text-[#80cbc4]">
-                      // System locking active, SLA compliance true
-                    </div>
-                    <div className="pl-8 text-[#c3e88d]">
-                      node.set_compliance_flag(<span className="text-[#f78c6c]">true</span>);
-                    </div>
-                    <div className="pl-4">&#125;</div>
-                    <div className="pl-4 text-[#c792ea]">Ok(())</div>
-                    <div>&#125;</div>
-                    <div className="text-[#c3e88d] mt-2">
-                      Running:{" "}
-                      <span className="text-[#f78c6c]">cargo run --bin envx-controller</span>
-                    </div>
-                    <div className="text-emerald-400 font-semibold mt-1">
-                      ✔ [OK] Telemetry nodes locked. Edge p99 verified: 18ms.
-                    </div>
-                  </div>
-                </div>
 
-                {/* Clean, detailed Telemetry Stats Box */}
-                <div className="mt-16 w-full max-w-2xl grid grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
-                  {[
-                    { val: "99.992%", key: "Core Availability", dot: "bg-emerald-500" },
-                    { val: "18ms", key: "Edge p99 Latency", dot: "bg-blue-400" },
-                    { val: "24/7", key: "Active Health Engine", dot: "bg-cyan-400" },
-                  ].map(({ val, key, dot }) => (
-                    <div
-                      key={key}
-                      className="bg-[#05070d]/90 py-6 px-4 flex flex-col items-center justify-center relative group"
+                  <h3 className="font-display text-[44px] md:text-[68px] font-bold tracking-[-0.04em] leading-[1.0] text-white">
+                    ELEKKI
+                  </h3>
+
+                  <p className="mt-4 text-[18px] md:text-[20px] font-semibold text-white/90 leading-snug">
+                    The Complete Skill Development Ecosystem for Electronics &amp; Communication Engineers.
+                  </p>
+
+                  <p className="mt-4 text-white/60 text-[15px] md:text-[16px] leading-relaxed max-w-xl">
+                    If LeetCode transformed coding interview preparation, ELEKKI is building the platform that transforms how ECE students learn, practice, validate, and showcase industry-ready skills.
+                  </p>
+
+                  <div className="mt-8 flex flex-wrap items-center gap-4">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="rounded-full px-8 py-6 text-base font-semibold bg-violet-600 hover:bg-violet-500 text-white shadow-md shadow-violet-600/10 hover:shadow-lg hover:shadow-violet-600/20 hover:-translate-y-px transition-all duration-200"
                     >
-                      <div className="font-mono text-xl md:text-3xl font-bold tracking-tight text-white flex items-center gap-2.5">
-                        <span
-                          className={`h-1.5 w-1.5 rounded-full ${dot} animate-pulse shadow-[0_0_8px_rgba(255,255,255,0.5)]`}
-                        />
-                        {val}
+                      <a href="/elekki">Explore ELEKKI</a>
+                    </Button>
+                    <CTA href="/elekki#waitlist">Join Waitlist</CTA>
+                  </div>
+                </div>
+
+                {/* Conceptual preview graphic on the right */}
+                <div className="relative w-full aspect-video lg:aspect-auto lg:h-[350px] rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 overflow-hidden flex flex-col justify-between shadow-2xl">
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-violet-500/10 to-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+                  
+                  {/* Mock dashboard element header */}
+                  <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2.5 w-2.5 rounded-full bg-violet-500 animate-pulse" />
+                      <span className="font-mono text-[10px] tracking-wider text-white/60">ELEKKI.DASHBOARD.PREVIEW</span>
+                    </div>
+                    <span className="font-mono text-[9px] text-[#06b6d4]">SYSTEM: ONLINE</span>
+                  </div>
+
+                  {/* Mock analytics metrics */}
+                  <div className="my-auto grid grid-cols-3 gap-4">
+                    <div className="bg-white/5 border border-white/5 rounded-xl p-4 text-left">
+                      <span className="text-[10px] font-mono text-white/40 block mb-1">SKILL LEVEL</span>
+                      <span className="text-xl font-bold font-display text-white">Lvl 4</span>
+                      <span className="text-[9px] font-mono text-emerald-400 block mt-1">+12% this week</span>
+                    </div>
+                    <div className="bg-white/5 border border-white/5 rounded-xl p-4 text-left">
+                      <span className="text-[10px] font-mono text-white/40 block mb-1">CHALLENGES</span>
+                      <span className="text-xl font-bold font-display text-white">42 / 100</span>
+                      <span className="text-[9px] font-mono text-violet-400 block mt-1">Next: UART Rx</span>
+                    </div>
+                    <div className="bg-white/5 border border-white/5 rounded-xl p-4 text-left">
+                      <span className="text-[10px] font-mono text-white/40 block mb-1">GLOBAL RANK</span>
+                      <span className="text-xl font-bold font-display text-white">#142</span>
+                      <span className="text-[9px] font-mono text-[#06b6d4] block mt-1">Top 2% Globally</span>
+                    </div>
+                  </div>
+
+                  {/* Mock progress bar */}
+                  <div className="flex flex-col gap-2 pt-4 border-t border-white/5">
+                    <div className="flex justify-between text-[10px] font-mono text-white/40">
+                      <span>RTL DESIGN (VERILOG) PROGRESS</span>
+                      <span className="text-white/80">68%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div className="h-full w-[68%] bg-gradient-to-r from-violet-500 to-cyan-500 rounded-full" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </Reveal>
+
+          {/* Sub-header for other suites */}
+          <Reveal delay={0.1}>
+            <div className="mt-28 mb-12 text-left">
+              <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay">
+                Core Architectures &amp; Suites
+              </div>
+              <h3 className="mt-3 font-display text-[28px] md:text-[38px] font-bold tracking-tight text-ink">
+                Autonomic Infrastructure Systems
+              </h3>
+            </div>
+          </Reveal>
+
+          {/* Grid for ENVX and NOVA */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+            {/* 2. Core Suite: ENVX */}
+            <Reveal delay={0.15}>
+              <Card className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0a0f1d] via-[#05070d] to-[#020306] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.3)] flex flex-col justify-between p-8 md:p-10 hover:shadow-[0_30px_70px_rgba(0,0,0,0.45)] hover:-translate-y-1 transition-all duration-300 h-full">
+                {/* Subtle ambient lighting */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="absolute -top-40 -right-32 w-[350px] h-[350px] rounded-full bg-[radial-gradient(closest-side,rgba(41,151,255,0.06),transparent_80%)]" />
+                </div>
+
+                <div className="relative z-10 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-white/5 bg-white/5 px-3 py-1 text-[11px] font-mono tracking-[0.2em] uppercase text-[#2997ff]">
+                      CORE SUITE // ENVX
+                    </div>
+
+                    <h4 className="mt-6 font-display text-[28px] md:text-[34px] font-bold tracking-tight text-white leading-tight">
+                      Critical Operations Environment.
+                    </h4>
+
+                    <p className="mt-4 text-[14px] md:text-[15px] leading-relaxed text-white/70">
+                      ENVX is an AI-native engineering studio. We combine sandboxed orchestration, autonomous code compilation, and hardware-in-the-loop debugging onto a single interface.
+                    </p>
+                  </div>
+
+                  {/* Compact Terminal View */}
+                  <div className="w-full mt-6 bg-[#020408] rounded-xl border border-white/5 overflow-hidden text-left shadow-2xl font-mono text-[11px] leading-normal">
+                    <div className="bg-[#0b0f19] px-3 py-2 border-b border-white/5 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-[#ff5f56]" />
+                        <span className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
+                        <span className="h-2 w-2 rounded-full bg-[#27c93f]" />
                       </div>
-                      <div className="mt-2 text-[10px] font-mono uppercase tracking-[0.2em] text-white/40">
-                        {key}
+                      <div className="text-[9px] text-white/40 uppercase tracking-widest">envx // control_loop.rs</div>
+                    </div>
+                    <div className="p-4 text-white/80 select-none overflow-x-auto max-h-[140px] scrollbar-thin">
+                      <div className="text-[#80cbc4]">// Initializing controller...</div>
+                      <div className="text-[#f77669]">use <span className="text-[#c792ea]">eaura_systems::prelude::*;</span></div>
+                      <div className="text-[#89ddff] mt-1"><span className="text-[#c792ea]">let</span> rate = node.read_flowrate();</div>
+                      <div className="text-emerald-400 font-semibold mt-1">✔ [OK] Edge p99 verified: 18ms.</div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/5">
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10 transition-all duration-200"
+                    >
+                      <a href="#contact">Request Access</a>
+                    </Button>
+                    <CTA href="#" className="text-white/60">Read Specs</CTA>
+                  </div>
+                </div>
+              </Card>
+            </Reveal>
+
+            {/* 3. Core Suite: NOVA */}
+            <Reveal delay={0.25}>
+              <Card className="relative overflow-hidden rounded-[24px] bg-surface-2 border border-hairline shadow-sm flex flex-col justify-between p-8 md:p-10 hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 h-full">
+                <div className="relative z-10 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 text-[11px] font-mono tracking-[0.2em] uppercase text-clay">
+                      OPERATING AGENT // NOVA
+                    </div>
+
+                    <h4 className="mt-6 font-display text-[28px] md:text-[34px] font-bold tracking-tight text-ink leading-tight">
+                      Physical Control Planes.
+                    </h4>
+
+                    <p className="mt-4 text-[14px] md:text-[15px] leading-relaxed text-ink-2">
+                      NOVA acts as a secure, distributed control plane for embodied robotics. Run control feedback loops, sync remote telemetry, and safely handle edge actions at scale.
+                    </p>
+                  </div>
+
+                  {/* Compact SVG animated Radar */}
+                  <div className="relative h-[160px] bg-gradient-to-br from-[#0c1322] via-[#07090e] to-[#030406] border border-hairline rounded-xl overflow-hidden flex items-center justify-center mt-6">
+                    <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(0,113,227,0.1),transparent_60%)]" />
+                    
+                    <div className="relative w-32 h-32 flex items-center justify-center">
+                      {/* Outer spinning ring */}
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 rounded-full border border-white/5 border-dashed"
+                      />
+                      {/* Mid spinning ring */}
+                      <motion.div
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                        className="absolute w-[80%] h-[80%] rounded-full border border-white/10"
+                      />
+                      {/* Sweep */}
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                        className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,rgba(41,151,255,0.08)_0deg,transparent_120deg)] origin-center"
+                      />
+                      {/* Pulsating Center */}
+                      <div className="absolute w-3.5 h-3.5 rounded-full bg-clay/20 border border-clay flex items-center justify-center">
+                        <div className="w-1 h-1 rounded-full bg-white animate-ping" />
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            </Card>
-          </Reveal>
-        </div>
-      </section>
+                  </div>
 
-      {/* PRODUCT — NOVA (Split layout with Canvas Radar scope) */}
-      <section id="nova" className="bg-bg py-16 md:py-24 relative">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal>
-            <Card className="relative overflow-hidden rounded-[24px] bg-surface-2 border border-hairline shadow-sm min-h-[580px] md:min-h-[640px] grid md:grid-cols-2 hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.06)] hover:-translate-y-1.5 transition-all duration-300 will-change-transform">
-              <div className="relative z-10 p-8 md:p-16 flex flex-col justify-center text-left">
-                <div className="inline-flex items-center gap-2 w-fit rounded-full border border-hairline bg-surface px-3 py-1 text-[11px] font-mono tracking-[0.2em] uppercase text-clay mb-6">
-                  OPERATING AGENT // NOVA
-                </div>
-                <h3 className="font-display text-[38px] md:text-[56px] font-bold tracking-[-0.035em] leading-[1.04] text-ink">
-                  Autonomous planes of physical control.
-                </h3>
-                <p className="mt-5 text-[16px] md:text-[18px] text-ink-2 leading-relaxed">
-                  NOVA acts as a secure, distributed control plane for embodied robotics. Run
-                  control feedback loops, sync remote telemetry, and safely handle edge actions at
-                  scale.
-                </p>
-                <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4 pt-4 border-t border-hairline">
-                  <CTA href="#">Request interface credentials</CTA>
-                  <span className="inline-flex items-center gap-2 text-[12.5px] font-mono text-ink-2/65">
-                    <span className="h-1.5 w-1.5 rounded-full bg-clay animate-pulse" />
-                    Private Sandbox Beta // v0.4
-                  </span>
-                </div>
-              </div>
-
-              {/* Advanced SVG animated Radar / telemetry visualization on the right */}
-              <div className="relative min-h-[360px] md:min-h-full bg-gradient-to-br from-[#0c1322] via-[#07090e] to-[#030406] border-t md:border-t-0 md:border-l border-hairline overflow-hidden flex items-center justify-center">
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle at 50% 50%, rgba(0,113,227,0.15), transparent 60%)",
-                  }}
-                />
-
-                {/* Radar Grid Graphic */}
-                <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
-                  {/* Outer spinning ring */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 rounded-full border border-white/5 border-dashed"
-                  />
-                  {/* Mid spinning ring */}
-                  <motion.div
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                    className="absolute w-[80%] h-[80%] rounded-full border border-white/10"
-                  />
-                  {/* Inner ring */}
-                  <div className="absolute w-[50%] h-[50%] rounded-full border border-white/5" />
-
-                  {/* Radar Sweep */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,rgba(41,151,255,0.12)_0deg,transparent_120deg)] origin-center"
-                  />
-
-                  {/* Floating Telemetry Targets (Blinking) */}
-                  <motion.div
-                    animate={{ opacity: [0.1, 0.9, 0.1] }}
-                    transition={{ duration: 3.5, repeat: Infinity, delay: 0.8 }}
-                    className="absolute top-1/4 left-1/4 flex items-center gap-1.5 pointer-events-none"
-                  >
-                    <span className="h-2 w-2 rounded-full bg-clay shadow-[0_0_8px_rgba(0,113,227,0.8)]" />
-                    <span className="font-mono text-[9px] text-[#2997ff]/60 tracking-wider">
-                      TRK-24
+                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-ink-2/65">
+                      <span className="h-1.5 w-1.5 rounded-full bg-clay animate-pulse" />
+                      Sandbox Beta // v0.4
                     </span>
-                  </motion.div>
-                  <motion.div
-                    animate={{ opacity: [0.1, 0.7, 0.1] }}
-                    transition={{ duration: 4.2, repeat: Infinity, delay: 2.2 }}
-                    className="absolute bottom-1/3 right-1/4 flex items-center gap-1.5 pointer-events-none"
-                  >
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-                    <span className="font-mono text-[9px] text-emerald-400/60 tracking-wider">
-                      TRK-09
-                    </span>
-                  </motion.div>
-
-                  {/* Pulsating Center Node */}
-                  <div className="absolute w-6 h-6 rounded-full bg-clay/20 border border-clay flex items-center justify-center shadow-lg shadow-clay/35">
-                    <div className="w-2 h-2 rounded-full bg-white animate-ping" />
-                  </div>
-
-                  {/* Telemetry labels */}
-                  <div className="absolute top-2 left-1/2 -translate-x-1/2 font-mono text-[9px] tracking-widest text-white/30">
-                    NOVA // CENTERED POINT
-                  </div>
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2 font-mono text-[9px] tracking-widest text-emerald-400/70 uppercase">
-                    SYS.LOCKED
+                    <CTA href="#">Interface Access</CTA>
                   </div>
                 </div>
-              </div>
-            </Card>
-          </Reveal>
+              </Card>
+            </Reveal>
+          </div>
         </div>
       </section>
 

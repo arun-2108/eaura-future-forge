@@ -3,12 +3,13 @@ import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motio
 import { Button } from "@/components/ui/button";
 
 const links = [
-  { href: "#philosophy", label: "Philosophy" },
-  { href: "#capabilities", label: "Capabilities" },
-  { href: "#products", label: "Products" },
-  { href: "#research", label: "Research" },
-  { href: "#founders", label: "Leadership" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#philosophy", label: "Philosophy" },
+  { href: "/#capabilities", label: "Capabilities" },
+  { href: "/#products", label: "Products" },
+  { href: "/elekki", label: "ELEKKI" },
+  { href: "/#research", label: "Research" },
+  { href: "/#founders", label: "Leadership" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Nav() {
@@ -35,7 +36,9 @@ export function Nav() {
 
   // Active section tracking via IntersectionObserver
   useEffect(() => {
-    const sectionIds = links.map((l) => l.href.replace("#", ""));
+    const sectionIds = links
+      .map((l) => (l.href.includes("#") ? l.href.split("#")[1] : ""))
+      .filter(Boolean);
     const observers: IntersectionObserver[] = [];
 
     sectionIds.forEach((id) => {
@@ -69,7 +72,7 @@ export function Nav() {
       />
 
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6">
-        <a href="#company" className="flex items-center gap-2.5 group">
+        <a href="/#company" className="flex items-center gap-2.5 group">
           <span className="grid h-7 w-7 place-items-center rounded-lg bg-ink text-bg text-[11px] font-bold font-display transition-all duration-300 group-hover:rotate-6 group-hover:scale-105">
             E
           </span>
@@ -80,8 +83,9 @@ export function Nav() {
 
         <nav className="hidden md:flex items-center gap-8">
           {links.map((l) => {
-            const sectionId = l.href.replace("#", "");
-            const isActive = activeSection === sectionId;
+            const isCurrentPage = typeof window !== "undefined" && window.location.pathname === l.href;
+            const sectionId = l.href.includes("#") ? l.href.split("#")[1] : "";
+            const isActive = isCurrentPage || (activeSection === sectionId && sectionId !== "");
             return (
               <a
                 key={l.href}
@@ -108,7 +112,7 @@ export function Nav() {
             variant="default"
             className="rounded-full px-5 transition-all duration-200 hover:shadow-md hover:shadow-ink/10 hover:-translate-y-px"
           >
-            <a href="#contact">Get in touch</a>
+            <a href="/#contact">Get in touch</a>
           </Button>
         </div>
 
@@ -183,7 +187,7 @@ export function Nav() {
                 className="w-full py-6 rounded-full text-base"
                 onClick={() => setOpen(false)}
               >
-                <a href="#contact">Get in touch</a>
+                <a href="/#contact">Get in touch</a>
               </Button>
             </motion.div>
           </motion.div>
