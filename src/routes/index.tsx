@@ -104,12 +104,7 @@ function Home() {
     mouseY.set(0);
   };
 
-  const roadmapRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: roadmapRef,
-    offset: ["start center", "end center"]
-  });
-  const scaleY = useSpring(scrollYProgress, { stiffness: 60, damping: 20 });
+  const [activePhaseIndex, setActivePhaseIndex] = useState(0);
 
   return (
     <div className="min-h-screen bg-bg text-ink antialiased overflow-x-hidden">
@@ -1059,301 +1054,242 @@ function Home() {
         </div>
       </section>
 
-      {/* ROADMAP SECTION — Premium Apple-inspired Storytelling Experience */}
-      <section id="roadmap" ref={roadmapRef} className="bg-[#030206] text-white py-28 md:py-36 border-t border-white/5 relative overflow-hidden">
-        {/* Parallax / Glowing background lights */}
+      {/* ROADMAP SECTION — Interactive Premium Dashboard Switched Experience */}
+      <section id="roadmap" className="bg-[#030206] text-white py-24 border-t border-white/5 relative overflow-hidden">
+        {/* Ambient Glowing lights */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(closest-side,rgba(99,102,241,0.06),transparent_80%)] blur-3xl" />
-          <div className="absolute top-[40%] right-[-10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(168,85,247,0.05),transparent_80%)] blur-3xl" />
-          <div className="absolute bottom-[10%] left-[20%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(closest-side,rgba(6,182,212,0.04),transparent_80%)] blur-3xl" />
+          <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(closest-side,rgba(168,85,247,0.05),transparent_80%)] blur-3xl" />
         </div>
 
         <div className="mx-auto max-w-6xl px-6 relative z-10">
-          {/* Header */}
-          <Reveal>
-            <div className="max-w-3xl mb-24 text-left">
-              <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-indigo-400 mb-3">
-                Roadmap
-              </div>
-              <h2 className="font-display text-[40px] md:text-[60px] font-bold tracking-[-0.03em] leading-[1.02] text-white">
-                Our Journey
-              </h2>
-              <p className="mt-6 text-[17px] md:text-[19px] text-white/60 max-w-2xl leading-[1.65]">
-                Every product begins with a vision. Every milestone brings us closer to building intelligent products that create meaningful impact.
-              </p>
-            </div>
-          </Reveal>
-
-          {/* Timeline Wrapper */}
-          <div className="relative mt-16 md:mt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
             
-            {/* Center / Left Timeline vertical progress line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 -translate-x-[1px]">
-              <motion.div
-                style={{ scaleY: scaleY, originY: 0 }}
-                className="w-full h-full bg-gradient-to-b from-indigo-500 via-purple-500 to-cyan-400"
-              />
+            {/* Left Column: Switched Navigation */}
+            <div className="lg:col-span-4 text-left">
+              <Reveal>
+                <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-indigo-400 mb-3">
+                  Our Journey
+                </div>
+                <h2 className="font-display text-[36px] md:text-[50px] font-bold tracking-tight text-white leading-[1.05]">
+                  Roadmap
+                </h2>
+                <p className="mt-4 text-[14.5px] leading-relaxed text-white/50 max-w-sm mb-8">
+                  Every product begins with a vision. Every milestone brings us closer to building intelligent products that create meaningful impact.
+                </p>
+              </Reveal>
+
+              {/* Phase Switcher Tabs */}
+              <div className="flex flex-col gap-2.5">
+                {[
+                  { phase: "PHASE 01", label: "Foundation", date: "June 2025" },
+                  { phase: "PHASE 02", label: "Innovation", date: "In Progress" },
+                  { phase: "PHASE 03", label: "Growth", date: "Q3 2026" },
+                  { phase: "PHASE 04", label: "Scale", date: "2027" },
+                  { phase: "PHASE 05", label: "Future", date: "Long-term" }
+                ].map((item, idx) => (
+                  <button
+                    key={item.phase}
+                    onClick={() => setActivePhaseIndex(idx)}
+                    className={`w-full text-left p-4.5 rounded-xl border transition-all duration-300 flex items-center justify-between group ${
+                      activePhaseIndex === idx
+                        ? "bg-white/5 border-indigo-500/40 shadow-lg shadow-indigo-500/5 text-white"
+                        : "bg-transparent border-white/5 text-white/40 hover:text-white/70 hover:border-white/10"
+                    }`}
+                  >
+                    <div>
+                      <span className="text-[10px] font-mono tracking-widest block opacity-60">{item.phase}</span>
+                      <span className="text-[15px] font-semibold font-display block mt-1">{item.label}</span>
+                    </div>
+                    <span className="text-[10px] font-mono opacity-50 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">{item.date}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* MILESTONES */}
-            <div className="space-y-24">
-
-              {/* PHASE 01: FOUNDATION */}
-              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-                {/* Left Side Content */}
-                <div className="text-left md:text-right pr-0 md:pr-12 pl-12 md:pl-0">
-                  <Reveal>
-                    <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-indigo-400 font-semibold mb-4">
-                      PHASE 01 // FOUNDATION
-                    </div>
-                    <div className="flex items-center gap-2 md:justify-end text-[12px] font-mono text-white/40 mb-2">
-                      <Calendar size={13} />
-                      June 2025
-                    </div>
-                    <h3 className="font-display text-2xl font-bold text-white">
-                      EAURA Founded
-                    </h3>
-                    <p className="mt-4 text-[14.5px] leading-relaxed text-white/65 max-w-md md:ml-auto">
-                      EAURA was established with a vision to build intelligent technology products that solve meaningful real-world problems across AI, developer infrastructure and engineering education.
-                    </p>
-                  </Reveal>
-                </div>
-                {/* Right Side Empty */}
-                <div className="hidden md:block" />
-                {/* Glowing milestone indicator node */}
-                <div className="absolute left-4 md:left-1/2 top-2 -translate-x-1/2 h-4.5 w-4.5 rounded-full border border-indigo-500 bg-[#030206] shadow-[0_0_10px_rgba(99,102,241,0.6)] flex items-center justify-center">
-                  <div className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-ping" />
-                </div>
-              </div>
-
-              {/* PHASE 02: INNOVATION ( stacked vertical showcase cards ) */}
-              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-                <div className="hidden md:block" />
+            {/* Right Column: Console Details */}
+            <div className="lg:col-span-8 w-full">
+              <div className="bg-white/[0.02] border border-white/10 backdrop-blur-md rounded-2xl p-6 md:p-10 min-h-[460px] flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 hover:border-indigo-500/20">
+                {/* Visual element indicators */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-500/10 to-transparent rounded-full blur-xl pointer-events-none" />
                 
-                {/* Right Side Cards */}
-                <div className="text-left pl-12 md:pl-12">
-                  <Reveal>
-                    <div className="inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-purple-400 font-semibold mb-6">
-                      PHASE 02 // INNOVATION
-                    </div>
-                    <h3 className="font-display text-3xl font-bold text-white mb-8">
-                      Product Inception
-                    </h3>
-                  </Reveal>
+                {/* Top console header info */}
+                <div className="flex items-center justify-between border-b border-white/5 pb-4.5 mb-6 text-left">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
+                    <span className="font-mono text-[9.5px] uppercase tracking-wider text-white/60">
+                      ROADMAP // PANEL_0{activePhaseIndex + 1}
+                    </span>
+                  </div>
+                  <span className="font-mono text-[9px] text-[#06b6d4]">STATUS: ACTIVE</span>
+                </div>
 
-                  <div className="flex flex-col gap-8">
-                    
-                    {/* Card 1: NOVA */}
-                    <Reveal delay={0.05}>
-                      <div className="group relative bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 hover:border-indigo-500/30 backdrop-blur-md rounded-2xl p-6 md:p-8 transition-all duration-300 shadow-xl">
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-[16px] font-mono font-semibold tracking-wider text-indigo-400">NOVA</span>
-                          <span className="inline-flex items-center rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-0.5 text-[9px] font-mono text-amber-400">PROTOTYPE</span>
+                {/* Main Dynamic content with clean key switcher */}
+                <div className="flex-grow flex flex-col justify-center text-left">
+                  {activePhaseIndex === 0 && (
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-[9px] font-mono text-indigo-400 font-semibold mb-4">
+                        PHASE 01 // FOUNDATION
+                      </div>
+                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-white mb-4">
+                        EAURA Founded
+                      </h3>
+                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-white/70 max-w-xl">
+                        EAURA was established with a vision to build intelligent technology products that solve meaningful real-world problems across AI, developer infrastructure and engineering education.
+                      </p>
+                      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-white/55 font-mono text-[11.5px]">
+                        <div className="flex items-center gap-2.5">
+                          <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                          <span>June 2025 Incorporation</span>
                         </div>
-                        <p className="text-[13.5px] leading-relaxed text-white/70">
-                          Developing a next-generation AI companion focused on natural interaction, smart home integration and intelligent everyday assistance.
-                        </p>
-                        <div className="mt-6 pt-4 border-t border-white/5">
-                          <h4 className="text-[11px] font-mono uppercase tracking-wider text-white/50 mb-2.5">Upcoming Milestones</h4>
-                          <ul className="grid grid-cols-1 gap-2 text-[12px] text-white/60">
-                            {["Voice Assistant MVP", "Smart Home Integration", "Hardware Prototype"].map((m) => (
-                              <li key={m} className="flex items-center gap-2">
-                                <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
-                                {m}
-                              </li>
-                            ))}
-                          </ul>
+                        <div className="flex items-center gap-2.5">
+                          <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                          <span>Core Architecture Scoping</span>
                         </div>
                       </div>
-                    </Reveal>
+                    </div>
+                  )}
 
-                    {/* Card 2: ENVX */}
-                    <Reveal delay={0.1}>
-                      <div className="group relative bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 hover:border-cyan-500/30 backdrop-blur-md rounded-2xl p-6 md:p-8 transition-all duration-300 shadow-xl">
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-[16px] font-mono font-semibold tracking-wider text-cyan-400">ENVX</span>
-                          <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[9px] font-mono text-emerald-400 font-semibold">MVP</span>
-                        </div>
-                        <p className="text-[13.5px] leading-relaxed text-white/70">
-                          Building secure developer infrastructure that simplifies environment variable management using encrypted CLI-first workflows.
-                        </p>
-                        <div className="mt-6 pt-4 border-t border-white/5">
-                          <h4 className="text-[11px] font-mono uppercase tracking-wider text-white/50 mb-2.5">Upcoming Milestones</h4>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[12px] text-white/60">
-                            {[
-                              "Public Beta",
-                              "Team Collaboration",
-                              "Enterprise-grade Security",
-                              "VS Code Extension",
-                              "GitHub Marketplace"
-                            ].map((m) => (
-                              <li key={m} className="flex items-center gap-2">
-                                <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />
-                                {m}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                  {activePhaseIndex === 1 && (
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 px-2.5 py-0.5 text-[9px] font-mono text-purple-400 font-semibold mb-4">
+                        PHASE 02 // INNOVATION
                       </div>
-                    </Reveal>
-
-                    {/* Card 3: ELEKKI */}
-                    <Reveal delay={0.15}>
-                      <div className="group relative bg-white/[0.02] hover:bg-white/[0.04] border border-white/10 hover:border-violet-500/30 backdrop-blur-md rounded-2xl p-6 md:p-8 transition-all duration-300 shadow-xl">
-                        <div className="flex justify-between items-center mb-4">
-                          <span className="text-[16px] font-mono font-semibold tracking-wider text-violet-400">ELEKKI</span>
-                          <span className="inline-flex items-center rounded-full border border-violet-500/30 bg-violet-500/10 px-2.5 py-0.5 text-[9px] font-mono text-violet-400 font-semibold">BETA</span>
-                        </div>
-                        <p className="text-[13.5px] leading-relaxed text-white/70">
-                          Building the complete skill development ecosystem for Electronics & Communication Engineering students.
-                        </p>
-                        <div className="mt-6 pt-4 border-t border-white/5">
-                          <h4 className="text-[11px] font-mono uppercase tracking-wider text-white/50 mb-2.5">Upcoming Milestones</h4>
-                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[12px] text-white/60">
-                            {[
-                              "College Pilot Programs",
-                              "AI Learning Mentor",
-                              "Company Assessments",
-                              "Recruiter Portal",
-                              "Public Platform Launch"
-                            ].map((m) => (
-                              <li key={m} className="flex items-center gap-2">
-                                <span className="h-1.5 w-1.5 rounded-full bg-violet-500" />
-                                {m}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-white mb-6">
+                        Product Inception
+                      </h3>
+                      
+                      {/* Products milestone cards */}
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {[
+                          {
+                            name: "NOVA",
+                            status: "Prototype",
+                            color: "text-amber-400 border-amber-500/30 bg-amber-500/5",
+                            milestones: ["Voice Assistant MVP", "Smart Home Sync", "Hardware Prototype"]
+                          },
+                          {
+                            name: "ENVX",
+                            status: "MVP",
+                            color: "text-cyan-400 border-cyan-500/30 bg-cyan-500/5",
+                            milestones: ["Public Beta", "VS Code Extension", "GitHub Integration"]
+                          },
+                          {
+                            name: "ELEKKI",
+                            status: "Beta",
+                            color: "text-violet-400 border-violet-500/30 bg-violet-500/5",
+                            milestones: ["College Pilots", "AI Learning Mentor", "Recruiter Portal"]
+                          }
+                        ].map((p) => (
+                          <div key={p.name} className="bg-white/5 border border-white/5 rounded-xl p-4.5">
+                            <div className="flex justify-between items-center mb-2.5">
+                              <span className="font-mono font-semibold text-[14px] text-white">{p.name}</span>
+                              <span className={`px-2 py-0.5 text-[8.5px] font-mono border rounded-full ${p.color}`}>{p.status}</span>
+                            </div>
+                            <ul className="flex flex-col gap-1.5 text-[11px] text-white/50 font-mono text-left">
+                              {p.milestones.map((m) => (
+                                <li key={m} className="flex items-center gap-1.5">
+                                  <span className="h-1 w-1 rounded-full bg-indigo-500" />
+                                  <span>{m}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
                       </div>
-                    </Reveal>
-
-                  </div>
-                </div>
-
-                {/* Glowing milestone node */}
-                <div className="absolute left-4 md:left-1/2 top-2 -translate-x-1/2 h-4.5 w-4.5 rounded-full border border-purple-500 bg-[#030206] shadow-[0_0_10px_rgba(168,85,247,0.6)] flex items-center justify-center">
-                  <div className="h-1.5 w-1.5 rounded-full bg-purple-400 animate-pulse" />
-                </div>
-              </div>
-
-              {/* PHASE 03: GROWTH */}
-              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-                
-                {/* Left Side Content */}
-                <div className="text-left md:text-right pr-0 md:pr-12 pl-12 md:pl-0">
-                  <Reveal>
-                    <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-emerald-400 font-semibold mb-4">
-                      PHASE 03 // GROWTH
                     </div>
-                    <h3 className="font-display text-2xl font-bold text-white">
-                      Building a Product Ecosystem
-                    </h3>
-                    <p className="mt-4 text-[14.5px] leading-relaxed text-white/65 max-w-md md:ml-auto">
-                      Expand EAURA into a multi-product technology company serving students, developers, professionals and businesses through intelligent software and AI-powered solutions.
-                    </p>
+                  )}
 
-                    {/* Differentiator Visual Cards */}
-                    <div className="mt-8 grid grid-cols-2 gap-3 text-left">
-                      {[
-                        "Developer Tools",
-                        "Artificial Intelligence",
-                        "Education Technology",
-                        "Future Products"
-                      ].map((item) => (
-                        <div key={item} className="bg-white/5 border border-white/5 rounded-xl p-3.5 hover:bg-white/[0.08] transition-colors duration-200">
-                          <span className="font-mono text-[11px] text-emerald-400 font-semibold block">ECOSYSTEM TRACK</span>
-                          <span className="text-[13px] text-white font-medium block mt-1">{item}</span>
-                        </div>
-                      ))}
+                  {activePhaseIndex === 2 && (
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[9px] font-mono text-emerald-400 font-semibold mb-4">
+                        PHASE 03 // GROWTH
+                      </div>
+                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-white mb-4">
+                        Building a Product Ecosystem
+                      </h3>
+                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-white/70 max-w-xl mb-6">
+                        Expand EAURA into a multi-product technology company serving students, developers, professionals and businesses through intelligent software and AI-powered solutions.
+                      </p>
+                      
+                      {/* Growth Tracks tags */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                        {["Developer Tools", "Artificial Intelligence", "Education Technology", "Future Products"].map((item) => (
+                          <div key={item} className="bg-white/5 border border-white/5 rounded-xl p-3.5">
+                            <span className="font-mono text-[10px] text-emerald-400 font-semibold block">ECOSYSTEM</span>
+                            <span className="text-[13px] text-white font-medium block mt-1">{item}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </Reveal>
-                </div>
-                
-                <div className="hidden md:block" />
+                  )}
 
-                {/* Glowing milestone node */}
-                <div className="absolute left-4 md:left-1/2 top-2 -translate-x-1/2 h-4.5 w-4.5 rounded-full border border-emerald-500 bg-[#030206] shadow-[0_0_10px_rgba(16,185,129,0.6)] flex items-center justify-center">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                </div>
-              </div>
+                  {activePhaseIndex === 3 && (
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-0.5 text-[9px] font-mono text-cyan-400 font-semibold mb-4">
+                        PHASE 04 // SCALE
+                      </div>
+                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-white mb-4">
+                        Strategic Growth
+                      </h3>
+                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-white/70 max-w-xl mb-6">
+                        Scale global integrations, secure strategic developer partnerships, and enter enterprise solutions markets.
+                      </p>
 
-              {/* PHASE 04: SCALE */}
-              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-                <div className="hidden md:block" />
-
-                {/* Right Side Content */}
-                <div className="text-left pl-12 md:pl-12">
-                  <Reveal>
-                    <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-cyan-400 font-semibold mb-4">
-                      PHASE 04 // SCALE
+                      {/* Milestones list */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[12px] text-white/70 font-mono">
+                        {[
+                          "Seed Funding Scoping",
+                          "Strategic Partnerships",
+                          "Enterprise Solutions",
+                          "Growing Product Ecosystem",
+                          "Global Developer Community",
+                          "College Partnerships",
+                          "Industry Collaborations"
+                        ].map((item) => (
+                          <div key={item} className="flex items-center gap-2">
+                            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                    <h3 className="font-display text-2xl font-bold text-white">
-                      Strategic Growth
-                    </h3>
+                  )}
 
-                    {/* Milestones list grid */}
-                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {[
-                        "Seed Funding",
-                        "Strategic Partnerships",
-                        "Enterprise Solutions",
-                        "Growing Product Ecosystem",
-                        "Global Developer Community",
-                        "College Partnerships",
-                        "Industry Collaborations"
-                      ].map((item) => (
-                        <div key={item} className="flex items-center gap-3 bg-white/5 border border-white/5 px-4 py-3 rounded-xl hover:bg-white/[0.08] transition-colors duration-200">
-                          <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
-                          <span className="text-[13px] text-white/80">{item}</span>
-                        </div>
-                      ))}
+                  {activePhaseIndex === 4 && (
+                    <div className="relative py-4">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-[9px] font-mono text-indigo-400 font-semibold mb-6">
+                        PHASE 05 // FUTURE
+                      </div>
+                      
+                      <h4 className="font-display text-[26px] md:text-[40px] font-bold tracking-tight text-white leading-tight mb-4 select-none drop-shadow-[0_0_12px_rgba(99,102,241,0.25)]">
+                        Our journey is just beginning.
+                      </h4>
+                      <p className="text-[15px] md:text-[17px] leading-[1.7] text-white/75 max-w-2xl">
+                        We envision EAURA becoming a globally recognized technology company building intelligent products that simplify complexity, empower people and create lasting impact across industries.
+                      </p>
                     </div>
-                  </Reveal>
+                  )}
                 </div>
 
-                {/* Glowing milestone node */}
-                <div className="absolute left-4 md:left-1/2 top-2 -translate-x-1/2 h-4.5 w-4.5 rounded-full border border-cyan-500 bg-[#030206] shadow-[0_0_10px_rgba(6,182,212,0.6)] flex items-center justify-center">
-                  <div className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                {/* Bottom interactive guide */}
+                <div className="border-t border-white/5 pt-4 flex items-center justify-between text-[10px] font-mono text-white/40">
+                  <span>SELECT OTHER TABS TO EXPLORE</span>
+                  <span>EAURA ORCHESTRATION</span>
                 </div>
+
               </div>
-
-              {/* PHASE 05: FUTURE */}
-              <div className="relative flex flex-col items-center text-center pt-16">
-                <Reveal>
-                  <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-indigo-400 font-semibold mb-6">
-                    PHASE 05 // FUTURE
-                  </div>
-                  <h3 className="font-display text-[26px] md:text-[34px] font-bold text-white mb-8">
-                    Engineering What's Next
-                  </h3>
-
-                  {/* Large glowing vision text block */}
-                  <div className="relative max-w-3xl bg-gradient-to-b from-white/10 to-white/[0.02] border border-white/10 p-10 md:p-14 rounded-[32px] overflow-hidden shadow-2xl">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.06),transparent_70%)] pointer-events-none" />
-                    
-                    <h4 className="font-display text-[28px] md:text-[44px] font-bold tracking-tight text-white leading-tight mb-6">
-                      Our journey is just beginning.
-                    </h4>
-                    <p className="text-[16px] md:text-[18px] leading-[1.7] text-white/70 max-w-2xl mx-auto">
-                      We envision EAURA becoming a globally recognized technology company building intelligent products that simplify complexity, empower people and create lasting impact across industries.
-                    </p>
-                  </div>
-                </Reveal>
-
-                {/* Pulsating terminal node */}
-                <div className="absolute left-4 md:left-1/2 top-0 -translate-x-1/2 h-4.5 w-4.5 rounded-full border border-indigo-400 bg-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.8)]" />
-              </div>
-
             </div>
+
           </div>
 
           {/* Ending CTA */}
           <Reveal>
-            <div className="mt-32 max-w-4xl mx-auto text-center border-t border-white/5 pt-20">
-              <h3 className="font-display text-[32px] md:text-[54px] font-bold text-white mb-6">
+            <div className="mt-24 max-w-4xl mx-auto text-center border-t border-white/5 pt-16">
+              <h3 className="font-display text-[30px] md:text-[48px] font-bold text-white mb-6">
                 Ready to build the future with us?
               </h3>
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Button
                   onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
                   size="lg"
