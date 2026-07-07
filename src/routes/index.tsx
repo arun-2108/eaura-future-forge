@@ -450,6 +450,52 @@ function Home() {
         </div>
       </section>
 
+      {/* VISION SECTION — Premium Minimal Typography */}
+      <section id="vision" className="bg-surface py-28 md:py-36 border-t border-hairline relative overflow-hidden">
+        {/* Soft radial glow */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+          <div className="w-[600px] h-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(0,113,227,0.03),transparent_80%)] blur-3xl" />
+        </div>
+
+        <div className="relative mx-auto max-w-6xl px-6 z-10">
+          <Reveal>
+            <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay mb-6">
+              Our Vision
+            </div>
+          </Reveal>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-start">
+            <Reveal>
+              <h2 className="font-display text-[40px] md:text-[60px] font-bold tracking-[-0.04em] leading-[1.05] text-ink text-balance">
+                Engineering Tomorrow
+                <br />
+                <span className="bg-gradient-to-r from-ink-2 to-clay bg-clip-text text-transparent">
+                  Through Intelligent Products.
+                </span>
+              </h2>
+            </Reveal>
+
+            <div className="flex flex-col gap-6 text-left lg:pt-2">
+              <Reveal delay={0.05}>
+                <p className="text-[19px] md:text-[21px] font-medium leading-relaxed text-ink tracking-tight">
+                  Technology should solve meaningful problems, not create unnecessary complexity.
+                </p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="text-[15px] md:text-[16.5px] leading-relaxed text-ink-2">
+                  At EAURA, we design products that empower students, developers and individuals by combining artificial intelligence, engineering and thoughtful product design.
+                </p>
+              </Reveal>
+              <Reveal delay={0.15}>
+                <p className="text-[15px] md:text-[16.5px] leading-relaxed text-ink-2">
+                  We believe the future belongs to products that are practical, intelligent and built with purpose.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ECOSYSTEM SECTION — Full-width Premium Product Showcases */}
       <section id="products" className="bg-bg py-28 md:py-36 border-t border-hairline relative">
         <div className="mx-auto max-w-6xl px-6">
