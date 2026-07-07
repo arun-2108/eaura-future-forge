@@ -450,13 +450,13 @@ function Home() {
         </div>
       </section>
 
-      {/* PRODUCTS SECTION — ELEKKI (Flagship) & Core Suites (ENVX, NOVA) ──────────────── */}
-      <section id="products" className="bg-bg py-24 md:py-32 border-t border-hairline relative">
+      {/* ECOSYSTEM SECTION — Full-width Premium Product Showcases */}
+      <section id="products" className="bg-bg py-28 md:py-36 border-t border-hairline relative">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
-            <div className="max-w-3xl mb-16">
+            <div className="max-w-3xl mb-24 text-left">
               <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay">
-                Flagship Offering
+                Our Ecosystem
               </div>
               <h2 className="mt-4 font-display text-[40px] md:text-[60px] font-bold tracking-[-0.03em] leading-[1.02] text-ink">
                 Intelligent infrastructure.
@@ -468,42 +468,245 @@ function Home() {
             </div>
           </Reveal>
 
-          {/* 1. Flagship Product: ELEKKI */}
-          <Reveal delay={0.05}>
-            <Card className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#080711] via-[#030206] to-[#010103] border border-violet-500/20 shadow-[0_30px_90px_-20px_rgba(94,92,230,0.15)] min-h-[500px] flex items-center p-8 md:p-16 hover:shadow-[0_40px_100px_-20px_rgba(94,92,230,0.25)] transition-all duration-300 group">
-              {/* Subtle ambient lighting */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute -top-40 -right-32 w-[650px] h-[650px] rounded-full bg-[radial-gradient(closest-side,rgba(94,92,230,0.12),transparent_80%)]" />
-                <div className="absolute -bottom-40 -left-32 w-[650px] h-[650px] rounded-full bg-[radial-gradient(closest-side,rgba(6,182,212,0.06),transparent_80%)]" />
-              </div>
-
-              <div className="relative w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-center z-10">
-                <div className="text-left flex flex-col items-start">
+          {/* Product Showcases Grid */}
+          <div className="flex flex-col gap-24 md:gap-36">
+            
+            {/* 1. NOVA (Consumer AI) */}
+            <Reveal>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                {/* Left Side: Content */}
+                <div className="text-left flex flex-col items-start lg:pr-6">
                   <div className="flex flex-wrap items-center gap-2 mb-6">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-[11px] font-mono tracking-[0.15em] uppercase text-violet-400">
-                      FLAGSHIP PLATFORM
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-clay font-semibold">
+                      Category // Consumer AI
                     </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[11px] font-mono tracking-[0.15em] uppercase text-emerald-400">
-                      COMING SOON
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-mono tracking-[0.15em] uppercase text-white/50">
-                      BUILT BY EAURA
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-emerald-400 font-semibold">
+                      MVP Status
                     </span>
                   </div>
 
-                  <h3 className="font-display text-[44px] md:text-[68px] font-bold tracking-[-0.04em] leading-[1.0] text-white">
+                  <h3 className="font-display text-[36px] md:text-[52px] font-bold tracking-[-0.04em] leading-[1.0] text-ink">
+                    NOVA
+                  </h3>
+
+                  <p className="mt-6 text-[16px] md:text-[18px] leading-relaxed text-ink-2">
+                    An intelligent next-generation AI companion designed to simplify everyday life through natural conversations, proactive assistance and intelligent automation.
+                  </p>
+
+                  {/* Animated Feature List */}
+                  <ul className="mt-8 flex flex-col gap-3 w-full">
+                    {[
+                      "Natural Conversations: Context-aware interactive companion logic.",
+                      "Proactive Assistance: Anticipates scheduling, workflow, and analysis queries.",
+                      "Intelligent Automation: Automates code generation and telemetry pipelines."
+                    ].map((feature, i) => (
+                      <motion.li
+                        key={i}
+                        whileHover={{ x: 2 }}
+                        className="flex items-start gap-3 text-[14px] text-ink-2"
+                      >
+                        <span className="h-5 w-5 rounded-full bg-clay/10 border border-clay/20 flex items-center justify-center text-clay text-[10px] shrink-0 mt-0.5">✓</span>
+                        <span>{feature}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-10 flex items-center gap-6">
+                    <Button
+                      onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                      size="lg"
+                      className="rounded-full px-8 py-6 text-base font-semibold shadow-md shadow-clay/5 hover:shadow-lg hover:shadow-clay/10 hover:-translate-y-px transition-all duration-200"
+                    >
+                      Explore NOVA
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Right Side: Mockup */}
+                <div className="relative w-full aspect-video md:aspect-[4/3] lg:aspect-square max-w-[480px] mx-auto rounded-3xl border border-hairline bg-surface/70 backdrop-blur-md p-6 overflow-hidden flex flex-col justify-between shadow-2xl hover:border-clay/20 transition-all duration-300 group">
+                  {/* Glowing core ambient */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[radial-gradient(closest-side,rgba(0,113,227,0.06),transparent_80%)] rounded-full blur-2xl" />
+                  
+                  {/* Mock Window Header */}
+                  <div className="flex items-center justify-between border-b border-hairline pb-4 mb-4 z-10">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+                    </div>
+                    <span className="font-mono text-[9px] tracking-wider text-ink-2">NOVA // ASSISTANT CORE</span>
+                  </div>
+
+                  {/* Pulsating Orb in center */}
+                  <div className="relative flex-grow flex items-center justify-center my-6 z-10">
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.08, 1],
+                        rotate: 360
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                      className="h-28 w-28 rounded-full bg-gradient-to-tr from-clay/20 via-indigo-500/10 to-cyan-500/20 border border-clay/30 flex items-center justify-center shadow-lg shadow-clay/10"
+                    >
+                      <motion.div
+                        animate={{ scale: [1, 1.15, 1] }}
+                        transition={{ duration: 4, repeat: Infinity }}
+                        className="h-16 w-16 rounded-full bg-clay/35 flex items-center justify-center border border-white/10"
+                      >
+                        <Bot size={24} className="text-ink" />
+                      </motion.div>
+                    </motion.div>
+                  </div>
+
+                  {/* Conversation bubbles */}
+                  <div className="flex flex-col gap-3 font-mono text-[11px] text-left z-10">
+                    <div className="bg-hairline/25 border border-hairline p-3 rounded-2xl max-w-[85%] self-start rounded-tl-none">
+                      <span className="text-clay block font-bold mb-1">User</span>
+                      NOVA, compile the daily simulation test status.
+                    </div>
+                    <div className="bg-clay/5 border border-clay/15 p-3 rounded-2xl max-w-[85%] self-end rounded-tr-none text-right">
+                      <span className="text-indigo-400 block font-bold mb-1">NOVA</span>
+                      Running test suite. Detected 2 warnings in sequence_detector.v. Logs generated.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* 2. ENVX (Developer Infrastructure) */}
+            <Reveal>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                {/* Left Side: Mockup (Alternating on Desktop) */}
+                <div className="order-2 lg:order-1 relative w-full aspect-video md:aspect-[4/3] lg:aspect-square max-w-[480px] mx-auto rounded-3xl border border-hairline bg-[#03060a]/90 p-6 overflow-hidden flex flex-col justify-between shadow-2xl hover:border-clay/20 transition-all duration-300 group">
+                  <div className="absolute top-0 right-0 w-36 h-36 bg-[radial-gradient(closest-side,rgba(0,113,227,0.06),transparent_80%)] rounded-full blur-2xl pointer-events-none" />
+                  
+                  {/* Mock terminal header */}
+                  <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full bg-white/20" />
+                      <span className="font-mono text-[9px] text-white/50 uppercase tracking-widest">envx // cli terminal</span>
+                    </div>
+                    <span className="font-mono text-[8px] text-emerald-400 border border-emerald-500/20 bg-emerald-500/5 px-2 py-0.5 rounded-full">ACTIVE SECURE</span>
+                  </div>
+
+                  {/* Terminal CLI code outputs */}
+                  <div className="flex-grow font-mono text-[11px] leading-relaxed text-left flex flex-col justify-center gap-3 py-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-clay font-bold">$</span>
+                      <span className="text-white/90">envx pull production</span>
+                    </div>
+                    <div className="text-white/40 flex flex-col gap-1 pl-4 border-l border-white/5">
+                      <div>➔ Authenticating with GitHub (arun-2108)...</div>
+                      <div className="text-emerald-400">✔ GitHub Auth successful.</div>
+                      <div>➔ Retrieving encrypted payload keys...</div>
+                      <div>➔ Decrypting payload via AES-256-GCM...</div>
+                      <div className="text-emerald-400">✔ Decryption complete.</div>
+                      <div>➔ Injecting 18 secrets safely into local .env</div>
+                    </div>
+                    <div className="text-indigo-400 mt-2 font-semibold">
+                      [INFO] Audit trail generated: TX_ID: 864fa91b.
+                    </div>
+                  </div>
+
+                  {/* Interactive lock visualization */}
+                  <div className="border-t border-white/5 pt-4 flex items-center justify-between text-[10px] font-mono text-white/40">
+                    <span>Symmetric Keys: Encrypted</span>
+                    <span className="text-clay">GitHub Connected</span>
+                  </div>
+                </div>
+
+                {/* Right Side: Content */}
+                <div className="order-1 lg:order-2 text-left flex flex-col items-start lg:pl-6">
+                  <div className="flex flex-wrap items-center gap-2 mb-6">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-clay font-semibold">
+                      Category // Developer Infrastructure
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-emerald-400 font-semibold">
+                      MVP Status
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-[36px] md:text-[52px] font-bold tracking-[-0.04em] leading-[1.0] text-ink">
+                    ENVX
+                  </h3>
+
+                  <p className="mt-6 text-[16px] md:text-[18px] leading-relaxed text-ink-2">
+                    A secure CLI-first environment variable management platform enabling development teams to synchronize secrets safely with encrypted workflows, GitHub authentication and enterprise-grade audit trails.
+                  </p>
+
+                  <ul className="mt-8 flex flex-col gap-3 w-full">
+                    {[
+                      "Encrypted Workflows: Zero-trust variables synchronized via AES-256 payload encryption.",
+                      "GitHub Authentication: Integrates cleanly onto developer teams' single sign-on cycles.",
+                      "Enterprise-grade Audit Trails: Trace secret synchronization cycles dynamically."
+                    ].map((feature, i) => (
+                      <motion.li
+                        key={i}
+                        whileHover={{ x: 2 }}
+                        className="flex items-start gap-3 text-[14px] text-ink-2"
+                      >
+                        <span className="h-5 w-5 rounded-full bg-clay/10 border border-clay/20 flex items-center justify-center text-clay text-[10px] shrink-0 mt-0.5">✓</span>
+                        <span>{feature}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-10 flex items-center gap-6">
+                    <Button
+                      onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                      size="lg"
+                      className="rounded-full px-8 py-6 text-base font-semibold shadow-md shadow-clay/5 hover:shadow-lg hover:shadow-clay/10 hover:-translate-y-px transition-all duration-200"
+                    >
+                      Explore ENVX
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* 3. ELEKKI (Education Technology) */}
+            <Reveal>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                {/* Left Side: Content */}
+                <div className="text-left flex flex-col items-start lg:pr-6">
+                  <div className="flex flex-wrap items-center gap-2 mb-6">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-clay font-semibold">
+                      Category // Education Technology
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-[10px] font-mono tracking-[0.1em] uppercase text-violet-400 font-semibold">
+                      Beta Status
+                    </span>
+                  </div>
+
+                  <h3 className="font-display text-[36px] md:text-[52px] font-bold tracking-[-0.04em] leading-[1.0] text-ink">
                     ELEKKI
                   </h3>
 
-                  <p className="mt-4 text-[18px] md:text-[20px] font-semibold text-white/90 leading-snug">
-                    The Complete Skill Development Ecosystem for Electronics &amp; Communication Engineers.
+                  <p className="mt-6 text-[16px] md:text-[18px] leading-relaxed text-ink-2">
+                    The complete skill development ecosystem for Electronics and Communication Engineering students, bringing learning, practice, assessments and career readiness into one unified platform.
                   </p>
 
-                  <p className="mt-4 text-white/60 text-[15px] md:text-[16px] leading-relaxed max-w-xl">
-                    If LeetCode transformed coding interview preparation, ELEKKI is building the platform that transforms how ECE students learn, practice, validate, and showcase industry-ready skills.
-                  </p>
+                  <ul className="mt-8 flex flex-col gap-3 w-full">
+                    {[
+                      "Unified Learning Sandbox: Conceptual tracks integrated directly with secure, client-side fallback simulators.",
+                      "Gamified Problem Solver: Tracks ECE skill progression across digital circuits, VLSI, and FSM design.",
+                      "Recruiter Matchmaking: Direct recruitment pipelines linking certified skill portfolios with top silicon employers."
+                    ].map((feature, i) => (
+                      <motion.li
+                        key={i}
+                        whileHover={{ x: 2 }}
+                        className="flex items-start gap-3 text-[14px] text-ink-2"
+                      >
+                        <span className="h-5 w-5 rounded-full bg-clay/10 border border-clay/20 flex items-center justify-center text-clay text-[10px] shrink-0 mt-0.5">✓</span>
+                        <span>{feature}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
 
-                  <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <div className="mt-10 flex items-center gap-6">
                     <Button
                       asChild
                       size="lg"
@@ -511,186 +714,50 @@ function Home() {
                     >
                       <a href="/elekki">Explore ELEKKI</a>
                     </Button>
-                    <CTA href="/elekki#waitlist">Join Waitlist</CTA>
                   </div>
                 </div>
 
-                {/* Conceptual preview graphic on the right */}
-                <div className="relative w-full aspect-video lg:aspect-auto lg:h-[350px] rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6 overflow-hidden flex flex-col justify-between shadow-2xl">
-                  {/* Decorative elements */}
-                  <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-violet-500/10 to-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+                {/* Right Side: Mockup */}
+                <div className="relative w-full aspect-video md:aspect-[4/3] lg:aspect-square max-w-[480px] mx-auto rounded-3xl border border-hairline bg-surface/70 backdrop-blur-md p-6 overflow-hidden flex flex-col justify-between shadow-2xl hover:border-clay/20 transition-all duration-300 group">
+                  <div className="absolute top-0 right-0 w-36 h-36 bg-gradient-to-br from-violet-500/10 to-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
                   
-                  {/* Mock dashboard element header */}
-                  <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                  {/* Mock panel header */}
+                  <div className="flex items-center justify-between border-b border-hairline pb-4 mb-4 z-10">
                     <div className="flex items-center gap-2">
-                      <div className="h-2.5 w-2.5 rounded-full bg-violet-500 animate-pulse" />
-                      <span className="font-mono text-[10px] tracking-wider text-white/60">ELEKKI.DASHBOARD.PREVIEW</span>
+                      <div className="h-2 w-2 rounded-full bg-violet-500 animate-pulse" />
+                      <span className="font-mono text-[9px] tracking-wider text-ink-2">ELEKKI.SYSTEM.PREVIEW</span>
                     </div>
-                    <span className="font-mono text-[9px] text-[#06b6d4]">SYSTEM: ONLINE</span>
+                    <span className="font-mono text-[8px] text-violet-400">SANDBOX COMPILED</span>
                   </div>
 
-                  {/* Mock analytics metrics */}
-                  <div className="my-auto grid grid-cols-3 gap-4">
-                    <div className="bg-white/5 border border-white/5 rounded-xl p-4 text-left">
-                      <span className="text-[10px] font-mono text-white/40 block mb-1">SKILL LEVEL</span>
-                      <span className="text-xl font-bold font-display text-white">Lvl 4</span>
-                      <span className="text-[9px] font-mono text-emerald-400 block mt-1">+12% this week</span>
-                    </div>
-                    <div className="bg-white/5 border border-white/5 rounded-xl p-4 text-left">
-                      <span className="text-[10px] font-mono text-white/40 block mb-1">CHALLENGES</span>
-                      <span className="text-xl font-bold font-display text-white">42 / 100</span>
-                      <span className="text-[9px] font-mono text-violet-400 block mt-1">Next: UART Rx</span>
-                    </div>
-                    <div className="bg-white/5 border border-white/5 rounded-xl p-4 text-left">
-                      <span className="text-[10px] font-mono text-white/40 block mb-1">GLOBAL RANK</span>
-                      <span className="text-xl font-bold font-display text-white">#142</span>
-                      <span className="text-[9px] font-mono text-[#06b6d4] block mt-1">Top 2% Globally</span>
-                    </div>
+                  {/* ECE Skill levels */}
+                  <div className="my-auto flex flex-col gap-3.5 z-10">
+                    {[
+                      { name: "Verilog / FSM Logic", val: 85, color: "bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.4)]" },
+                      { name: "4-to-1 Multiplexer", val: 100, color: "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.4)]" },
+                      { name: "D Flip-Flop Storage", val: 68, color: "bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.4)]" }
+                    ].map((item) => (
+                      <div key={item.name} className="flex flex-col gap-1 text-[11px] font-mono text-left">
+                        <div className="flex justify-between text-ink-2">
+                          <span>{item.name}</span>
+                          <span className="text-ink font-semibold">{item.val}%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-hairline/20 rounded-full overflow-hidden">
+                          <div className={`h-full ${item.color} rounded-full`} style={{ width: `${item.val}%` }} />
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
-                  {/* Mock progress bar */}
-                  <div className="flex flex-col gap-2 pt-4 border-t border-white/5">
-                    <div className="flex justify-between text-[10px] font-mono text-white/40">
-                      <span>RTL DESIGN (VERILOG) PROGRESS</span>
-                      <span className="text-white/80">68%</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <div className="h-full w-[68%] bg-gradient-to-r from-violet-500 to-cyan-500 rounded-full" />
-                    </div>
+                  {/* Level stats */}
+                  <div className="border-t border-hairline pt-4 flex items-center justify-between text-[10px] font-mono text-ink-2 z-10">
+                    <span>Rank: Top 2% Globally</span>
+                    <span className="text-violet-400 font-semibold">14,820 XP</span>
                   </div>
                 </div>
               </div>
-            </Card>
-          </Reveal>
-
-          {/* Sub-header for other suites */}
-          <Reveal delay={0.1}>
-            <div className="mt-28 mb-12 text-left">
-              <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay">
-                Core Architectures &amp; Suites
-              </div>
-              <h3 className="mt-3 font-display text-[28px] md:text-[38px] font-bold tracking-tight text-ink">
-                Autonomic Infrastructure Systems
-              </h3>
-            </div>
-          </Reveal>
-
-          {/* Grid for ENVX and NOVA */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-            {/* 2. Core Suite: ENVX */}
-            <Reveal delay={0.15}>
-              <Card className="relative overflow-hidden rounded-[24px] bg-gradient-to-br from-[#0a0f1d] via-[#05070d] to-[#020306] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.3)] flex flex-col justify-between p-8 md:p-10 hover:shadow-[0_30px_70px_rgba(0,0,0,0.45)] hover:-translate-y-1 transition-all duration-300 h-full">
-                {/* Subtle ambient lighting */}
-                <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute -top-40 -right-32 w-[350px] h-[350px] rounded-full bg-[radial-gradient(closest-side,rgba(41,151,255,0.06),transparent_80%)]" />
-                </div>
-
-                <div className="relative z-10 flex flex-col justify-between h-full">
-                  <div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-white/5 bg-white/5 px-3 py-1 text-[11px] font-mono tracking-[0.2em] uppercase text-[#2997ff]">
-                      CORE SUITE // ENVX
-                    </div>
-
-                    <h4 className="mt-6 font-display text-[28px] md:text-[34px] font-bold tracking-tight text-white leading-tight">
-                      Critical Operations Environment.
-                    </h4>
-
-                    <p className="mt-4 text-[14px] md:text-[15px] leading-relaxed text-white/70">
-                      ENVX is an AI-native engineering studio. We combine sandboxed orchestration, autonomous code compilation, and hardware-in-the-loop debugging onto a single interface.
-                    </p>
-                  </div>
-
-                  {/* Compact Terminal View */}
-                  <div className="w-full mt-6 bg-[#020408] rounded-xl border border-white/5 overflow-hidden text-left shadow-2xl font-mono text-[11px] leading-normal">
-                    <div className="bg-[#0b0f19] px-3 py-2 border-b border-white/5 flex items-center justify-between">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-[#ff5f56]" />
-                        <span className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
-                        <span className="h-2 w-2 rounded-full bg-[#27c93f]" />
-                      </div>
-                      <div className="text-[9px] text-white/40 uppercase tracking-widest">envx // control_loop.rs</div>
-                    </div>
-                    <div className="p-4 text-white/80 select-none overflow-x-auto max-h-[140px] scrollbar-thin">
-                      <div className="text-[#80cbc4]">// Initializing controller...</div>
-                      <div className="text-[#f77669]">use <span className="text-[#c792ea]">eaura_systems::prelude::*;</span></div>
-                      <div className="text-[#89ddff] mt-1"><span className="text-[#c792ea]">let</span> rate = node.read_flowrate();</div>
-                      <div className="text-emerald-400 font-semibold mt-1">✔ [OK] Edge p99 verified: 18ms.</div>
-                    </div>
-                  </div>
-
-                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/5">
-                    <Button
-                      asChild
-                      variant="outline"
-                      size="sm"
-                      className="rounded-full border-white/20 bg-white/5 text-white hover:bg-white/10 transition-all duration-200"
-                    >
-                      <a href="#contact">Request Access</a>
-                    </Button>
-                    <CTA href="#" className="text-white/60">Read Specs</CTA>
-                  </div>
-                </div>
-              </Card>
             </Reveal>
 
-            {/* 3. Core Suite: NOVA */}
-            <Reveal delay={0.25}>
-              <Card className="relative overflow-hidden rounded-[24px] bg-surface-2 border border-hairline shadow-sm flex flex-col justify-between p-8 md:p-10 hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 h-full">
-                <div className="relative z-10 flex flex-col justify-between h-full">
-                  <div>
-                    <div className="inline-flex items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 text-[11px] font-mono tracking-[0.2em] uppercase text-clay">
-                      OPERATING AGENT // NOVA
-                    </div>
-
-                    <h4 className="mt-6 font-display text-[28px] md:text-[34px] font-bold tracking-tight text-ink leading-tight">
-                      Physical Control Planes.
-                    </h4>
-
-                    <p className="mt-4 text-[14px] md:text-[15px] leading-relaxed text-ink-2">
-                      NOVA acts as a secure, distributed control plane for embodied robotics. Run control feedback loops, sync remote telemetry, and safely handle edge actions at scale.
-                    </p>
-                  </div>
-
-                  {/* Compact SVG animated Radar */}
-                  <div className="relative h-[160px] bg-gradient-to-br from-[#0c1322] via-[#07090e] to-[#030406] border border-hairline rounded-xl overflow-hidden flex items-center justify-center mt-6">
-                    <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(0,113,227,0.1),transparent_60%)]" />
-                    
-                    <div className="relative w-32 h-32 flex items-center justify-center">
-                      {/* Outer spinning ring */}
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-0 rounded-full border border-white/5 border-dashed"
-                      />
-                      {/* Mid spinning ring */}
-                      <motion.div
-                        animate={{ rotate: -360 }}
-                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                        className="absolute w-[80%] h-[80%] rounded-full border border-white/10"
-                      />
-                      {/* Sweep */}
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-0 rounded-full bg-[conic-gradient(from_0deg,rgba(41,151,255,0.08)_0deg,transparent_120deg)] origin-center"
-                      />
-                      {/* Pulsating Center */}
-                      <div className="absolute w-3.5 h-3.5 rounded-full bg-clay/20 border border-clay flex items-center justify-center">
-                        <div className="w-1 h-1 rounded-full bg-white animate-ping" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-8 flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-hairline">
-                    <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-ink-2/65">
-                      <span className="h-1.5 w-1.5 rounded-full bg-clay animate-pulse" />
-                      Sandbox Beta // v0.4
-                    </span>
-                    <CTA href="#">Interface Access</CTA>
-                  </div>
-                </div>
-              </Card>
-            </Reveal>
           </div>
         </div>
       </section>
