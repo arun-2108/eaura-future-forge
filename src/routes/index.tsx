@@ -903,8 +903,8 @@ function Home() {
                   gradient: "from-[#080d1a] via-[#0e162b] to-[#1d2d54]",
                   image: "/directors/Director_1.jpg",
                   linkedin: "#",
-                  objectPosition: "42% 64%",
-                  zoom: 2.1,
+                  objectPosition: "42% 70%",
+                  zoom: 1.7,
                 },
                 {
                   name: "Giridhar Golla",
