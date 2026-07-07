@@ -1054,12 +1054,11 @@ function Home() {
         </div>
       </section>
 
-      {/* ROADMAP SECTION — Interactive Premium Dashboard Switched Experience */}
-      <section id="roadmap" className="bg-[#030206] text-white py-24 border-t border-white/5 relative overflow-hidden">
-        {/* Ambient Glowing lights */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(closest-side,rgba(99,102,241,0.06),transparent_80%)] blur-3xl" />
-          <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(closest-side,rgba(168,85,247,0.05),transparent_80%)] blur-3xl" />
+      {/* ROADMAP SECTION — Interactive Premium Dashboard Switched Experience (Light Theme) */}
+      <section id="roadmap" className="bg-surface py-24 border-t border-hairline relative overflow-hidden">
+        {/* Soft radial glow */}
+        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+          <div className="w-[600px] h-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(0,113,227,0.02),transparent_80%)] blur-3xl" />
         </div>
 
         <div className="mx-auto max-w-6xl px-6 relative z-10">
@@ -1068,13 +1067,13 @@ function Home() {
             {/* Left Column: Switched Navigation */}
             <div className="lg:col-span-4 text-left">
               <Reveal>
-                <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-indigo-400 mb-3">
+                <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay mb-3">
                   Our Journey
                 </div>
-                <h2 className="font-display text-[36px] md:text-[50px] font-bold tracking-tight text-white leading-[1.05]">
+                <h2 className="font-display text-[36px] md:text-[50px] font-bold tracking-tight text-ink leading-[1.05]">
                   Roadmap
                 </h2>
-                <p className="mt-4 text-[14.5px] leading-relaxed text-white/50 max-w-sm mb-8">
+                <p className="mt-4 text-[14.5px] leading-relaxed text-ink-2 max-w-sm mb-8">
                   Every product begins with a vision. Every milestone brings us closer to building intelligent products that create meaningful impact.
                 </p>
               </Reveal>
@@ -1093,15 +1092,15 @@ function Home() {
                     onClick={() => setActivePhaseIndex(idx)}
                     className={`w-full text-left p-4.5 rounded-xl border transition-all duration-300 flex items-center justify-between group ${
                       activePhaseIndex === idx
-                        ? "bg-white/5 border-indigo-500/40 shadow-lg shadow-indigo-500/5 text-white"
-                        : "bg-transparent border-white/5 text-white/40 hover:text-white/70 hover:border-white/10"
+                        ? "bg-bg border-clay text-ink shadow-sm"
+                        : "bg-transparent border-hairline text-ink-2 hover:text-ink hover:border-clay/20 hover:bg-bg/40"
                     }`}
                   >
                     <div>
                       <span className="text-[10px] font-mono tracking-widest block opacity-60">{item.phase}</span>
                       <span className="text-[15px] font-semibold font-display block mt-1">{item.label}</span>
                     </div>
-                    <span className="text-[10px] font-mono opacity-50 bg-white/5 border border-white/10 px-2 py-0.5 rounded-full">{item.date}</span>
+                    <span className="text-[10px] font-mono opacity-65 bg-surface border border-hairline px-2 py-0.5 rounded-full">{item.date}</span>
                   </button>
                 ))}
               </div>
@@ -1109,41 +1108,41 @@ function Home() {
 
             {/* Right Column: Console Details */}
             <div className="lg:col-span-8 w-full">
-              <div className="bg-white/[0.02] border border-white/10 backdrop-blur-md rounded-2xl p-6 md:p-10 min-h-[460px] flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 hover:border-indigo-500/20">
+              <div className="bg-bg border border-hairline rounded-2xl p-6 md:p-10 min-h-[460px] flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 hover:border-clay/10">
                 {/* Visual element indicators */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-indigo-500/10 to-transparent rounded-full blur-xl pointer-events-none" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-clay/5 to-transparent rounded-full blur-xl pointer-events-none" />
                 
                 {/* Top console header info */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-4.5 mb-6 text-left">
+                <div className="flex items-center justify-between border-b border-hairline pb-4.5 mb-6 text-left">
                   <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
-                    <span className="font-mono text-[9.5px] uppercase tracking-wider text-white/60">
+                    <span className="h-2 w-2 rounded-full bg-clay animate-pulse" />
+                    <span className="font-mono text-[9.5px] uppercase tracking-wider text-ink-2">
                       ROADMAP // PANEL_0{activePhaseIndex + 1}
                     </span>
                   </div>
-                  <span className="font-mono text-[9px] text-[#06b6d4]">STATUS: ACTIVE</span>
+                  <span className="font-mono text-[9px] text-clay font-semibold">STATUS: ACTIVE</span>
                 </div>
 
                 {/* Main Dynamic content with clean key switcher */}
                 <div className="flex-grow flex flex-col justify-center text-left">
                   {activePhaseIndex === 0 && (
                     <div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-[9px] font-mono text-indigo-400 font-semibold mb-4">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-4">
                         PHASE 01 // FOUNDATION
                       </div>
-                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-white mb-4">
+                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
                         EAURA Founded
                       </h3>
-                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-white/70 max-w-xl">
+                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl">
                         EAURA was established with a vision to build intelligent technology products that solve meaningful real-world problems across AI, developer infrastructure and engineering education.
                       </p>
-                      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-white/55 font-mono text-[11.5px]">
+                      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-ink-2 font-mono text-[11.5px]">
                         <div className="flex items-center gap-2.5">
-                          <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-clay" />
                           <span>June 2025 Incorporation</span>
                         </div>
                         <div className="flex items-center gap-2.5">
-                          <span className="h-1.5 w-1.5 rounded-full bg-indigo-500" />
+                          <span className="h-1.5 w-1.5 rounded-full bg-clay" />
                           <span>Core Architecture Scoping</span>
                         </div>
                       </div>
@@ -1152,10 +1151,10 @@ function Home() {
 
                   {activePhaseIndex === 1 && (
                     <div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 px-2.5 py-0.5 text-[9px] font-mono text-purple-400 font-semibold mb-4">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-4">
                         PHASE 02 // INNOVATION
                       </div>
-                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-white mb-6">
+                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-6">
                         Product Inception
                       </h3>
                       
@@ -1165,31 +1164,31 @@ function Home() {
                           {
                             name: "NOVA",
                             status: "Prototype",
-                            color: "text-amber-400 border-amber-500/30 bg-amber-500/5",
+                            color: "text-amber-600 border-amber-500/20 bg-amber-500/5",
                             milestones: ["Voice Assistant MVP", "Smart Home Sync", "Hardware Prototype"]
                           },
                           {
                             name: "ENVX",
                             status: "MVP",
-                            color: "text-cyan-400 border-cyan-500/30 bg-cyan-500/5",
+                            color: "text-emerald-600 border-emerald-500/20 bg-emerald-500/5",
                             milestones: ["Public Beta", "VS Code Extension", "GitHub Integration"]
                           },
                           {
                             name: "ELEKKI",
                             status: "Beta",
-                            color: "text-violet-400 border-violet-500/30 bg-violet-500/5",
+                            color: "text-violet-600 border-violet-500/20 bg-violet-500/5",
                             milestones: ["College Pilots", "AI Learning Mentor", "Recruiter Portal"]
                           }
                         ].map((p) => (
-                          <div key={p.name} className="bg-white/5 border border-white/5 rounded-xl p-4.5">
+                          <div key={p.name} className="bg-surface/50 border border-hairline rounded-xl p-4.5">
                             <div className="flex justify-between items-center mb-2.5">
-                              <span className="font-mono font-semibold text-[14px] text-white">{p.name}</span>
+                              <span className="font-mono font-semibold text-[14px] text-ink">{p.name}</span>
                               <span className={`px-2 py-0.5 text-[8.5px] font-mono border rounded-full ${p.color}`}>{p.status}</span>
                             </div>
-                            <ul className="flex flex-col gap-1.5 text-[11px] text-white/50 font-mono text-left">
+                            <ul className="flex flex-col gap-1.5 text-[11px] text-ink-2 font-mono text-left">
                               {p.milestones.map((m) => (
                                 <li key={m} className="flex items-center gap-1.5">
-                                  <span className="h-1 w-1 rounded-full bg-indigo-500" />
+                                  <span className="h-1 w-1 rounded-full bg-clay/60" />
                                   <span>{m}</span>
                                 </li>
                               ))}
@@ -1202,22 +1201,22 @@ function Home() {
 
                   {activePhaseIndex === 2 && (
                     <div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[9px] font-mono text-emerald-400 font-semibold mb-4">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-4">
                         PHASE 03 // GROWTH
                       </div>
-                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-white mb-4">
+                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
                         Building a Product Ecosystem
                       </h3>
-                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-white/70 max-w-xl mb-6">
+                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl mb-6">
                         Expand EAURA into a multi-product technology company serving students, developers, professionals and businesses through intelligent software and AI-powered solutions.
                       </p>
                       
                       {/* Growth Tracks tags */}
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
                         {["Developer Tools", "Artificial Intelligence", "Education Technology", "Future Products"].map((item) => (
-                          <div key={item} className="bg-white/5 border border-white/5 rounded-xl p-3.5">
-                            <span className="font-mono text-[10px] text-emerald-400 font-semibold block">ECOSYSTEM</span>
-                            <span className="text-[13px] text-white font-medium block mt-1">{item}</span>
+                          <div key={item} className="bg-surface/50 border border-hairline rounded-xl p-3.5">
+                            <span className="font-mono text-[10px] text-clay font-semibold block">ECOSYSTEM</span>
+                            <span className="text-[13px] text-ink font-medium block mt-1">{item}</span>
                           </div>
                         ))}
                       </div>
@@ -1226,18 +1225,18 @@ function Home() {
 
                   {activePhaseIndex === 3 && (
                     <div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-0.5 text-[9px] font-mono text-cyan-400 font-semibold mb-4">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-4">
                         PHASE 04 // SCALE
                       </div>
-                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-white mb-4">
+                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
                         Strategic Growth
                       </h3>
-                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-white/70 max-w-xl mb-6">
+                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl mb-6">
                         Scale global integrations, secure strategic developer partnerships, and enter enterprise solutions markets.
                       </p>
 
                       {/* Milestones list */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[12px] text-white/70 font-mono">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[12px] text-ink-2 font-mono">
                         {[
                           "Seed Funding Scoping",
                           "Strategic Partnerships",
@@ -1248,7 +1247,7 @@ function Home() {
                           "Industry Collaborations"
                         ].map((item) => (
                           <div key={item} className="flex items-center gap-2">
-                            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-clay" />
                             <span>{item}</span>
                           </div>
                         ))}
@@ -1258,14 +1257,14 @@ function Home() {
 
                   {activePhaseIndex === 4 && (
                     <div className="relative py-4">
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-2.5 py-0.5 text-[9px] font-mono text-indigo-400 font-semibold mb-6">
+                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-6">
                         PHASE 05 // FUTURE
                       </div>
                       
-                      <h4 className="font-display text-[26px] md:text-[40px] font-bold tracking-tight text-white leading-tight mb-4 select-none drop-shadow-[0_0_12px_rgba(99,102,241,0.25)]">
+                      <h4 className="font-display text-[26px] md:text-[40px] font-bold tracking-tight text-ink leading-tight mb-4">
                         Our journey is just beginning.
                       </h4>
-                      <p className="text-[15px] md:text-[17px] leading-[1.7] text-white/75 max-w-2xl">
+                      <p className="text-[15px] md:text-[17px] leading-[1.7] text-ink-2 max-w-2xl">
                         We envision EAURA becoming a globally recognized technology company building intelligent products that simplify complexity, empower people and create lasting impact across industries.
                       </p>
                     </div>
@@ -1273,7 +1272,7 @@ function Home() {
                 </div>
 
                 {/* Bottom interactive guide */}
-                <div className="border-t border-white/5 pt-4 flex items-center justify-between text-[10px] font-mono text-white/40">
+                <div className="border-t border-hairline pt-4 flex items-center justify-between text-[10px] font-mono text-ink-2">
                   <span>SELECT OTHER TABS TO EXPLORE</span>
                   <span>EAURA ORCHESTRATION</span>
                 </div>
@@ -1285,15 +1284,15 @@ function Home() {
 
           {/* Ending CTA */}
           <Reveal>
-            <div className="mt-24 max-w-4xl mx-auto text-center border-t border-white/5 pt-16">
-              <h3 className="font-display text-[30px] md:text-[48px] font-bold text-white mb-6">
+            <div className="mt-24 max-w-4xl mx-auto text-center border-t border-hairline pt-16">
+              <h3 className="font-display text-[30px] md:text-[48px] font-bold text-ink mb-6">
                 Ready to build the future with us?
               </h3>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
                 <Button
                   onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
                   size="lg"
-                  className="rounded-full px-8 py-6 text-base font-semibold bg-white text-[#030206] hover:bg-white/90 shadow-lg shadow-white/5 transition-all duration-200"
+                  className="rounded-full px-8 py-6 text-base font-semibold bg-ink text-bg hover:bg-clay hover:text-white shadow-lg shadow-ink/5 transition-all duration-200"
                 >
                   Explore Our Products
                 </Button>
@@ -1301,7 +1300,7 @@ function Home() {
                   onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
                   size="lg"
                   variant="outline"
-                  className="rounded-full px-8 py-6 text-base font-semibold border-white/10 hover:border-white/20 bg-white/5 hover:bg-white/10 text-white transition-all duration-200"
+                  className="rounded-full px-8 py-6 text-base font-semibold border-hairline bg-bg hover:bg-surface text-ink transition-all duration-200"
                 >
                   Contact EAURA
                 </Button>
