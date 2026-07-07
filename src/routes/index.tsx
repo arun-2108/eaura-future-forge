@@ -805,13 +805,12 @@ function Home() {
                 </div>
               </div>
             </Reveal>
-
           </div>
         </div>
       </section>
 
       {/* WHY EAURA SECTION — 4-column premium grid */}
-      <section id="why-eaura" className="bg-[#050811] py-28 md:py-36 border-t border-hairline relative">
+      <section id="why-eaura" className="bg-surface py-28 md:py-36 border-t border-hairline relative">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal>
             <div className="max-w-3xl mb-20 text-left">
@@ -833,40 +832,40 @@ function Home() {
                 Icon: Layers,
                 title: "Product First",
                 desc: "We build products, not one-off solutions.",
-                borderClass: "hover:border-violet-500/30 group-hover:bg-violet-600 group-hover:shadow-[0_0_15px_rgba(139,92,246,0.35)]"
+                borderClass: "group-hover:border-violet-500 group-hover:bg-violet-50 group-hover:text-violet-600"
               },
               {
                 Icon: Cpu,
                 title: "Engineering Excellence",
                 desc: "Every product is backed by engineering precision and thoughtful design.",
-                borderClass: "hover:border-cyan-500/30 group-hover:bg-cyan-500 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.35)]"
+                borderClass: "group-hover:border-cyan-500 group-hover:bg-cyan-50 group-hover:text-cyan-600"
               },
               {
                 Icon: TrendingUp,
                 title: "Long-Term Vision",
                 desc: "We focus on creating technology with lasting value.",
-                borderClass: "hover:border-emerald-500/30 group-hover:bg-emerald-500 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.35)]"
+                borderClass: "group-hover:border-emerald-500 group-hover:bg-emerald-50 group-hover:text-emerald-600"
               },
               {
                 Icon: Users,
                 title: "User-Centric Innovation",
                 desc: "Every feature exists to solve a real problem.",
-                borderClass: "hover:border-rose-500/30 group-hover:bg-rose-500 group-hover:shadow-[0_0_15px_rgba(244,63,94,0.35)]"
+                borderClass: "group-hover:border-rose-500 group-hover:bg-rose-50 group-hover:text-rose-600"
               }
             ].map(({ Icon, title, desc, borderClass }, idx) => (
               <Reveal key={title} delay={idx * 0.05}>
-                <Card className="group relative bg-[#0a0d14]/75 border-hairline p-8 min-h-[220px] flex flex-col justify-between hover:shadow-[0_20px_45px_-12px_rgba(0,0,0,0.5)] hover:-translate-y-1.5 hover:bg-surface-2 transition-all duration-300 h-full">
+                <Card className="group relative bg-bg border-hairline p-8 min-h-[220px] flex flex-col justify-between hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.07)] hover:-translate-y-1.5 transition-all duration-300 h-full">
                   <div>
                     {/* Icon container */}
-                    <div className={`h-11 w-11 rounded-xl bg-surface border border-hairline grid place-items-center text-ink-2 transition-all duration-300 ${borderClass} group-hover:text-white`}>
+                    <div className={`h-11 w-11 rounded-xl bg-surface border border-hairline grid place-items-center text-ink-2 transition-all duration-300 ${borderClass}`}>
                       <Icon className="h-5 w-5" />
                     </div>
 
-                    <h4 className="mt-8 font-display font-semibold text-lg text-white">
+                    <h4 className="mt-8 font-display font-semibold text-lg text-ink">
                       {title}
                     </h4>
 
-                    <p className="mt-3 text-[14px] text-white/50 leading-relaxed font-normal">
+                    <p className="mt-3 text-[14px] text-ink-2 leading-relaxed font-normal">
                       {desc}
                     </p>
                   </div>
