@@ -474,98 +474,87 @@ function Home() {
             </div>
           </Reveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-start">
-            <Reveal>
-              <h2 className="font-display text-[40px] md:text-[60px] font-bold tracking-[-0.04em] leading-[1.05] text-ink text-balance">
-                Engineering Tomorrow
-                <br />
-                <span className="bg-gradient-to-r from-ink-2 to-clay bg-clip-text text-transparent">
-                  Through Intelligent Products.
-                </span>
-              </h2>
-            </Reveal>
-
-            <div className="flex flex-col gap-6 text-left lg:pt-2">
-              <Reveal delay={0.05}>
-                <p className="text-[19px] md:text-[21px] font-medium leading-relaxed text-ink tracking-tight">
-                  Technology should solve meaningful problems, not create unnecessary complexity.
-                </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Left Column: Vision Statement */}
+            <div className="lg:col-span-5 text-left">
+              <Reveal>
+                <h2 className="font-display text-[38px] md:text-[52px] font-bold tracking-[-0.04em] leading-[1.05] text-ink text-balance">
+                  Engineering Tomorrow
+                  <br />
+                  <span className="bg-gradient-to-r from-ink-2 to-clay bg-clip-text text-transparent">
+                    Through Intelligent Products.
+                  </span>
+                </h2>
               </Reveal>
-              <Reveal delay={0.1}>
-                <p className="text-[15px] md:text-[16.5px] leading-relaxed text-ink-2">
-                  At EAURA, we design products that empower students, developers and individuals by combining artificial intelligence, engineering and thoughtful product design.
-                </p>
-              </Reveal>
-              <Reveal delay={0.15}>
-                <p className="text-[15px] md:text-[16.5px] leading-relaxed text-ink-2">
-                  We believe the future belongs to products that are practical, intelligent and built with purpose.
-                </p>
-              </Reveal>
-            </div>
-          </div>
-
-          {/* Combined Why EAURA Differentiators block */}
-          <div className="mt-12 md:mt-16 pt-12 border-t border-hairline/60">
-            <Reveal>
-              <div className="max-w-3xl mb-8 text-left">
-                <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay mb-1.5">
-                  Core Value
-                </div>
-                <h3 className="font-display text-[32px] md:text-[40px] font-bold tracking-tight text-ink">
-                  Why EAURA
-                </h3>
-                <p className="mt-2 text-[15px] md:text-[16px] text-ink-2 max-w-2xl leading-relaxed">
-                  The foundational principles behind our engineering mindset and product design.
-                </p>
-              </div>
-            </Reveal>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  Icon: Layers,
-                  title: "Product First",
-                  desc: "We build products, not one-off solutions.",
-                  borderClass: "group-hover:border-violet-500 group-hover:bg-violet-50 group-hover:text-violet-600"
-                },
-                {
-                  Icon: Cpu,
-                  title: "Engineering Excellence",
-                  desc: "Every product is backed by engineering precision and thoughtful design.",
-                  borderClass: "group-hover:border-cyan-500 group-hover:bg-cyan-50 group-hover:text-cyan-600"
-                },
-                {
-                  Icon: TrendingUp,
-                  title: "Long-Term Vision",
-                  desc: "We focus on creating technology with lasting value.",
-                  borderClass: "group-hover:border-emerald-500 group-hover:bg-emerald-50 group-hover:text-emerald-600"
-                },
-                {
-                  Icon: Users,
-                  title: "User-Centric Innovation",
-                  desc: "Every feature exists to solve a real problem.",
-                  borderClass: "group-hover:border-rose-500 group-hover:bg-rose-50 group-hover:text-rose-600"
-                }
-              ].map(({ Icon, title, desc, borderClass }, idx) => (
-                <Reveal key={title} delay={idx * 0.05}>
-                  <Card className="group relative bg-bg border-hairline p-6 min-h-[160px] flex flex-col justify-between hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.07)] hover:-translate-y-1.5 transition-all duration-300 h-full">
-                    <div>
-                      {/* Icon container */}
-                      <div className={`h-11 w-11 rounded-xl bg-surface border border-hairline grid place-items-center text-ink-2 transition-all duration-300 ${borderClass}`}>
-                        <Icon className="h-5 w-5" />
-                      </div>
-
-                      <h4 className="mt-4 font-display font-semibold text-[17px] text-ink">
-                        {title}
-                      </h4>
-
-                      <p className="mt-1.5 text-[13.5px] text-ink-2 leading-relaxed font-normal">
-                        {desc}
-                      </p>
-                    </div>
-                  </Card>
+              
+              <div className="flex flex-col gap-5 text-left mt-8">
+                <Reveal delay={0.05}>
+                  <p className="text-[18px] font-medium leading-relaxed text-ink tracking-tight">
+                    Technology should solve meaningful problems, not create unnecessary complexity.
+                  </p>
                 </Reveal>
-              ))}
+                <Reveal delay={0.1}>
+                  <p className="text-[14.5px] leading-relaxed text-ink-2">
+                    At EAURA, we design products that empower students, developers and individuals by combining artificial intelligence, engineering and thoughtful product design.
+                  </p>
+                </Reveal>
+                <Reveal delay={0.15}>
+                  <p className="text-[14.5px] leading-relaxed text-ink-2">
+                    We believe the future belongs to products that are practical, intelligent and built with purpose.
+                  </p>
+                </Reveal>
+              </div>
+            </div>
+
+            {/* Right Column: Embedded Features Grid */}
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  {
+                    Icon: Layers,
+                    title: "Product First",
+                    desc: "We build products, not one-off solutions.",
+                    borderClass: "group-hover:border-violet-500 group-hover:bg-violet-50 group-hover:text-violet-600"
+                  },
+                  {
+                    Icon: Cpu,
+                    title: "Engineering Excellence",
+                    desc: "Every product is backed by engineering precision and thoughtful design.",
+                    borderClass: "group-hover:border-cyan-500 group-hover:bg-cyan-50 group-hover:text-cyan-600"
+                  },
+                  {
+                    Icon: TrendingUp,
+                    title: "Long-Term Vision",
+                    desc: "We focus on creating technology with lasting value.",
+                    borderClass: "group-hover:border-emerald-500 group-hover:bg-emerald-50 group-hover:text-emerald-600"
+                  },
+                  {
+                    Icon: Users,
+                    title: "User-Centric Innovation",
+                    desc: "Every feature exists to solve a real problem.",
+                    borderClass: "group-hover:border-rose-500 group-hover:bg-rose-50 group-hover:text-rose-600"
+                  }
+                ].map(({ Icon, title, desc, borderClass }, idx) => (
+                  <Reveal key={title} delay={idx * 0.05}>
+                    <Card className="group relative bg-bg border-hairline p-5.5 min-h-[160px] flex flex-col justify-between hover:shadow-[0_15px_30px_-12px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 h-full">
+                      <div>
+                        {/* Icon container */}
+                        <div className={`h-10 w-10 rounded-xl bg-surface border border-hairline grid place-items-center text-ink-2 transition-all duration-300 ${borderClass}`}>
+                          <Icon className="h-4.5 w-4.5" />
+                        </div>
+
+                        <h4 className="mt-4 font-display font-semibold text-[16.5px] text-ink leading-tight">
+                          {title}
+                        </h4>
+
+                        <p className="mt-2 text-[13px] text-ink-2 leading-relaxed font-normal">
+                          {desc}
+                        </p>
+                      </div>
+                    </Card>
+                  </Reveal>
+                ))}
+              </div>
             </div>
           </div>
         </div>
