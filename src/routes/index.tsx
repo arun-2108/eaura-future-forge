@@ -903,7 +903,8 @@ function Home() {
                   gradient: "from-[#080d1a] via-[#0e162b] to-[#1d2d54]",
                   image: "/directors/Director_1.jpg",
                   linkedin: "#",
-                  objectPosition: "center 57%",
+                  objectPosition: "42% 64%",
+                  zoom: 2.1,
                 },
                 {
                   name: "Giridhar Golla",
@@ -933,16 +934,22 @@ function Home() {
                   >
                     {/* Render Image if available */}
                     {p.image && (
-                      <img
-                        src={p.image}
-                        alt={p.name}
-                        style={{ objectPosition: p.objectPosition || "center" }}
-                        onError={(e) => {
-                          // Hide image on error (e.g. if file is missing) to fall back cleanly to gradient
-                          e.currentTarget.style.display = "none";
-                        }}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
+                      <div className="absolute inset-0 w-full h-full overflow-hidden transition-transform duration-500 group-hover:scale-105">
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          style={{ 
+                            objectPosition: p.objectPosition || "center",
+                            transform: p.zoom ? `scale(${p.zoom})` : undefined,
+                            transformOrigin: p.objectPosition || "center",
+                          }}
+                          onError={(e) => {
+                            // Hide image on error (e.g. if file is missing) to fall back cleanly to gradient
+                            e.currentTarget.style.display = "none";
+                          }}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
                     )}
 
                     {/* Gradient Overlay for text contrast when image is loaded */}
