@@ -461,7 +461,7 @@ function Home() {
       </section>
 
       {/* VISION SECTION — Premium Minimal Typography */}
-      <section id="vision" className="bg-surface py-28 md:py-36 border-t border-hairline relative overflow-hidden">
+      <section id="vision" className="bg-surface py-16 md:py-24 border-t border-hairline relative overflow-hidden">
         {/* Soft radial glow */}
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
           <div className="w-[600px] h-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(0,113,227,0.03),transparent_80%)] blur-3xl" />
@@ -469,7 +469,7 @@ function Home() {
 
         <div className="relative mx-auto max-w-6xl px-6 z-10">
           <Reveal>
-            <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay mb-6">
+            <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay mb-3">
               Our Vision
             </div>
           </Reveal>
@@ -505,16 +505,16 @@ function Home() {
           </div>
 
           {/* Combined Why EAURA Differentiators block */}
-          <div className="mt-20 md:mt-24 pt-20 border-t border-hairline/60">
+          <div className="mt-12 md:mt-16 pt-12 border-t border-hairline/60">
             <Reveal>
-              <div className="max-w-3xl mb-16 text-left">
-                <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay mb-3">
+              <div className="max-w-3xl mb-8 text-left">
+                <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay mb-1.5">
                   Core Value
                 </div>
-                <h3 className="font-display text-[32px] md:text-[48px] font-bold tracking-tight text-ink">
+                <h3 className="font-display text-[32px] md:text-[40px] font-bold tracking-tight text-ink">
                   Why EAURA
                 </h3>
-                <p className="mt-4 text-[15px] md:text-[16px] text-ink-2 max-w-2xl leading-relaxed">
+                <p className="mt-2 text-[15px] md:text-[16px] text-ink-2 max-w-2xl leading-relaxed">
                   The foundational principles behind our engineering mindset and product design.
                 </p>
               </div>
@@ -548,18 +548,18 @@ function Home() {
                 }
               ].map(({ Icon, title, desc, borderClass }, idx) => (
                 <Reveal key={title} delay={idx * 0.05}>
-                  <Card className="group relative bg-bg border-hairline p-8 min-h-[220px] flex flex-col justify-between hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.07)] hover:-translate-y-1.5 transition-all duration-300 h-full">
+                  <Card className="group relative bg-bg border-hairline p-6 min-h-[160px] flex flex-col justify-between hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.07)] hover:-translate-y-1.5 transition-all duration-300 h-full">
                     <div>
                       {/* Icon container */}
                       <div className={`h-11 w-11 rounded-xl bg-surface border border-hairline grid place-items-center text-ink-2 transition-all duration-300 ${borderClass}`}>
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <h4 className="mt-8 font-display font-semibold text-lg text-ink">
+                      <h4 className="mt-4 font-display font-semibold text-[17px] text-ink">
                         {title}
                       </h4>
 
-                      <p className="mt-3 text-[14px] text-ink-2 leading-relaxed font-normal">
+                      <p className="mt-1.5 text-[13.5px] text-ink-2 leading-relaxed font-normal">
                         {desc}
                       </p>
                     </div>
