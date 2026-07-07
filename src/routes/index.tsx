@@ -105,15 +105,26 @@ function Home() {
     <div className="min-h-screen bg-bg text-ink antialiased overflow-x-hidden">
       <Nav />
 
-      {/* HERO — Centered layout with interactive background & 3D Parallax */}
+      {/* HERO — Two-column layout with interactive background & Ecosystem Hub */}
       <section
         ref={heroRef}
         id="company"
-        aria-label="EAURA — Deep Technology Company"
+        aria-label="EAURA — Intelligent Products Startup"
         className="relative overflow-hidden bg-surface min-h-[92vh] flex items-center pt-32 pb-24 md:pt-40 md:pb-32"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes flowDash {
+            to {
+              stroke-dashoffset: -20;
+            }
+          }
+          .animate-flow-dash {
+            animation: flowDash 1.5s linear infinite;
+          }
+        `}} />
+
         {/* Background Network Canvas */}
         <AbstractTechVisualization />
 
@@ -122,157 +133,167 @@ function Home() {
           style={{ x: bgTranslateX, y: bgTranslateY }}
           className="absolute inset-0 pointer-events-none z-0"
         >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full bg-[radial-gradient(closest-side,rgba(0,113,227,0.04),transparent_80%)]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full bg-[radial-gradient(closest-side,rgba(0,113,227,0.03),transparent_80%)]" />
         </motion.div>
 
-        <div className="relative mx-auto max-w-6xl px-6 w-full z-10 text-center flex flex-col items-center">
+        <div className="relative mx-auto max-w-6xl px-6 w-full z-10 grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center text-left">
+          {/* Left Column: Headline, Subheading, CTAs */}
           <motion.div
             style={{ x: textTranslateX, y: textTranslateY }}
-            className="max-w-4xl flex flex-col items-center"
+            className="flex flex-col items-start w-full"
           >
             <Reveal>
-              <p className="text-[11px] md:text-[12px] font-semibold text-clay tracking-[0.22em] uppercase mb-5">
-                Deep Technology · Intelligent Systems
-              </p>
+              <div className="inline-flex items-center gap-2 rounded-full border border-clay/10 bg-clay/5 px-3.5 py-1 text-[11px] font-mono tracking-[0.22em] uppercase text-clay mb-6">
+                Deep Tech · Intelligent Systems
+              </div>
             </Reveal>
 
             <Reveal delay={0.05}>
-              <h1 className="font-display font-bold tracking-[-0.04em] text-[48px] leading-[1.02] md:text-[92px] md:leading-[0.94] text-balance text-ink">
-                Building intelligent
+              <h1 className="font-display font-bold tracking-[-0.04em] text-[44px] leading-[1.05] md:text-[76px] md:leading-[0.94] text-ink">
+                Building Intelligent
                 <br />
                 <span className="bg-gradient-to-r from-ink via-ink-2 to-clay bg-clip-text text-transparent">
-                  products that matter.
+                  Products That Matter.
                 </span>
               </h1>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="mx-auto mt-8 max-w-3xl text-[18px] md:text-[20px] leading-[1.65] text-ink-2 tracking-[-0.01em] text-balance font-normal">
-                EAURA is a technology product company building intelligent software, AI-powered platforms and engineering solutions that solve meaningful real-world problems across education, developer productivity and intelligent automation.
+              <p className="mt-6 text-[17px] md:text-[19px] leading-[1.65] text-ink-2 tracking-[-0.01em] max-w-xl font-normal">
+                EAURA builds AI-powered software, developer tools and engineering platforms that solve meaningful problems and create lasting impact.
               </p>
             </Reveal>
 
             <Reveal delay={0.15}>
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Button
-                  asChild
+                  onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
                   size="lg"
                   className="rounded-full px-8 py-6 text-base font-semibold shadow-md shadow-clay/5 hover:shadow-lg hover:shadow-clay/10 hover:-translate-y-px transition-all duration-200"
                 >
-                  <a href="#contact">Request Access</a>
+                  Explore Products
                 </Button>
                 <Button
-                  asChild
+                  onClick={() => document.getElementById("philosophy")?.scrollIntoView({ behavior: "smooth" })}
                   variant="outline"
                   size="lg"
                   className="rounded-full px-8 py-6 text-base font-semibold border border-ink/15 bg-transparent hover:bg-surface hover:border-ink/25 text-ink transition-all duration-200"
                 >
-                  <a href="#philosophy">Explore Architecture</a>
+                  Our Vision
                 </Button>
               </div>
             </Reveal>
           </motion.div>
 
-          {/* 3D Tilting Hero Telemetry Card */}
-          <Reveal delay={0.2} className="w-full">
-            <div className="relative mt-16 md:mt-24 w-full max-w-4xl" style={{ perspective: 1200 }}>
-              <motion.div
-                style={{
-                  rotateX: cardRotateX,
-                  rotateY: cardRotateY,
-                  transformStyle: "preserve-3d",
-                }}
-                className="relative aspect-[16/9] rounded-[24px] overflow-hidden bg-gradient-to-br from-[#0c1424] via-[#090d16] to-[#04060b] border border-white/10 shadow-[0_30px_90px_-25px_rgba(0,0,0,0.45)] flex flex-col justify-between p-6 md:p-10 group"
-              >
-                {/* Tech grid texture overlay */}
-                <div
-                  className="absolute inset-0 opacity-[0.06] mix-blend-overlay pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(to right, rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.2) 1px, transparent 1px)",
-                    backgroundSize: "32px 32px",
-                  }}
-                />
+          {/* Right Column: Floating Ecosystem Visualization */}
+          <Reveal delay={0.2} className="w-full flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[340px] py-6 flex items-center justify-center min-h-[460px]">
+              {/* Background gradient lighting / radial glows */}
+              <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
+                <div className="w-[320px] h-[320px] rounded-full bg-[radial-gradient(closest-side,rgba(0,113,227,0.04),transparent_80%)] blur-3xl" />
+              </div>
 
-                {/* Card header */}
-                <div className="flex items-center justify-between z-10">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
-                    <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/50">
-                      SYSTEM STATE: ACTIVE
-                    </span>
-                  </div>
-                  <div className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/50">
-                    EAURA // OPERATIONAL REPORT
-                  </div>
-                </div>
+              {/* Ecosystem layout container */}
+              <div className="relative flex flex-col items-center gap-6 w-full z-10">
+                {/* Connecting SVG lines with moving dash arrays for flow effect */}
+                <svg className="absolute inset-y-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
+                  <line x1="50%" y1="12%" x2="50%" y2="88%" stroke="var(--hairline)" strokeWidth="1.5" strokeDasharray="5 5" />
+                  <line 
+                    x1="50%" 
+                    y1="12%" 
+                    x2="50%" 
+                    y2="88%" 
+                    stroke="var(--clay)" 
+                    strokeWidth="1.5" 
+                    strokeDasharray="5 5"
+                    className="animate-flow-dash"
+                  />
+                </svg>
 
-                {/* Subtitle center metrics placeholder */}
-                <div
-                  className="flex flex-col items-center justify-center my-auto z-10"
-                  style={{ transform: "translateZ(30px)" }}
+                {/* 1. NOVA Node */}
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="relative z-10 w-full rounded-2xl border border-hairline bg-surface/85 backdrop-blur-md p-4 flex items-center gap-4 hover:border-clay/35 hover:shadow-lg hover:shadow-clay/5 transition-all duration-300 group"
                 >
-                  <div className="text-[11px] font-mono tracking-[0.3em] uppercase text-clay mb-2">
-                    AUTONOMOUS FLOWRATE
+                  <div className="h-10 w-10 rounded-xl bg-surface border border-hairline grid place-items-center text-clay group-hover:bg-clay group-hover:text-white group-hover:border-clay/20 transition-all duration-300">
+                    <Bot size={18} />
                   </div>
-                  <div className="font-display font-bold text-4xl md:text-6xl tracking-tight text-white">
-                    {opsValue.toLocaleString()}{" "}
-                    <span className="text-xl md:text-2xl font-light text-white/50">OPS/S</span>
-                  </div>
-                  <div className="w-48 h-[1px] bg-gradient-to-r from-transparent via-white/15 to-transparent mt-4" />
-                </div>
-
-                {/* Card footer */}
-                <div
-                  className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 z-10"
-                  style={{ transform: "translateZ(20px)" }}
-                >
                   <div className="text-left">
-                    <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/40">
-                      INFRASTRUCTURE HEALTH
-                    </div>
-                    <div className="mt-1 font-display text-xl font-medium tracking-tight text-white flex items-center gap-2">
-                      99.98% SLA
-                      <span className="text-xs font-mono text-emerald-400 font-normal">
-                        // VERIFIED
-                      </span>
-                    </div>
+                    <div className="font-display font-bold text-[15px] text-ink">NOVA</div>
+                    <div className="font-mono text-[9px] text-ink-2 uppercase tracking-widest mt-0.5">Intelligent Automation</div>
                   </div>
-                  <div className="flex gap-3">
-                    <Button asChild variant="outline" size="sm">
-                      <a href="#products">Telemetry Node</a>
-                    </Button>
+                  <div className="absolute top-3.5 right-4 h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                </motion.div>
+
+                {/* 2. EAURA Logo Central Hub (Connected Through) */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="relative z-20 h-14 w-14 rounded-full bg-ink text-bg flex items-center justify-center shadow-xl border border-hairline group cursor-default"
+                >
+                  <div className="absolute -inset-1.5 rounded-full border border-clay/10 group-hover:border-clay/30 animate-pulse opacity-30 pointer-events-none" />
+                  <span className="font-display font-extrabold text-[20px] tracking-wide">E</span>
+                </motion.div>
+
+                {/* 3. ENVX Node */}
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="relative z-10 w-full rounded-2xl border border-hairline bg-surface/85 backdrop-blur-md p-4 flex items-center gap-4 hover:border-clay/35 hover:shadow-lg hover:shadow-clay/5 transition-all duration-300 group"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-surface border border-hairline grid place-items-center text-clay group-hover:bg-clay group-hover:text-white group-hover:border-clay/20 transition-all duration-300">
+                    <Layers size={18} />
                   </div>
-                </div>
-              </motion.div>
+                  <div className="text-left">
+                    <div className="font-display font-bold text-[15px] text-ink">ENVX</div>
+                    <div className="font-mono text-[9px] text-ink-2 uppercase tracking-widest mt-0.5">Developer Tools</div>
+                  </div>
+                  <div className="absolute top-3.5 right-4 h-1.5 w-1.5 rounded-full bg-violet-400 animate-pulse" />
+                </motion.div>
+
+                {/* 4. ELEKKI Node */}
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  className="relative z-10 w-full rounded-2xl border border-hairline bg-surface/85 backdrop-blur-md p-4 flex items-center gap-4 hover:border-clay/35 hover:shadow-lg hover:shadow-clay/5 transition-all duration-300 group"
+                >
+                  <div className="h-10 w-10 rounded-xl bg-surface border border-hairline grid place-items-center text-clay group-hover:bg-clay group-hover:text-white group-hover:border-clay/20 transition-all duration-300">
+                    <Cpu size={18} />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-display font-bold text-[15px] text-ink">ELEKKI</div>
+                    <div className="font-mono text-[9px] text-ink-2 uppercase tracking-widest mt-0.5">Intelligent Education</div>
+                  </div>
+                  <a 
+                    href="/elekki" 
+                    className="absolute top-3.5 right-4 h-5 w-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-clay hover:text-white transition-all duration-200" 
+                    title="View Showcase"
+                  >
+                    <ChevronRight size={10} />
+                  </a>
+                </motion.div>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* TRUST STRIP — Credential bar with vertical dividers */}
-      <section className="border-y border-hairline bg-bg z-10 relative" aria-label="Company credentials">
+      {/* HIGHLIGHTS STRIP — Minimal aligned columns */}
+      <section className="border-y border-hairline bg-bg z-10 relative" aria-label="Company highlights">
         <div className="mx-auto max-w-6xl px-6 py-9">
-          <div className="grid grid-cols-2 md:grid-cols-5 text-center md:text-left text-[11px] font-mono uppercase tracking-[0.2em] text-ink-2 divide-y md:divide-y-0 divide-hairline md:divide-x md:divide-hairline">
+          <div className="grid grid-cols-2 md:grid-cols-4 text-center md:text-left text-[11px] font-mono uppercase tracking-[0.2em] text-ink-2 divide-y md:divide-y-0 divide-hairline md:divide-x md:divide-hairline">
             <div className="flex flex-col gap-1.5 py-6 md:py-0 md:px-8 first:pl-0 last:pr-0">
-              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">ENTITY</span>
-              <span className="text-ink font-semibold text-[12px]">EAURA Pvt. Ltd.</span>
+              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">TYPE</span>
+              <span className="text-ink font-semibold text-[12px]">Technology Product Company</span>
             </div>
             <div className="flex flex-col gap-1.5 py-6 md:py-0 md:px-8">
-              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">ORIGIN</span>
-              <span className="text-ink font-semibold text-[12px]">India · Global</span>
+              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">PORTFOLIO</span>
+              <span className="text-ink font-semibold text-[12px]">3 Flagship Products</span>
             </div>
             <div className="flex flex-col gap-1.5 py-6 md:py-0 md:px-8">
-              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">DOMAIN</span>
-              <span className="text-ink font-semibold text-[12px]">Intelligent Software & Platforms</span>
+              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">SECTORS</span>
+              <span className="text-ink font-semibold text-[12px]">AI + Developer Tools + Education</span>
             </div>
             <div className="flex flex-col gap-1.5 py-6 md:py-0 md:px-8">
-              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">STAGE</span>
-              <span className="text-ink font-semibold text-[12px]">Product Rollout & Growth</span>
-            </div>
-            <div className="flex flex-col gap-1.5 py-6 md:py-0 md:px-8 col-span-2 md:col-span-1">
-              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">ESTABLISHED</span>
-              <span className="text-ink font-semibold text-[12px]">Est. 2024</span>
+              <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">TRAJECTORY</span>
+              <span className="text-ink font-semibold text-[12px]">Growing Startup</span>
             </div>
           </div>
         </div>
