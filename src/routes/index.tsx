@@ -29,11 +29,11 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "EAURA — Engineering the autonomic age" },
+      { title: "EAURA — Building Intelligent Products That Matter" },
       {
         name: "description",
         content:
-          "EAURA Pvt. Ltd. is a deep-technology company building the systems layer for intelligent infrastructure — across AI, robotics, and automation at scale.",
+          "EAURA is a technology product company building intelligent software, AI-powered platforms and engineering solutions that solve meaningful real-world problems across education, developer productivity and intelligent automation.",
       },
     ],
   }),
@@ -102,7 +102,7 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-bg text-ink antialiased overflow-x-hidden">
+    <div className="dark min-h-screen bg-bg text-ink antialiased overflow-x-hidden">
       <Nav />
 
       {/* HERO — Centered layout with interactive background & 3D Parallax */}
@@ -138,18 +138,17 @@ function Home() {
 
             <Reveal delay={0.05}>
               <h1 className="font-display font-bold tracking-[-0.04em] text-[48px] leading-[1.02] md:text-[92px] md:leading-[0.94] text-balance text-ink">
-                Engineering the
+                Building intelligent
                 <br />
-                <span className="bg-gradient-to-r from-ink via-ink-2 to-clay bg-clip-text text-transparent">
-                  autonomic age.
+                <span className="bg-gradient-to-r from-white via-indigo-200 to-violet-400 bg-clip-text text-transparent">
+                  products that matter.
                 </span>
               </h1>
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="mx-auto mt-8 max-w-xl text-[18px] md:text-[20px] leading-[1.65] text-ink-2 tracking-[-0.01em] text-balance font-normal">
-                We build the systems layer for intelligent infrastructure —
-                AI, robotics, and automation operating at industrial scale.
+              <p className="mx-auto mt-8 max-w-3xl text-[18px] md:text-[20px] leading-[1.65] text-ink-2 tracking-[-0.01em] text-balance font-normal">
+                EAURA is a technology product company building intelligent software, AI-powered platforms and engineering solutions that solve meaningful real-world problems across education, developer productivity and intelligent automation.
               </p>
             </Reveal>
 
@@ -265,11 +264,11 @@ function Home() {
             </div>
             <div className="flex flex-col gap-1.5 py-6 md:py-0 md:px-8">
               <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">DOMAIN</span>
-              <span className="text-ink font-semibold text-[12px]">AI · Robotics · Infra</span>
+              <span className="text-ink font-semibold text-[12px]">Intelligent Software & Platforms</span>
             </div>
             <div className="flex flex-col gap-1.5 py-6 md:py-0 md:px-8">
               <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">STAGE</span>
-              <span className="text-ink font-semibold text-[12px]">Deep R&amp;D · Pre-launch</span>
+              <span className="text-ink font-semibold text-[12px]">Product Rollout & Growth</span>
             </div>
             <div className="flex flex-col gap-1.5 py-6 md:py-0 md:px-8 col-span-2 md:col-span-1">
               <span className="text-ink-2/45 text-[10px] font-medium tracking-[0.14em]">ESTABLISHED</span>
@@ -355,15 +354,14 @@ function Home() {
                 Capabilities
               </div>
               <h2 className="mt-4 font-display text-[40px] md:text-[60px] font-bold tracking-[-0.03em] leading-[1.02] text-balance text-ink">
-                Six core disciplines.
+                Three core domains.
                 <br />
                 <span className="bg-gradient-to-r from-ink-2 to-ink-2/60 bg-clip-text text-transparent">
-                  One unified systems standard.
+                  First-principles engineering.
                 </span>
               </h2>
               <p className="mt-6 text-[17px] md:text-[19px] text-ink-2 max-w-2xl leading-[1.7] tracking-[-0.01em]">
-                Every practice is integrated from design to manufacturing,
-                ensuring no system operates in isolation.
+                We build intelligent software, AI-powered platforms and engineering solutions that integrate hardware simulation with high-scale automation.
               </p>
             </div>
           </Reveal>
@@ -373,39 +371,39 @@ function Home() {
               {[
                 {
                   Icon: Cpu,
-                  title: "Applied AI",
-                  desc: "Production-grade models, retrieval mechanics, and reasoning engines optimized for industrial telemetry.",
-                  brief: "Applied AI Specifications",
-                },
-                {
-                  Icon: Bot,
-                  title: "Robotics",
-                  desc: "Kinematics, dynamic feedback control, and embodied intelligence for real-world automation.",
-                  brief: "Feedback Loops Architecture",
-                },
-                {
-                  Icon: Network,
-                  title: "Infrastructure",
-                  desc: "Distributed execution, isolated networking layers, and computing systems built for critical loads.",
-                  brief: "Edge Execution SLAs",
-                },
-                {
-                  Icon: Workflow,
-                  title: "Automation",
-                  desc: "Autonomous operational cycles that eliminate latency across every production tier.",
-                  brief: "Closed-Loop Cycle Telemetry",
+                  title: "Intelligent Education",
+                  desc: "Next-generation engineering platforms featuring secure compilers, real-time waveform visualization, and gamified skill verification.",
+                  brief: "Ecosystem Specs",
                 },
                 {
                   Icon: Layers,
-                  title: "Developer Platforms",
-                  desc: "High-performance SDKs and compilation tools that feel intuitive to build on.",
+                  title: "Developer Productivity",
+                  desc: "AI-native engineering studios, compiler optimization layers, and unified debuggers built for low-latency operational control.",
+                  brief: "Developer SLA Details",
+                },
+                {
+                  Icon: Bot,
+                  title: "Intelligent Automation",
+                  desc: "Distributed control planes, embodied robotics feedback loops, and secure execution telemetry at physical infrastructure scales.",
+                  brief: "Feedback Loop Architecture",
+                },
+                {
+                  Icon: Network,
+                  title: "Applied Deep Learning",
+                  desc: "Domain-specific reasoning models, semantic search arrays, and custom telemetry parsers built for complex industrial environments.",
+                  brief: "Reasoning Model Specs",
+                },
+                {
+                  Icon: Workflow,
+                  title: "Systems Engineering",
+                  desc: "Low-overhead abstractions, deterministic code execution, and high-performance compilation toolchains designed for peak stability.",
                   brief: "Compiler & SDK Specs",
                 },
                 {
                   Icon: ShieldCheck,
-                  title: "Intelligent Systems",
-                  desc: "Closed-loop platforms designed to monitor, resolve, and report anomalies automatically.",
-                  brief: "Anomaly Handler Details",
+                  title: "Hardware Integration",
+                  desc: "Edge-to-cloud synthesis, logic simulation environments, and automated hardware-in-the-loop stress testing pipelines.",
+                  brief: "Simulation Handler Details",
                 },
               ].map(({ Icon, title, desc, brief }) => (
                 <Card
@@ -906,8 +904,7 @@ function Home() {
                 </span>
               </div>
               <p className="mt-5 max-w-xs text-ink-2 leading-[1.7] text-[13.5px] font-normal">
-                We build computing, control, and intelligence systems
-                for the next generation of physical infrastructure.
+                Building intelligent software, AI-powered platforms and engineering solutions that solve meaningful real-world problems.
               </p>
             </div>
             {[
