@@ -102,7 +102,7 @@ function Home() {
   };
 
   return (
-    <div className="dark min-h-screen bg-bg text-ink antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-bg text-ink antialiased overflow-x-hidden">
       <Nav />
 
       {/* HERO — Centered layout with interactive background & 3D Parallax */}
@@ -140,7 +140,7 @@ function Home() {
               <h1 className="font-display font-bold tracking-[-0.04em] text-[48px] leading-[1.02] md:text-[92px] md:leading-[0.94] text-balance text-ink">
                 Building intelligent
                 <br />
-                <span className="bg-gradient-to-r from-white via-indigo-200 to-violet-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-ink via-ink-2 to-clay bg-clip-text text-transparent">
                   products that matter.
                 </span>
               </h1>
