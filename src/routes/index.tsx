@@ -1081,203 +1081,303 @@ function Home() {
               {/* Phase Switcher Tabs */}
               <div className="flex flex-col gap-2.5">
                 {[
-                  { phase: "PHASE 01", label: "Foundation", date: "June 2025" },
-                  { phase: "PHASE 02", label: "Innovation", date: "In Progress" },
-                  { phase: "PHASE 03", label: "Growth", date: "Q3 2026" },
-                  { phase: "PHASE 04", label: "Scale", date: "2027" },
-                  { phase: "PHASE 05", label: "Future", date: "Long-term" }
-                ].map((item, idx) => (
-                  <button
-                    key={item.phase}
-                    onClick={() => setActivePhaseIndex(idx)}
-                    className={`w-full text-left p-4.5 rounded-xl border transition-all duration-300 flex items-center justify-between group ${
-                      activePhaseIndex === idx
-                        ? "bg-bg border-clay text-ink shadow-sm"
-                        : "bg-transparent border-hairline text-ink-2 hover:text-ink hover:border-clay/20 hover:bg-bg/40"
-                    }`}
-                  >
-                    <div>
-                      <span className="text-[10px] font-mono tracking-widest block opacity-60">{item.phase}</span>
-                      <span className="text-[15px] font-semibold font-display block mt-1">{item.label}</span>
-                    </div>
-                    <span className="text-[10px] font-mono opacity-65 bg-surface border border-hairline px-2 py-0.5 rounded-full">{item.date}</span>
-                  </button>
-                ))}
+                  {
+                    phase: "PHASE 01",
+                    label: "Foundation",
+                    date: "June 2025",
+                    bgClass: "bg-indigo-50/60 border-indigo-500 text-indigo-950 shadow-sm",
+                    badgeClass: "bg-indigo-100 text-indigo-700 border-indigo-200",
+                    hoverClass: "hover:border-indigo-300 hover:bg-indigo-50/10 text-ink-2 hover:text-indigo-900",
+                    indicatorColor: "bg-indigo-500",
+                    textTheme: "text-indigo-600 border-indigo-500/20 bg-indigo-500/5",
+                    bulletColor: "bg-indigo-500"
+                  },
+                  {
+                    phase: "PHASE 02",
+                    label: "Innovation",
+                    date: "In Progress",
+                    bgClass: "bg-purple-50/60 border-purple-500 text-purple-950 shadow-sm",
+                    badgeClass: "bg-purple-100 text-purple-700 border-purple-200",
+                    hoverClass: "hover:border-purple-300 hover:bg-purple-50/10 text-ink-2 hover:text-purple-900",
+                    indicatorColor: "bg-purple-500",
+                    textTheme: "text-purple-600 border-purple-500/20 bg-purple-500/5",
+                    bulletColor: "bg-purple-500"
+                  },
+                  {
+                    phase: "PHASE 03",
+                    label: "Growth",
+                    date: "Q3 2026",
+                    bgClass: "bg-blue-50/60 border-blue-500 text-blue-950 shadow-sm",
+                    badgeClass: "bg-blue-100 text-blue-700 border-blue-200",
+                    hoverClass: "hover:border-blue-300 hover:bg-blue-50/10 text-ink-2 hover:text-blue-900",
+                    indicatorColor: "bg-blue-500",
+                    textTheme: "text-blue-600 border-blue-500/20 bg-blue-500/5",
+                    bulletColor: "bg-blue-500"
+                  },
+                  {
+                    phase: "PHASE 04",
+                    label: "Scale",
+                    date: "2027",
+                    bgClass: "bg-emerald-50/60 border-emerald-500 text-emerald-950 shadow-sm",
+                    badgeClass: "bg-emerald-100 text-emerald-700 border-emerald-200",
+                    hoverClass: "hover:border-emerald-300 hover:bg-emerald-50/10 text-ink-2 hover:text-emerald-900",
+                    indicatorColor: "bg-emerald-500",
+                    textTheme: "text-emerald-600 border-emerald-500/20 bg-emerald-500/5",
+                    bulletColor: "bg-emerald-500"
+                  },
+                  {
+                    phase: "PHASE 05",
+                    label: "Future",
+                    date: "Long-term",
+                    bgClass: "bg-rose-50/60 border-rose-500 text-rose-950 shadow-sm",
+                    badgeClass: "bg-rose-100 text-rose-700 border-rose-200",
+                    hoverClass: "hover:border-rose-300 hover:bg-rose-50/10 text-ink-2 hover:text-rose-900",
+                    indicatorColor: "bg-rose-500",
+                    textTheme: "text-rose-600 border-rose-500/20 bg-rose-500/5",
+                    bulletColor: "bg-rose-500"
+                  }
+                ].map((item, idx) => {
+                  const isActive = activePhaseIndex === idx;
+                  return (
+                    <button
+                      key={item.phase}
+                      onClick={() => setActivePhaseIndex(idx)}
+                      className={`w-full text-left p-4.5 rounded-xl border transition-all duration-300 flex items-center justify-between group ${
+                        isActive
+                          ? item.bgClass
+                          : `bg-transparent border-hairline ${item.hoverClass}`
+                      }`}
+                    >
+                      <div>
+                        <span className={`text-[10px] font-mono tracking-widest block transition-colors duration-300 ${
+                          isActive ? "opacity-90 font-semibold text-ink" : "opacity-60"
+                        }`}>{item.phase}</span>
+                        <span className="text-[15px] font-bold font-display block mt-0.5">{item.label}</span>
+                      </div>
+                      <span className={`text-[10px] font-mono border px-2.5 py-0.5 rounded-full transition-all duration-300 ${
+                        isActive
+                          ? item.badgeClass
+                          : "opacity-65 bg-surface border-hairline text-ink-2 group-hover:bg-bg group-hover:border-hairline"
+                      }`}>{item.date}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Right Column: Console Details */}
             <div className="lg:col-span-8 w-full">
-              <div className="bg-bg border border-hairline rounded-2xl p-6 md:p-10 min-h-[460px] flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 hover:border-clay/10">
-                {/* Visual element indicators */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-clay/5 to-transparent rounded-full blur-xl pointer-events-none" />
-                
-                {/* Top console header info */}
-                <div className="flex items-center justify-between border-b border-hairline pb-4.5 mb-6 text-left">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-clay animate-pulse" />
-                    <span className="font-mono text-[9.5px] uppercase tracking-wider text-ink-2">
-                      ROADMAP // PANEL_0{activePhaseIndex + 1}
-                    </span>
-                  </div>
-                  <span className="font-mono text-[9px] text-clay font-semibold">STATUS: ACTIVE</span>
-                </div>
-
-                {/* Main Dynamic content with clean key switcher */}
-                <div className="flex-grow flex flex-col justify-center text-left">
-                  {activePhaseIndex === 0 && (
-                    <div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-4">
-                        PHASE 01 // FOUNDATION
+              {[
+                {
+                  indicatorColor: "bg-indigo-500",
+                  textColor: "text-indigo-600",
+                  borderColor: "border-indigo-500/20",
+                  bgLight: "bg-indigo-500/5",
+                  bullet: "bg-indigo-500"
+                },
+                {
+                  indicatorColor: "bg-purple-500",
+                  textColor: "text-purple-600",
+                  borderColor: "border-purple-500/20",
+                  bgLight: "bg-purple-500/5",
+                  bullet: "bg-purple-500"
+                },
+                {
+                  indicatorColor: "bg-blue-500",
+                  textColor: "text-blue-600",
+                  borderColor: "border-blue-500/20",
+                  bgLight: "bg-blue-500/5",
+                  bullet: "bg-blue-500"
+                },
+                {
+                  indicatorColor: "bg-emerald-500",
+                  textColor: "text-emerald-600",
+                  borderColor: "border-emerald-500/20",
+                  bgLight: "bg-emerald-500/5",
+                  bullet: "bg-emerald-500"
+                },
+                {
+                  indicatorColor: "bg-rose-500",
+                  textColor: "text-rose-600",
+                  borderColor: "border-rose-500/20",
+                  bgLight: "bg-rose-500/5",
+                  bullet: "bg-rose-500"
+                }
+              ].map((style, idx) => {
+                if (activePhaseIndex !== idx) return null;
+                return (
+                  <div key={idx} className="bg-bg border border-hairline rounded-2xl p-6 md:p-10 min-h-[460px] flex flex-col justify-between shadow-2xl relative overflow-hidden transition-all duration-300 hover:border-clay/10">
+                    {/* Visual element indicators */}
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-clay/5 to-transparent rounded-full blur-xl pointer-events-none" />
+                    
+                    {/* Top console header info */}
+                    <div className="flex items-center justify-between border-b border-hairline pb-4.5 mb-6 text-left">
+                      <div className="flex items-center gap-2">
+                        <span className={`h-2 w-2 rounded-full ${style.indicatorColor} animate-pulse`} />
+                        <span className="font-mono text-[9.5px] uppercase tracking-wider text-ink-2">
+                          ROADMAP // PANEL_0{idx + 1}
+                        </span>
                       </div>
-                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
-                        EAURA Founded
-                      </h3>
-                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl">
-                        EAURA was established with a vision to build intelligent technology products that solve meaningful real-world problems across AI, developer infrastructure and engineering education.
-                      </p>
-                      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-ink-2 font-mono text-[11.5px]">
-                        <div className="flex items-center gap-2.5">
-                          <span className="h-1.5 w-1.5 rounded-full bg-clay" />
-                          <span>June 2025 Incorporation</span>
-                        </div>
-                        <div className="flex items-center gap-2.5">
-                          <span className="h-1.5 w-1.5 rounded-full bg-clay" />
-                          <span>Core Architecture Scoping</span>
-                        </div>
-                      </div>
+                      <span className={`font-mono text-[9px] ${style.textColor} font-semibold`}>STATUS: ACTIVE</span>
                     </div>
-                  )}
 
-                  {activePhaseIndex === 1 && (
-                    <div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-4">
-                        PHASE 02 // INNOVATION
-                      </div>
-                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-6">
-                        Product Inception
-                      </h3>
-                      
-                      {/* Products milestone cards */}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {[
-                          {
-                            name: "NOVA",
-                            status: "Prototype",
-                            color: "text-amber-600 border-amber-500/20 bg-amber-500/5",
-                            milestones: ["Voice Assistant MVP", "Smart Home Sync", "Hardware Prototype"]
-                          },
-                          {
-                            name: "ENVX",
-                            status: "MVP",
-                            color: "text-emerald-600 border-emerald-500/20 bg-emerald-500/5",
-                            milestones: ["Public Beta", "VS Code Extension", "GitHub Integration"]
-                          },
-                          {
-                            name: "ELEKKI",
-                            status: "Beta",
-                            color: "text-violet-600 border-violet-500/20 bg-violet-500/5",
-                            milestones: ["College Pilots", "AI Learning Mentor", "Recruiter Portal"]
-                          }
-                        ].map((p) => (
-                          <div key={p.name} className="bg-surface/50 border border-hairline rounded-xl p-4.5">
-                            <div className="flex justify-between items-center mb-2.5">
-                              <span className="font-mono font-semibold text-[14px] text-ink">{p.name}</span>
-                              <span className={`px-2 py-0.5 text-[8.5px] font-mono border rounded-full ${p.color}`}>{p.status}</span>
+                    {/* Main Dynamic content */}
+                    <div className="flex-grow flex flex-col justify-center text-left">
+                      {idx === 0 && (
+                        <div>
+                          <div className={`inline-flex items-center gap-1.5 rounded-full border ${style.borderColor} ${style.bgLight} px-2.5 py-0.5 text-[9px] font-mono ${style.textColor} font-semibold mb-4`}>
+                            PHASE 01 // FOUNDATION
+                          </div>
+                          <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
+                            EAURA Founded
+                          </h3>
+                          <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl">
+                            EAURA was established with a vision to build intelligent technology products that solve meaningful real-world problems across AI, developer infrastructure and engineering education.
+                          </p>
+                          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-ink-2 font-mono text-[11.5px]">
+                            <div className="flex items-center gap-2.5">
+                              <span className={`h-1.5 w-1.5 rounded-full ${style.bullet}`} />
+                              <span>June 2025 Incorporation</span>
                             </div>
-                            <ul className="flex flex-col gap-1.5 text-[11px] text-ink-2 font-mono text-left">
-                              {p.milestones.map((m) => (
-                                <li key={m} className="flex items-center gap-1.5">
-                                  <span className="h-1 w-1 rounded-full bg-clay/60" />
-                                  <span>{m}</span>
-                                </li>
-                              ))}
-                            </ul>
+                            <div className="flex items-center gap-2.5">
+                              <span className={`h-1.5 w-1.5 rounded-full ${style.bullet}`} />
+                              <span>Core Architecture Scoping</span>
+                            </div>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                        </div>
+                      )}
 
-                  {activePhaseIndex === 2 && (
-                    <div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-4">
-                        PHASE 03 // GROWTH
-                      </div>
-                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
-                        Building a Product Ecosystem
-                      </h3>
-                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl mb-6">
-                        Expand EAURA into a multi-product technology company serving students, developers, professionals and businesses through intelligent software and AI-powered solutions.
-                      </p>
-                      
-                      {/* Growth Tracks tags */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
-                        {["Developer Tools", "Artificial Intelligence", "Education Technology", "Future Products"].map((item) => (
-                          <div key={item} className="bg-surface/50 border border-hairline rounded-xl p-3.5">
-                            <span className="font-mono text-[10px] text-clay font-semibold block">ECOSYSTEM</span>
-                            <span className="text-[13px] text-ink font-medium block mt-1">{item}</span>
+                      {idx === 1 && (
+                        <div>
+                          <div className={`inline-flex items-center gap-1.5 rounded-full border ${style.borderColor} ${style.bgLight} px-2.5 py-0.5 text-[9px] font-mono ${style.textColor} font-semibold mb-4`}>
+                            PHASE 02 // INNOVATION
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {activePhaseIndex === 3 && (
-                    <div>
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-4">
-                        PHASE 04 // SCALE
-                      </div>
-                      <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
-                        Strategic Growth
-                      </h3>
-                      <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl mb-6">
-                        Scale global integrations, secure strategic developer partnerships, and enter enterprise solutions markets.
-                      </p>
-
-                      {/* Milestones list */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[12px] text-ink-2 font-mono">
-                        {[
-                          "Seed Funding Scoping",
-                          "Strategic Partnerships",
-                          "Enterprise Solutions",
-                          "Growing Product Ecosystem",
-                          "Global Developer Community",
-                          "College Partnerships",
-                          "Industry Collaborations"
-                        ].map((item) => (
-                          <div key={item} className="flex items-center gap-2">
-                            <span className="h-1.5 w-1.5 rounded-full bg-clay" />
-                            <span>{item}</span>
+                          <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-6">
+                            Product Inception
+                          </h3>
+                          
+                          {/* Products milestone cards */}
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {[
+                              {
+                                name: "NOVA",
+                                status: "Prototype",
+                                color: "text-amber-600 border-amber-500/20 bg-amber-500/5",
+                                milestones: ["Voice Assistant MVP", "Smart Home Sync", "Hardware Prototype"]
+                              },
+                              {
+                                name: "ENVX",
+                                status: "MVP",
+                                color: "text-emerald-600 border-emerald-500/20 bg-emerald-500/5",
+                                milestones: ["Public Beta", "VS Code Extension", "GitHub Integration"]
+                              },
+                              {
+                                name: "ELEKKI",
+                                status: "Beta",
+                                color: "text-violet-600 border-violet-500/20 bg-violet-500/5",
+                                milestones: ["College Pilots", "AI Learning Mentor", "Recruiter Portal"]
+                              }
+                            ].map((p) => (
+                              <div key={p.name} className="bg-surface/50 border border-hairline rounded-xl p-4.5">
+                                <div className="flex justify-between items-center mb-2.5">
+                                  <span className="font-mono font-semibold text-[14px] text-ink">{p.name}</span>
+                                  <span className={`px-2 py-0.5 text-[8.5px] font-mono border rounded-full ${p.color}`}>{p.status}</span>
+                                </div>
+                                <ul className="flex flex-col gap-1.5 text-[11px] text-ink-2 font-mono text-left">
+                                  {p.milestones.map((m) => (
+                                    <li key={m} className="flex items-center gap-1.5">
+                                      <span className={`h-1 w-1 rounded-full ${style.bullet}`} />
+                                      <span>{m}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                      )}
+
+                      {idx === 2 && (
+                        <div>
+                          <div className={`inline-flex items-center gap-1.5 rounded-full border ${style.borderColor} ${style.bgLight} px-2.5 py-0.5 text-[9px] font-mono ${style.textColor} font-semibold mb-4`}>
+                            PHASE 03 // GROWTH
+                          </div>
+                          <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
+                            Building a Product Ecosystem
+                          </h3>
+                          <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl mb-6">
+                            Expand EAURA into a multi-product technology company serving students, developers, professionals and businesses through intelligent software and AI-powered solutions.
+                          </p>
+                          
+                          {/* Growth Tracks tags */}
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                            {["Developer Tools", "Artificial Intelligence", "Education Technology", "Future Products"].map((item) => (
+                              <div key={item} className="bg-surface/50 border border-hairline rounded-xl p-3.5">
+                                <span className={`font-mono text-[10px] ${style.textColor} font-semibold block`}>ECOSYSTEM</span>
+                                <span className="text-[13px] text-ink font-medium block mt-1">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {idx === 3 && (
+                        <div>
+                          <div className={`inline-flex items-center gap-1.5 rounded-full border ${style.borderColor} ${style.bgLight} px-2.5 py-0.5 text-[9px] font-mono ${style.textColor} font-semibold mb-4`}>
+                            PHASE 04 // SCALE
+                          </div>
+                          <h3 className="font-display text-2xl md:text-3.5xl font-bold text-ink mb-4">
+                            Strategic Growth
+                          </h3>
+                          <p className="text-[14.5px] md:text-[16px] leading-relaxed text-ink-2 max-w-xl mb-6">
+                            Scale global integrations, secure strategic developer partnerships, and enter enterprise solutions markets.
+                          </p>
+
+                          {/* Milestones list */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[12px] text-ink-2 font-mono">
+                            {[
+                              "Seed Funding Scoping",
+                              "Strategic Partnerships",
+                              "Enterprise Solutions",
+                              "Growing Product Ecosystem",
+                              "Global Developer Community",
+                              "College Partnerships",
+                              "Industry Collaborations"
+                            ].map((item) => (
+                              <div key={item} className="flex items-center gap-2">
+                                <span className={`h-1.5 w-1.5 rounded-full ${style.bullet}`} />
+                                <span>{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {idx === 4 && (
+                        <div className="relative py-4">
+                          <div className={`inline-flex items-center gap-1.5 rounded-full border ${style.borderColor} ${style.bgLight} px-2.5 py-0.5 text-[9px] font-mono ${style.textColor} font-semibold mb-6`}>
+                            PHASE 05 // FUTURE
+                          </div>
+                          
+                          <h4 className="font-display text-[26px] md:text-[40px] font-bold tracking-tight text-ink leading-tight mb-4">
+                            Our journey is just beginning.
+                          </h4>
+                          <p className="text-[15px] md:text-[17px] leading-[1.7] text-ink-2 max-w-2xl">
+                            We envision EAURA becoming a globally recognized technology company building intelligent products that simplify complexity, empower people and create lasting impact across industries.
+                          </p>
+                        </div>
+                      )}
                     </div>
-                  )}
 
-                  {activePhaseIndex === 4 && (
-                    <div className="relative py-4">
-                      <div className="inline-flex items-center gap-1.5 rounded-full border border-clay/30 bg-clay/5 px-2.5 py-0.5 text-[9px] font-mono text-clay font-semibold mb-6">
-                        PHASE 05 // FUTURE
-                      </div>
-                      
-                      <h4 className="font-display text-[26px] md:text-[40px] font-bold tracking-tight text-ink leading-tight mb-4">
-                        Our journey is just beginning.
-                      </h4>
-                      <p className="text-[15px] md:text-[17px] leading-[1.7] text-ink-2 max-w-2xl">
-                        We envision EAURA becoming a globally recognized technology company building intelligent products that simplify complexity, empower people and create lasting impact across industries.
-                      </p>
+                    {/* Bottom interactive guide */}
+                    <div className="border-t border-hairline pt-4 flex items-center justify-between text-[10px] font-mono text-ink-2">
+                      <span>SELECT OTHER TABS TO EXPLORE</span>
+                      <span>EAURA ORCHESTRATION</span>
                     </div>
-                  )}
-                </div>
 
-                {/* Bottom interactive guide */}
-                <div className="border-t border-hairline pt-4 flex items-center justify-between text-[10px] font-mono text-ink-2">
-                  <span>SELECT OTHER TABS TO EXPLORE</span>
-                  <span>EAURA ORCHESTRATION</span>
-                </div>
-
-              </div>
+                  </div>
+                );
+              })}
             </div>
 
           </div>
