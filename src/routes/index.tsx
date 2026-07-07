@@ -1,7 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useScroll, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import {
+  X,
+  Mail,
+  Briefcase,
+  MapPin,
+  Loader2,
+  CheckCircle2,
   ArrowRight,
   ChevronRight,
   Cpu,
@@ -105,6 +111,30 @@ function Home() {
   };
 
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isCareersOpen, setIsCareersOpen] = useState(false);
+
+  // Contact Form Simulation State
+  const [contactForm, setContactForm] = useState({ name: "", email: "", org: "", message: "" });
+  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "success">("idle");
+
+  // Careers Form Simulation State
+  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const [careersForm, setCareersForm] = useState({ name: "", email: "", resume: "" });
+  const [careersStatus, setCareersStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const resetContactForm = () => {
+    setContactForm({ name: "", email: "", org: "", message: "" });
+    setContactStatus("idle");
+    setIsContactOpen(false);
+  };
+
+  const resetCareersForm = () => {
+    setCareersForm({ name: "", email: "", resume: "" });
+    setSelectedRole(null);
+    setCareersStatus("idle");
+    setIsCareersOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-bg text-ink antialiased overflow-x-hidden">
@@ -371,89 +401,6 @@ function Home() {
         </div>
       </section>
 
-      {/* CAPABILITIES — Generously spaced 3-column layout */}
-      <section id="capabilities" className="bg-bg py-28 md:py-36 border-t border-hairline relative">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal>
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 text-[11px] font-mono tracking-[0.2em] uppercase text-clay">
-                Capabilities
-              </div>
-              <h2 className="mt-4 font-display text-[40px] md:text-[60px] font-bold tracking-[-0.03em] leading-[1.02] text-balance text-ink">
-                Three core domains.
-                <br />
-                <span className="bg-gradient-to-r from-ink-2 to-ink-2/60 bg-clip-text text-transparent">
-                  First-principles engineering.
-                </span>
-              </h2>
-              <p className="mt-6 text-[17px] md:text-[19px] text-ink-2 max-w-2xl leading-[1.7] tracking-[-0.01em]">
-                We build intelligent software, AI-powered platforms and engineering solutions that integrate hardware simulation with high-scale automation.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  Icon: Cpu,
-                  title: "Intelligent Education",
-                  desc: "Next-generation engineering platforms featuring secure compilers, real-time waveform visualization, and gamified skill verification.",
-                  brief: "Ecosystem Specs",
-                },
-                {
-                  Icon: Layers,
-                  title: "Developer Productivity",
-                  desc: "AI-native engineering studios, compiler optimization layers, and unified debuggers built for low-latency operational control.",
-                  brief: "Developer SLA Details",
-                },
-                {
-                  Icon: Bot,
-                  title: "Intelligent Automation",
-                  desc: "Distributed control planes, embodied robotics feedback loops, and secure execution telemetry at physical infrastructure scales.",
-                  brief: "Feedback Loop Architecture",
-                },
-                {
-                  Icon: Network,
-                  title: "Applied Deep Learning",
-                  desc: "Domain-specific reasoning models, semantic search arrays, and custom telemetry parsers built for complex industrial environments.",
-                  brief: "Reasoning Model Specs",
-                },
-                {
-                  Icon: Workflow,
-                  title: "Systems Engineering",
-                  desc: "Low-overhead abstractions, deterministic code execution, and high-performance compilation toolchains designed for peak stability.",
-                  brief: "Compiler & SDK Specs",
-                },
-                {
-                  Icon: ShieldCheck,
-                  title: "Hardware Integration",
-                  desc: "Edge-to-cloud synthesis, logic simulation environments, and automated hardware-in-the-loop stress testing pipelines.",
-                  brief: "Simulation Handler Details",
-                },
-              ].map(({ Icon, title, desc, brief }) => (
-                <Card
-                  key={title}
-                  className="group relative bg-bg hover:bg-surface border-hairline flex flex-col justify-between hover:shadow-[0_20px_40px_-16px_rgba(0,0,0,0.07)] hover:-translate-y-1.5 transition-all duration-300 will-change-transform"
-                >
-                  <CardHeader className="p-8 pb-0 flex-grow">
-                    <div className="h-11 w-11 rounded-xl bg-surface border border-hairline grid place-items-center text-ink-2 transition-all duration-300 group-hover:bg-clay group-hover:text-white group-hover:border-clay/20 group-hover:shadow-md group-hover:shadow-clay/20">
-                      <Icon className="h-4.5 w-4.5" />
-                    </div>
-                    <CardTitle className="mt-6 text-[21px] text-ink">{title}</CardTitle>
-                    <CardDescription className="mt-3 text-ink-2 leading-relaxed">
-                      {desc}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardFooter className="p-8 pt-6 border-t border-hairline/40 mt-8">
-                    <CTA href="#">{brief}</CTA>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       {/* VISION SECTION — Premium Minimal Typography */}
       <section id="vision" className="bg-surface py-16 md:py-24 border-t border-hairline relative overflow-hidden">
@@ -1367,15 +1314,21 @@ function Home() {
               Reach out to evaluate integration paths, sandbox access, or infrastructure requirements.
               Our technical team responds within one business day.
             </p>
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-              <a
-                href="mailto:hello@eaura.com"
-                className="group inline-flex items-center justify-center rounded-full bg-ink text-bg border border-transparent px-7 py-3.5 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:bg-clay hover:text-white hover:-translate-y-px shadow-md shadow-ink/10 hover:shadow-lg hover:shadow-clay/20"
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
+              <button
+                onClick={() => setIsContactOpen(true)}
+                className="group inline-flex items-center justify-center rounded-full bg-ink text-bg border border-transparent px-8 py-4 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:bg-clay hover:text-white hover:-translate-y-px shadow-md shadow-ink/10 hover:shadow-lg hover:shadow-clay/20 cursor-pointer"
               >
                 hello@eaura.com
                 <ArrowRight className="ml-2.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </a>
-              <CTA href="#">View open engineering roles</CTA>
+              </button>
+              <button
+                onClick={() => setIsCareersOpen(true)}
+                className="group inline-flex items-center justify-center rounded-full border border-hairline bg-bg hover:bg-surface text-ink px-8 py-4 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:border-clay/35 hover:-translate-y-px shadow-sm hover:shadow cursor-pointer"
+              >
+                View open engineering roles
+                <ChevronRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
             </div>
           </Reveal>
         </div>
@@ -1408,7 +1361,19 @@ function Home() {
                 <ul className="mt-4 space-y-3 text-ink-2">
                   {(items as string[]).map((i) => (
                     <li key={i}>
-                      <a href="#" className="link-hover hover:text-ink transition-colors duration-200">
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          if (i === "Careers") {
+                            e.preventDefault();
+                            setIsCareersOpen(true);
+                          } else if (i === "hello@eaura.com") {
+                            e.preventDefault();
+                            setIsContactOpen(true);
+                          }
+                        }}
+                        className="link-hover hover:text-ink transition-colors duration-200"
+                      >
                         {i}
                       </a>
                     </li>
@@ -1433,6 +1398,332 @@ function Home() {
           </div>
         </div>
       </footer>
+      {/* ── INTERACTIVE MODALS ────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {/* 1. Contact Form Modal */}
+        {isContactOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={resetContactForm}
+              className="absolute inset-0 cursor-pointer"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
+              className="relative w-full max-w-lg bg-bg border border-hairline rounded-[28px] shadow-2xl p-8 md:p-10 flex flex-col z-10 overflow-hidden"
+            >
+              {/* Top ambient glow */}
+              <div className="absolute -top-24 -left-24 w-48 h-48 bg-[radial-gradient(closest-side,rgba(0,113,227,0.06),transparent_80%)] rounded-full blur-2xl pointer-events-none" />
+
+              <button
+                onClick={resetContactForm}
+                className="absolute top-6 right-6 h-8 w-8 rounded-full border border-hairline bg-surface hover:bg-hairline flex items-center justify-center text-ink-2 hover:text-ink hover:rotate-90 transition-all duration-300 cursor-pointer"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
+
+              {contactStatus !== "success" ? (
+                <>
+                  <div className="text-left">
+                    <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-clay mb-2.5">Get in touch</p>
+                    <h3 className="font-display text-[28px] font-bold text-ink leading-tight">Partner with EAURA</h3>
+                    <p className="mt-3 text-[14px] text-ink-2 leading-relaxed">
+                      Reach out to evaluate integration paths, sandbox access, or telemetry infrastructure requirements.
+                    </p>
+                  </div>
+
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setContactStatus("sending");
+                      setTimeout(() => setContactStatus("success"), 1500);
+                    }}
+                    className="mt-8 flex flex-col gap-4 text-left"
+                  >
+                    <div>
+                      <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                        Full Name
+                      </label>
+                      <input
+                        required
+                        type="text"
+                        value={contactForm.name}
+                        onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                        placeholder="John Doe"
+                        className="w-full px-4 py-3 rounded-xl border border-hairline bg-surface text-ink text-[14.5px] focus:outline-none focus:border-clay/40 transition-all duration-200"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                          Work Email
+                        </label>
+                        <input
+                          required
+                          type="email"
+                          value={contactForm.email}
+                          onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                          placeholder="john@company.com"
+                          className="w-full px-4 py-3 rounded-xl border border-hairline bg-surface text-ink text-[14.5px] focus:outline-none focus:border-clay/40 transition-all duration-200"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                          Organization
+                        </label>
+                        <input
+                          required
+                          type="text"
+                          value={contactForm.org}
+                          onChange={(e) => setContactForm({ ...contactForm, org: e.target.value })}
+                          placeholder="Acme Corp"
+                          className="w-full px-4 py-3 rounded-xl border border-hairline bg-surface text-ink text-[14.5px] focus:outline-none focus:border-clay/40 transition-all duration-200"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                        Message
+                      </label>
+                      <textarea
+                        required
+                        rows={4}
+                        value={contactForm.message}
+                        onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                        placeholder="How can we assist you?"
+                        className="w-full px-4 py-3 rounded-xl border border-hairline bg-surface text-ink text-[14.5px] focus:outline-none focus:border-clay/40 resize-none transition-all duration-200"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={contactStatus === "sending"}
+                      className="mt-2 w-full group inline-flex items-center justify-center rounded-xl bg-ink text-bg py-4 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:bg-clay hover:text-white disabled:bg-hairline disabled:text-ink-2 cursor-pointer shadow"
+                    >
+                      {contactStatus === "sending" ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Sending Message...
+                        </>
+                      ) : (
+                        <>
+                          Send Inquiry
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center text-center py-10"
+                >
+                  <div className="h-16 w-16 rounded-full bg-emerald-500/10 border border-emerald-500/25 grid place-items-center text-emerald-500 mb-6 shadow-md shadow-emerald-500/5">
+                    <CheckCircle2 className="h-8 w-8 animate-bounce" />
+                  </div>
+                  <h3 className="font-display text-[24px] font-bold text-ink">Inquiry Received</h3>
+                  <p className="mt-4 text-[14.5px] leading-relaxed text-ink-2 max-w-sm">
+                    Thank you for reaching out, <span className="font-semibold text-ink">{contactForm.name}</span>. 
+                    Our systems engineering team has logged your inquiry. We will contact you at <span className="font-semibold text-ink">{contactForm.email}</span> within one business day.
+                  </p>
+                  <button
+                    onClick={resetContactForm}
+                    className="mt-8 px-8 py-3 bg-ink hover:bg-clay text-bg hover:text-white text-[14px] font-semibold rounded-full shadow transition-all duration-200 cursor-pointer"
+                  >
+                    Return to Homepage
+                  </button>
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
+        )}
+
+        {/* 2. Careers Modal */}
+        {isCareersOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={resetCareersForm}
+              className="absolute inset-0 cursor-pointer"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
+              className="relative w-full max-w-2xl bg-bg border border-hairline rounded-[28px] shadow-2xl p-8 md:p-10 flex flex-col z-10 max-h-[85vh] overflow-hidden"
+            >
+              <button
+                onClick={resetCareersForm}
+                className="absolute top-6 right-6 h-8 w-8 rounded-full border border-hairline bg-surface hover:bg-hairline flex items-center justify-center text-ink-2 hover:text-ink hover:rotate-90 transition-all duration-300 cursor-pointer"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
+
+              {careersStatus !== "success" ? (
+                <>
+                  <div className="text-left border-b border-hairline pb-5">
+                    <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-clay mb-2.5">Join the team</p>
+                    <h3 className="font-display text-[28px] font-bold text-ink leading-tight">Open Engineering Roles</h3>
+                    <p className="mt-2 text-[14px] text-ink-2 leading-relaxed">
+                      We are looking for engineers, compiler designers, and product creators who think from first principles.
+                    </p>
+                  </div>
+
+                  <div className="overflow-y-auto pr-2 mt-6 flex-grow flex flex-col gap-4 text-left">
+                    {[
+                      {
+                        id: "applied-ai",
+                        title: "Applied AI Researcher",
+                        loc: "Remote / Bengaluru",
+                        desc: "Design and implement reasoning models, semantic indexing systems, and custom parser pipelines for complex telemetry structures.",
+                        reqs: "Deep experience with LLM orchestration, structured output parsing, and fine-tuning frameworks."
+                      },
+                      {
+                        id: "compiler-arch",
+                        title: "Lead Compiler Architect",
+                        loc: "Bengaluru, India",
+                        desc: "Own low-overhead code abstractions, digital circuit logic compilers, and secure sandbox container runtimes.",
+                        reqs: "Expertise in LLVM, custom compiler toolchains, systems engineering, and hardware synthesis toolchains."
+                      },
+                      {
+                        id: "product-ux",
+                        title: "Product UX Engineer",
+                        loc: "Remote / Hybrid",
+                        desc: "Architect the next generation of developer consoles, micro-animated state visualizers, and interactive learning boards.",
+                        reqs: "Strong background in React, tailwind configurations, premium framer-motion micro-animations, and visual polish."
+                      }
+                    ].map((role) => (
+                      <div
+                        key={role.id}
+                        className={`border rounded-2xl p-5 transition-all duration-300 ${
+                          selectedRole === role.id
+                            ? "border-clay bg-clay/[0.02]"
+                            : "border-hairline bg-surface hover:bg-hairline/40 hover:border-hairline-2"
+                        }`}
+                      >
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div>
+                            <h4 className="font-display font-bold text-[16.5px] text-ink">{role.title}</h4>
+                            <div className="mt-1 flex items-center gap-4 text-[12px] font-mono text-ink-2">
+                              <span className="flex items-center gap-1.5"><Briefcase className="h-3.5 w-3.5" /> Full-Time</span>
+                              <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> {role.loc}</span>
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => setSelectedRole(selectedRole === role.id ? null : role.id)}
+                            className="px-4 py-1.5 border border-hairline bg-bg hover:bg-surface text-[12.5px] font-semibold rounded-full transition-all duration-200 cursor-pointer"
+                          >
+                            {selectedRole === role.id ? "Hide Details" : "Apply Now"}
+                          </button>
+                        </div>
+
+                        <AnimatePresence>
+                          {selectedRole === role.id && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pt-4 mt-4 border-t border-hairline/60 flex flex-col gap-4">
+                                <p className="text-[13.5px] leading-relaxed text-ink-2">{role.desc}</p>
+                                <div className="p-3 bg-surface border border-hairline rounded-xl text-[12.5px] text-ink leading-relaxed">
+                                  <span className="font-mono text-[10px] font-semibold text-clay block uppercase tracking-wider mb-1">Key Profile Specs</span>
+                                  {role.reqs}
+                                </div>
+
+                                {/* Application Mini-Form */}
+                                <form
+                                  onSubmit={(e) => {
+                                    e.preventDefault();
+                                    setCareersStatus("submitting");
+                                    setTimeout(() => setCareersStatus("success"), 1500);
+                                  }}
+                                  className="mt-2 flex flex-col gap-3.5 border-t border-hairline/60 pt-4"
+                                >
+                                  <h5 className="font-display font-semibold text-[14px] text-ink">Submit Application</h5>
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <input
+                                      required
+                                      type="text"
+                                      value={careersForm.name}
+                                      onChange={(e) => setCareersForm({ ...careersForm, name: e.target.value })}
+                                      placeholder="Your Name"
+                                      className="px-3.5 py-2.5 rounded-lg border border-hairline bg-surface text-ink text-[13.5px] focus:outline-none focus:border-clay/40"
+                                    />
+                                    <input
+                                      required
+                                      type="email"
+                                      value={careersForm.email}
+                                      onChange={(e) => setCareersForm({ ...careersForm, email: e.target.value })}
+                                      placeholder="Email Address"
+                                      className="px-3.5 py-2.5 rounded-lg border border-hairline bg-surface text-ink text-[13.5px] focus:outline-none focus:border-clay/40"
+                                    />
+                                  </div>
+                                  <div className="flex gap-3">
+                                    <input
+                                      required
+                                      type="url"
+                                      value={careersForm.resume}
+                                      onChange={(e) => setCareersForm({ ...careersForm, resume: e.target.value })}
+                                      placeholder="Resume URL (PDF/Google Drive/GitHub Link)"
+                                      className="flex-grow px-3.5 py-2.5 rounded-lg border border-hairline bg-surface text-ink text-[13.5px] focus:outline-none focus:border-clay/40"
+                                    />
+                                    <button
+                                      type="submit"
+                                      disabled={careersStatus === "submitting"}
+                                      className="px-6 bg-ink text-bg font-semibold rounded-lg text-[13.5px] hover:bg-clay hover:text-white disabled:bg-hairline disabled:text-ink-2 cursor-pointer transition-all duration-200"
+                                    >
+                                      {careersStatus === "submitting" ? "Submitting..." : "Apply"}
+                                    </button>
+                                  </div>
+                                </form>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex flex-col items-center justify-center text-center py-10"
+                >
+                  <div className="h-16 w-16 rounded-full bg-emerald-500/10 border border-emerald-500/25 grid place-items-center text-emerald-500 mb-6">
+                    <CheckCircle2 className="h-8 w-8 animate-bounce" />
+                  </div>
+                  <h3 className="font-display text-[24px] font-bold text-ink">Application Submitted</h3>
+                  <p className="mt-4 text-[14.5px] leading-relaxed text-ink-2 max-w-sm">
+                    Thank you for applying, <span className="font-semibold text-ink">{careersForm.name}</span>. 
+                    Your application has been compiled successfully. We will review your materials and contact you at <span className="font-semibold text-ink">{careersForm.email}</span>.
+                  </p>
+                  <button
+                    onClick={resetCareersForm}
+                    className="mt-8 px-8 py-3 bg-ink hover:bg-clay text-bg hover:text-white text-[14px] font-semibold rounded-full shadow transition-all duration-200 cursor-pointer"
+                  >
+                    Close Window
+                  </button>
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
