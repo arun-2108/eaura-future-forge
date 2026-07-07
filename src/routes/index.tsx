@@ -897,7 +897,7 @@ function Home() {
             <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
-                  name: "Rushyanth Reddy",
+                  name: "Arunkumar Sundaravel",
                   role: "Chief Executive Officer",
                   bio: "Sets the long-term technical vision. Leads system architecture decisions, strategic partnerships, and the engineering organization.",
                   gradient: "from-[#080d1a] via-[#0e162b] to-[#1d2d54]",
