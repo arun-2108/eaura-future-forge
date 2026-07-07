@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Linkedin,
   Users,
+  TrendingUp,
 } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Reveal } from "@/components/site/Reveal";
