@@ -761,7 +761,7 @@ function Home() {
 
                   <div className="mt-10 flex items-center gap-6">
                     <Button
-                      onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                      onClick={() => window.open("https://envx-eight.vercel.app/", "_blank", "noopener,noreferrer")}
                       size="lg"
                       className="rounded-full px-8 py-6 text-base font-semibold shadow-md shadow-clay/5 hover:shadow-lg hover:shadow-clay/10 hover:-translate-y-px transition-all duration-200"
                     >
