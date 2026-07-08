@@ -849,7 +849,7 @@ function Home() {
                   bio: "Sets the long-term technical vision. Leads system architecture decisions, strategic partnerships, and the engineering organization.",
                   gradient: "from-[#080d1a] via-[#0e162b] to-[#1d2d54]",
                   image: "/directors/Director_1.jpg",
-                  linkedin: "#",
+                  linkedin: "https://www.linkedin.com/in/arun-kumar-7755492a5/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BgVnDYQ1KSVeMB55%2FQO2sEA%3D%3D",
                   objectPosition: "42% 70%",
                   zoom: 1.7,
                 },
