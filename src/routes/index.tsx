@@ -1663,15 +1663,15 @@ function Home() {
                   {
                     id: "platform",
                     title: "Platform Engineer",
-                    type: "Full-Time",
-                    mode: "Remote",
+                    type: "Full-Time / Internship",
+                    mode: "Remote / Hybrid",
                     desc: "Design and maintain secure, scalable backend infrastructure, cloud services, deployment pipelines, authentication systems, APIs, databases, and developer tooling that power EAURA's technology platform."
                   },
                   {
                     id: "ai-product",
                     title: "AI Product Engineer (NOVA)",
-                    type: "Full-Time",
-                    mode: "Remote",
+                    type: "Full-Time / Internship",
+                    mode: "Remote / Hybrid",
                     desc: "Build intelligent AI-powered experiences for NOVA. Develop AI agents, LLM integrations, conversational interfaces, automation workflows, and next-generation productivity features."
                   }
                 ].map((role) => (
