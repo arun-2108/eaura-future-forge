@@ -20,6 +20,7 @@ import {
   Users,
   TrendingUp,
   Calendar,
+  Phone,
 } from "lucide-react";
 import { Nav } from "@/components/site/Nav";
 import { Reveal } from "@/components/site/Reveal";
@@ -1319,9 +1320,23 @@ function Home() {
                 onClick={() => setIsContactOpen(true)}
                 className="group inline-flex items-center justify-center rounded-full bg-ink text-bg border border-transparent px-8 py-4 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:bg-clay hover:text-white hover:-translate-y-px shadow-md shadow-ink/10 hover:shadow-lg hover:shadow-clay/20 cursor-pointer"
               >
-                hello@eaura.com
+                Send a message
                 <ArrowRight className="ml-2.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
+              <a
+                href="mailto:info@eauraone.com"
+                className="group inline-flex items-center justify-center rounded-full border border-hairline bg-bg hover:bg-surface text-ink px-8 py-4 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:border-clay/35 hover:-translate-y-px shadow-sm hover:shadow cursor-pointer"
+              >
+                <Mail className="mr-2 h-4 w-4 text-clay transition-transform duration-300 group-hover:scale-110" />
+                info@eauraone.com
+              </a>
+              <a
+                href="tel:+918639657245"
+                className="group inline-flex items-center justify-center rounded-full border border-hairline bg-bg hover:bg-surface text-ink px-8 py-4 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:border-clay/35 hover:-translate-y-px shadow-sm hover:shadow cursor-pointer"
+              >
+                <Phone className="mr-2 h-4 w-4 text-clay transition-transform duration-300 group-hover:scale-110" />
+                +91 86396 57245
+              </a>
               <button
                 onClick={() => setIsCareersOpen(true)}
                 className="group inline-flex items-center justify-center rounded-full border border-hairline bg-bg hover:bg-surface text-ink px-8 py-4 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:border-clay/35 hover:-translate-y-px shadow-sm hover:shadow cursor-pointer"
@@ -1354,7 +1369,7 @@ function Home() {
             {[
               ["Company", ["About", "Leadership", "Research", "Careers"]],
               ["Products", ["ENVX", "NOVA", "Roadmap"]],
-              ["Contact", ["hello@eaura.com", "Press", "Partners"]],
+              ["Contact", ["info@eauraone.com", "+91 86396 57245", "Press", "Partners"]],
             ].map(([title, items]) => (
               <div key={title as string} className="flex flex-col">
                 <div className="font-semibold text-ink tracking-wide">{title}</div>
@@ -1362,14 +1377,17 @@ function Home() {
                   {(items as string[]).map((i) => (
                     <li key={i}>
                       <a
-                        href="#"
+                        href={i === "+91 86396 57245" ? "tel:+918639657245" : i === "info@eauraone.com" ? "mailto:info@eauraone.com" : "#"}
                         onClick={(e) => {
                           if (i === "Careers") {
                             e.preventDefault();
                             setIsCareersOpen(true);
-                          } else if (i === "hello@eaura.com") {
+                          } else if (i === "info@eauraone.com") {
+                            // Do not prevent default so mailto: works
+                          } else if (i === "+91 86396 57245") {
+                            // Do not prevent default so tel: works
+                          } else {
                             e.preventDefault();
-                            setIsContactOpen(true);
                           }
                         }}
                         className="link-hover hover:text-ink transition-colors duration-200"
@@ -1438,10 +1456,38 @@ function Home() {
                   </div>
 
                   <form
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                       e.preventDefault();
                       setContactStatus("sending");
-                      setTimeout(() => setContactStatus("success"), 1500);
+                      try {
+                        const response = await fetch("https://api.web3forms.com/submit", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                          },
+                          body: JSON.stringify({
+                            access_key: import.meta.env.VITE_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE",
+                            name: contactForm.name,
+                            email: contactForm.email,
+                            subject: `New Contact Form Inquiry from ${contactForm.name} (${contactForm.org})`,
+                            from_name: "Eaura Website",
+                            message: `Organization: ${contactForm.org}\nEmail: ${contactForm.email}\nName: ${contactForm.name}\n\nMessage:\n${contactForm.message}`,
+                          }),
+                        });
+                        const result = await response.json();
+                        if (result.success) {
+                          setContactStatus("success");
+                        } else {
+                          console.error("Web3Forms Submission Failed:", result);
+                          setContactStatus("idle");
+                          alert("Failed to send message. Please try again or email us directly at info@eauraone.com.");
+                        }
+                      } catch (error) {
+                        console.error("Web3Forms Submission Error:", error);
+                        setContactStatus("idle");
+                        alert("An error occurred. Please try again or email us directly at info@eauraone.com.");
+                      }
                     }}
                     className="mt-8 flex flex-col gap-4 text-left"
                   >
@@ -1646,10 +1692,44 @@ function Home() {
 
                                 {/* Application Mini-Form */}
                                 <form
-                                  onSubmit={(e) => {
+                                  onSubmit={async (e) => {
                                     e.preventDefault();
                                     setCareersStatus("submitting");
-                                    setTimeout(() => setCareersStatus("success"), 1500);
+                                    const roleTitles: Record<string, string> = {
+                                      "applied-ai": "Applied AI Researcher",
+                                      "compiler-arch": "Lead Compiler Architect",
+                                      "product-ux": "Product UX Engineer"
+                                    };
+                                    const roleTitle = roleTitles[selectedRole || ""] || selectedRole || "Unknown Role";
+                                    try {
+                                      const response = await fetch("https://api.web3forms.com/submit", {
+                                        method: "POST",
+                                        headers: {
+                                          "Content-Type": "application/json",
+                                          Accept: "application/json",
+                                        },
+                                        body: JSON.stringify({
+                                          access_key: import.meta.env.VITE_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE",
+                                          name: careersForm.name,
+                                          email: careersForm.email,
+                                          subject: `Job Application: ${roleTitle} - ${careersForm.name}`,
+                                          from_name: "Eaura Careers",
+                                          message: `Candidate Name: ${careersForm.name}\nCandidate Email: ${careersForm.email}\nApplied Role: ${roleTitle}\nResume Link: ${careersForm.resume}`,
+                                        }),
+                                      });
+                                      const result = await response.json();
+                                      if (result.success) {
+                                        setCareersStatus("success");
+                                      } else {
+                                        console.error("Web3Forms Careers Submission Failed:", result);
+                                        setCareersStatus("idle");
+                                        alert("Failed to submit application. Please try again or email us directly at info@eauraone.com.");
+                                      }
+                                    } catch (error) {
+                                      console.error("Web3Forms Careers Submission Error:", error);
+                                      setCareersStatus("idle");
+                                      alert("An error occurred. Please try again or email us directly at info@eauraone.com.");
+                                    }
                                   }}
                                   className="mt-2 flex flex-col gap-3.5 border-t border-hairline/60 pt-4"
                                 >
