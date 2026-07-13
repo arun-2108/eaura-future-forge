@@ -25,6 +25,7 @@ import {
 import { Nav } from "@/components/site/Nav";
 import { Reveal } from "@/components/site/Reveal";
 import { AbstractTechVisualization } from "@/components/site/AbstractTechVisualization";
+import { ExecutiveLeadership } from "@/components/site/ExecutiveLeadership";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -840,11 +841,9 @@ function Home() {
         </div>
       </section>
 
-
-
       {/* LEADERSHIP — Clean profiles, subtle hover overlays */}
       <section
-        id="founders"
+        id="leadership-board"
         className="bg-surface py-28 md:py-36 border-t border-hairline relative"
       >
         <div className="mx-auto max-w-6xl px-6">
@@ -1324,6 +1323,9 @@ function Home() {
 
         </div>
       </section>
+
+      {/* EXECUTIVE LEADERSHIP — Cinematic full-width storytelling */}
+      <ExecutiveLeadership />
 
       {/* CTA / CONTACT — Large typography, minimalist layout */}
       <section id="contact" className="bg-surface py-28 md:py-40 border-t border-hairline relative overflow-hidden">
