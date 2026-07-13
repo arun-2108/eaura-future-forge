@@ -4,6 +4,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- GitHub Pages SPA route restoration -->
+    <script>
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+        // Also handle ?p= query param from 404.html
+        var p = window.location.search.slice(1);
+        if (p && p.indexOf('p=') === 0) {
+          var decoded = decodeURIComponent(p.slice(2));
+          history.replaceState(null, null, decoded);
+        }
+      })();
+    </script>
+
     <!-- Primary Metadata -->
     <title>EAURA — Engineering the Future Through Intelligent Technology</title>
     <meta
