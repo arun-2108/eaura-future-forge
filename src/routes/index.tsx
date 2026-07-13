@@ -25,7 +25,6 @@ import {
 import { Nav } from "@/components/site/Nav";
 import { Reveal } from "@/components/site/Reveal";
 import { AbstractTechVisualization } from "@/components/site/AbstractTechVisualization";
-import { ExecutiveLeadership } from "@/components/site/ExecutiveLeadership";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -1324,9 +1323,6 @@ function Home() {
         </div>
       </section>
 
-      {/* EXECUTIVE LEADERSHIP — Cinematic full-width storytelling */}
-      <ExecutiveLeadership />
-
       {/* CTA / CONTACT — Large typography, minimalist layout */}
       <section id="contact" className="bg-surface py-28 md:py-40 border-t border-hairline relative overflow-hidden">
         {/* Subtle radial ambient */}
@@ -1395,7 +1391,7 @@ function Home() {
               </p>
             </div>
             {[
-              ["Company", ["About", "Leadership", "Research", "Careers"]],
+              ["Company", ["About", "Team", "Research", "Careers"]],
               ["Products", ["ENVX", "NOVA", "Roadmap"]],
               ["Contact", ["info@eauraone.com", "+91 86396 57245", "Press", "Partners"]],
             ].map(([title, items]) => (
@@ -1405,15 +1401,18 @@ function Home() {
                   {(items as string[]).map((i) => (
                     <li key={i}>
                       <a
-                        href={i === "+91 86396 57245" ? "tel:+918639657245" : i === "info@eauraone.com" ? "mailto:info@eauraone.com" : "#"}
+                        href={
+                          i === "+91 86396 57245" ? "tel:+918639657245"
+                          : i === "info@eauraone.com" ? "mailto:info@eauraone.com"
+                          : i === "Team" ? "/team"
+                          : "#"
+                        }
                         onClick={(e) => {
                           if (i === "Careers") {
                             e.preventDefault();
                             setIsCareersOpen(true);
-                          } else if (i === "info@eauraone.com") {
-                            // Do not prevent default so mailto: works
-                          } else if (i === "+91 86396 57245") {
-                            // Do not prevent default so tel: works
+                          } else if (i === "info@eauraone.com" || i === "+91 86396 57245" || i === "Team") {
+                            // allow default navigation
                           } else {
                             e.preventDefault();
                           }

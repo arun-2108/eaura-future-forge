@@ -6,7 +6,7 @@ const links = [
   { href: "/#philosophy", label: "Philosophy" },
   { href: "/#products", label: "Products" },
   { href: "/#research", label: "Research" },
-  { href: "/#founders", label: "Leadership" },
+  { href: "/team", label: "Team" },
   { href: "/#contact", label: "Contact" },
 ];
 
