@@ -121,7 +121,24 @@ function Home() {
 
   // Careers Form Simulation State
   const [selectedRole, setSelectedRole] = useState<string | null>(null);
-  const [careersForm, setCareersForm] = useState({ name: "", email: "", resume: "" });
+  const [activeApplyRole, setActiveApplyRole] = useState<{ id: string; title: string } | null>(null);
+  const [careersForm, setCareersForm] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    linkedin: string;
+    github: string;
+    whyJoin: string;
+    resume: File | null;
+  }>({
+    name: "",
+    email: "",
+    phone: "",
+    linkedin: "",
+    github: "",
+    whyJoin: "",
+    resume: null,
+  });
   const [careersStatus, setCareersStatus] = useState<"idle" | "submitting" | "success">("idle");
 
   const resetContactForm = () => {
@@ -131,8 +148,17 @@ function Home() {
   };
 
   const resetCareersForm = () => {
-    setCareersForm({ name: "", email: "", resume: "" });
+    setCareersForm({
+      name: "",
+      email: "",
+      phone: "",
+      linkedin: "",
+      github: "",
+      whyJoin: "",
+      resume: null,
+    });
     setSelectedRole(null);
+    setActiveApplyRole(null);
     setCareersStatus("idle");
     setIsCareersOpen(false);
   };
@@ -1617,166 +1643,327 @@ function Home() {
                 <X className="h-4.5 w-4.5" />
               </button>
 
+              <div className="text-left border-b border-hairline pb-5">
+                <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-clay mb-2.5">Join the team</p>
+                <h3 className="font-display text-[28px] font-bold text-ink leading-tight">Open Engineering Roles</h3>
+                <p className="mt-2 text-[14px] text-ink-2 leading-relaxed">
+                  We are looking for engineers, compiler designers, and product creators who think from first principles.
+                </p>
+              </div>
+
+              <div className="overflow-y-auto pr-2 mt-6 flex-grow flex flex-col gap-4 text-left">
+                {[
+                  {
+                    id: "full-stack",
+                    title: "Full Stack Software Engineer",
+                    type: "Full-Time / Internship",
+                    mode: "Remote / Hybrid",
+                    desc: "Build scalable web applications and intelligent software products using modern technologies. Work across frontend, backend, APIs, databases, cloud infrastructure, and contribute to products including NOVA, ENVX, and ELEKKI."
+                  },
+                  {
+                    id: "platform",
+                    title: "Platform Engineer",
+                    type: "Full-Time",
+                    mode: "Remote",
+                    desc: "Design and maintain secure, scalable backend infrastructure, cloud services, deployment pipelines, authentication systems, APIs, databases, and developer tooling that power EAURA's technology platform."
+                  },
+                  {
+                    id: "ai-product",
+                    title: "AI Product Engineer (NOVA)",
+                    type: "Full-Time",
+                    mode: "Remote",
+                    desc: "Build intelligent AI-powered experiences for NOVA. Develop AI agents, LLM integrations, conversational interfaces, automation workflows, and next-generation productivity features."
+                  }
+                ].map((role) => (
+                  <div
+                    key={role.id}
+                    className={`border rounded-2xl p-5 transition-all duration-300 ${
+                      selectedRole === role.id
+                        ? "border-clay bg-clay/[0.02]"
+                        : "border-hairline bg-surface hover:bg-hairline/40 hover:border-hairline-2"
+                    }`}
+                  >
+                    <div
+                      className="flex flex-wrap items-start justify-between gap-3 cursor-pointer"
+                      onClick={() => setSelectedRole(selectedRole === role.id ? null : role.id)}
+                    >
+                      <div>
+                        <h4 className="font-display font-bold text-[16.5px] text-ink">{role.title}</h4>
+                        <div className="mt-1 flex items-center gap-4 text-[12px] font-mono text-ink-2">
+                          <span className="flex items-center gap-1.5"><Briefcase className="h-3.5 w-3.5" /> {role.type}</span>
+                          <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> {role.mode}</span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveApplyRole(role);
+                        }}
+                        className="px-4 py-1.5 border border-hairline bg-bg hover:bg-surface text-[12.5px] font-semibold rounded-full transition-all duration-200 cursor-pointer"
+                      >
+                        Apply Now
+                      </button>
+                    </div>
+
+                    <AnimatePresence>
+                      {selectedRole === role.id && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-4 mt-4 border-t border-hairline/60 flex flex-col gap-4">
+                            <p className="text-[13.5px] leading-relaxed text-ink-2">{role.desc}</p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-6 pt-4 border-t border-hairline/60 flex justify-between items-center text-[12px] text-ink-2 font-mono">
+                <div>hiring contact: <a href="mailto:info@eauraone.com" className="text-clay hover:underline">info@eauraone.com</a></div>
+                <div>tel: <a href="tel:+918639657245" className="text-clay hover:underline">+91 86396 57245</a></div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+
+        {/* 3. Job Application Modal */}
+        {activeApplyRole && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveApplyRole(null)}
+              className="absolute inset-0 cursor-pointer"
+            />
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ type: "spring", duration: 0.5, bounce: 0.15 }}
+              className="relative w-full max-w-xl bg-bg border border-hairline rounded-[28px] shadow-2xl p-8 md:p-10 flex flex-col z-10 max-h-[90vh] overflow-y-auto"
+            >
+              <button
+                onClick={() => setActiveApplyRole(null)}
+                className="absolute top-6 right-6 h-8 w-8 rounded-full border border-hairline bg-surface hover:bg-hairline flex items-center justify-center text-ink-2 hover:text-ink hover:rotate-90 transition-all duration-300 cursor-pointer"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
+
               {careersStatus !== "success" ? (
                 <>
                   <div className="text-left border-b border-hairline pb-5">
                     <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-clay mb-2.5">Join the team</p>
-                    <h3 className="font-display text-[28px] font-bold text-ink leading-tight">Open Engineering Roles</h3>
-                    <p className="mt-2 text-[14px] text-ink-2 leading-relaxed">
-                      We are looking for engineers, compiler designers, and product creators who think from first principles.
+                    <h3 className="font-display text-[24px] font-bold text-ink leading-tight">Apply for Role</h3>
+                    <p className="mt-2 text-[14.5px] text-ink-2">
+                      Submit your credentials to join EAURA.
                     </p>
                   </div>
 
-                  <div className="overflow-y-auto pr-2 mt-6 flex-grow flex flex-col gap-4 text-left">
-                    {[
-                      {
-                        id: "applied-ai",
-                        title: "Applied AI Researcher",
-                        loc: "Remote / Bengaluru",
-                        desc: "Design and implement reasoning models, semantic indexing systems, and custom parser pipelines for complex telemetry structures.",
-                        reqs: "Deep experience with LLM orchestration, structured output parsing, and fine-tuning frameworks."
-                      },
-                      {
-                        id: "compiler-arch",
-                        title: "Lead Compiler Architect",
-                        loc: "Bengaluru, India",
-                        desc: "Own low-overhead code abstractions, digital circuit logic compilers, and secure sandbox container runtimes.",
-                        reqs: "Expertise in LLVM, custom compiler toolchains, systems engineering, and hardware synthesis toolchains."
-                      },
-                      {
-                        id: "product-ux",
-                        title: "Product UX Engineer",
-                        loc: "Remote / Hybrid",
-                        desc: "Architect the next generation of developer consoles, micro-animated state visualizers, and interactive learning boards.",
-                        reqs: "Strong background in React, tailwind configurations, premium framer-motion micro-animations, and visual polish."
+                  <form
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      setCareersStatus("submitting");
+
+                      try {
+                        const formData = new FormData();
+                        formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE");
+                        formData.append("name", careersForm.name);
+                        formData.append("email", careersForm.email);
+                        formData.append("phone", careersForm.phone);
+                        formData.append("linkedin", careersForm.linkedin);
+                        formData.append("github", careersForm.github);
+                        formData.append("why_join", careersForm.whyJoin);
+                        formData.append("subject", `Job Application: ${activeApplyRole.title} - ${careersForm.name}`);
+                        formData.append("from_name", "Eaura Careers");
+
+                        let messageBody = `Candidate Name: ${careersForm.name}\n`;
+                        messageBody += `Candidate Email: ${careersForm.email}\n`;
+                        messageBody += `Phone Number: ${careersForm.phone}\n`;
+                        messageBody += `LinkedIn: ${careersForm.linkedin}\n`;
+                        messageBody += `GitHub/Portfolio: ${careersForm.github}\n`;
+                        messageBody += `Applied Role: ${activeApplyRole.title}\n\n`;
+                        messageBody += `Why join EAURA:\n${careersForm.whyJoin}\n`;
+
+                        formData.append("message", messageBody);
+
+                        if (careersForm.resume) {
+                          formData.append("attachment", careersForm.resume);
+                        }
+
+                        const response = await fetch("https://api.web3forms.com/submit", {
+                          method: "POST",
+                          headers: {
+                            Accept: "application/json",
+                          },
+                          body: formData,
+                        });
+
+                        const result = await response.json();
+                        if (result.success) {
+                          setCareersStatus("success");
+                        } else {
+                          console.error("Web3Forms Careers Submission Failed:", result);
+                          setCareersStatus("idle");
+                          alert("Failed to submit application. Please try again or email us directly at info@eauraone.com.");
+                        }
+                      } catch (error) {
+                        console.error("Web3Forms Careers Submission Error:", error);
+                        setCareersStatus("idle");
+                        alert("An error occurred. Please try again or email us directly at info@eauraone.com.");
                       }
-                    ].map((role) => (
-                      <div
-                        key={role.id}
-                        className={`border rounded-2xl p-5 transition-all duration-300 ${
-                          selectedRole === role.id
-                            ? "border-clay bg-clay/[0.02]"
-                            : "border-hairline bg-surface hover:bg-hairline/40 hover:border-hairline-2"
-                        }`}
-                      >
-                        <div className="flex flex-wrap items-start justify-between gap-3">
-                          <div>
-                            <h4 className="font-display font-bold text-[16.5px] text-ink">{role.title}</h4>
-                            <div className="mt-1 flex items-center gap-4 text-[12px] font-mono text-ink-2">
-                              <span className="flex items-center gap-1.5"><Briefcase className="h-3.5 w-3.5" /> Full-Time</span>
-                              <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> {role.loc}</span>
-                            </div>
-                          </div>
-                          <button
-                            onClick={() => setSelectedRole(selectedRole === role.id ? null : role.id)}
-                            className="px-4 py-1.5 border border-hairline bg-bg hover:bg-surface text-[12.5px] font-semibold rounded-full transition-all duration-200 cursor-pointer"
-                          >
-                            {selectedRole === role.id ? "Hide Details" : "Apply Now"}
-                          </button>
-                        </div>
+                    }}
+                    className="mt-6 flex flex-col gap-4 text-left"
+                  >
+                    <div>
+                      <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                        Role Applied For
+                      </label>
+                      <input
+                        disabled
+                        type="text"
+                        value={activeApplyRole.title}
+                        className="w-full px-4 py-2.5 rounded-xl border border-hairline bg-surface/50 text-ink-2 text-[14px] cursor-not-allowed"
+                      />
+                    </div>
 
-                        <AnimatePresence>
-                          {selectedRole === role.id && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="pt-4 mt-4 border-t border-hairline/60 flex flex-col gap-4">
-                                <p className="text-[13.5px] leading-relaxed text-ink-2">{role.desc}</p>
-                                <div className="p-3 bg-surface border border-hairline rounded-xl text-[12.5px] text-ink leading-relaxed">
-                                  <span className="font-mono text-[10px] font-semibold text-clay block uppercase tracking-wider mb-1">Key Profile Specs</span>
-                                  {role.reqs}
-                                </div>
-
-                                {/* Application Mini-Form */}
-                                <form
-                                  onSubmit={async (e) => {
-                                    e.preventDefault();
-                                    setCareersStatus("submitting");
-                                    const roleTitles: Record<string, string> = {
-                                      "applied-ai": "Applied AI Researcher",
-                                      "compiler-arch": "Lead Compiler Architect",
-                                      "product-ux": "Product UX Engineer"
-                                    };
-                                    const roleTitle = roleTitles[selectedRole || ""] || selectedRole || "Unknown Role";
-                                    try {
-                                      const response = await fetch("https://api.web3forms.com/submit", {
-                                        method: "POST",
-                                        headers: {
-                                          "Content-Type": "application/json",
-                                          Accept: "application/json",
-                                        },
-                                        body: JSON.stringify({
-                                          access_key: import.meta.env.VITE_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE",
-                                          name: careersForm.name,
-                                          email: careersForm.email,
-                                          subject: `Job Application: ${roleTitle} - ${careersForm.name}`,
-                                          from_name: "Eaura Careers",
-                                          message: `Candidate Name: ${careersForm.name}\nCandidate Email: ${careersForm.email}\nApplied Role: ${roleTitle}\nResume Link: ${careersForm.resume}`,
-                                        }),
-                                      });
-                                      const result = await response.json();
-                                      if (result.success) {
-                                        setCareersStatus("success");
-                                      } else {
-                                        console.error("Web3Forms Careers Submission Failed:", result);
-                                        setCareersStatus("idle");
-                                        alert("Failed to submit application. Please try again or email us directly at info@eauraone.com.");
-                                      }
-                                    } catch (error) {
-                                      console.error("Web3Forms Careers Submission Error:", error);
-                                      setCareersStatus("idle");
-                                      alert("An error occurred. Please try again or email us directly at info@eauraone.com.");
-                                    }
-                                  }}
-                                  className="mt-2 flex flex-col gap-3.5 border-t border-hairline/60 pt-4"
-                                >
-                                  <h5 className="font-display font-semibold text-[14px] text-ink">Submit Application</h5>
-                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                    <input
-                                      required
-                                      type="text"
-                                      value={careersForm.name}
-                                      onChange={(e) => setCareersForm({ ...careersForm, name: e.target.value })}
-                                      placeholder="Your Name"
-                                      className="px-3.5 py-2.5 rounded-lg border border-hairline bg-surface text-ink text-[13.5px] focus:outline-none focus:border-clay/40"
-                                    />
-                                    <input
-                                      required
-                                      type="email"
-                                      value={careersForm.email}
-                                      onChange={(e) => setCareersForm({ ...careersForm, email: e.target.value })}
-                                      placeholder="Email Address"
-                                      className="px-3.5 py-2.5 rounded-lg border border-hairline bg-surface text-ink text-[13.5px] focus:outline-none focus:border-clay/40"
-                                    />
-                                  </div>
-                                  <div className="flex gap-3">
-                                    <input
-                                      required
-                                      type="url"
-                                      value={careersForm.resume}
-                                      onChange={(e) => setCareersForm({ ...careersForm, resume: e.target.value })}
-                                      placeholder="Resume URL (PDF/Google Drive/GitHub Link)"
-                                      className="flex-grow px-3.5 py-2.5 rounded-lg border border-hairline bg-surface text-ink text-[13.5px] focus:outline-none focus:border-clay/40"
-                                    />
-                                    <button
-                                      type="submit"
-                                      disabled={careersStatus === "submitting"}
-                                      className="px-6 bg-ink text-bg font-semibold rounded-lg text-[13.5px] hover:bg-clay hover:text-white disabled:bg-hairline disabled:text-ink-2 cursor-pointer transition-all duration-200"
-                                    >
-                                      {careersStatus === "submitting" ? "Submitting..." : "Apply"}
-                                    </button>
-                                  </div>
-                                </form>
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                          Full Name
+                        </label>
+                        <input
+                          required
+                          type="text"
+                          value={careersForm.name}
+                          onChange={(e) => setCareersForm({ ...careersForm, name: e.target.value })}
+                          placeholder="John Doe"
+                          className="w-full px-4 py-2.5 rounded-xl border border-hairline bg-surface text-ink text-[14px] focus:outline-none focus:border-clay/40 transition-all duration-200"
+                        />
                       </div>
-                    ))}
-                  </div>
+                      <div>
+                        <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                          Email Address
+                        </label>
+                        <input
+                          required
+                          type="email"
+                          value={careersForm.email}
+                          onChange={(e) => setCareersForm({ ...careersForm, email: e.target.value })}
+                          placeholder="john@company.com"
+                          className="w-full px-4 py-2.5 rounded-xl border border-hairline bg-surface text-ink text-[14px] focus:outline-none focus:border-clay/40 transition-all duration-200"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                          Phone Number
+                        </label>
+                        <input
+                          required
+                          type="tel"
+                          value={careersForm.phone}
+                          onChange={(e) => setCareersForm({ ...careersForm, phone: e.target.value })}
+                          placeholder="+91 86396 57245"
+                          className="w-full px-4 py-2.5 rounded-xl border border-hairline bg-surface text-ink text-[14px] focus:outline-none focus:border-clay/40 transition-all duration-200"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                          LinkedIn Profile
+                        </label>
+                        <input
+                          required
+                          type="url"
+                          value={careersForm.linkedin}
+                          onChange={(e) => setCareersForm({ ...careersForm, linkedin: e.target.value })}
+                          placeholder="https://linkedin.com/in/username"
+                          className="w-full px-4 py-2.5 rounded-xl border border-hairline bg-surface text-ink text-[14px] focus:outline-none focus:border-clay/40 transition-all duration-200"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                          GitHub / Portfolio URL
+                        </label>
+                        <input
+                          required
+                          type="url"
+                          value={careersForm.github}
+                          onChange={(e) => setCareersForm({ ...careersForm, github: e.target.value })}
+                          placeholder="https://github.com/username"
+                          className="w-full px-4 py-2.5 rounded-xl border border-hairline bg-surface text-ink text-[14px] focus:outline-none focus:border-clay/40 transition-all duration-200"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                          Resume Upload (PDF only)
+                        </label>
+                        <input
+                          required
+                          type="file"
+                          accept=".pdf"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0] || null;
+                            if (file && file.type !== "application/pdf") {
+                              alert("Please upload a PDF file only.");
+                              e.target.value = "";
+                              setCareersForm({ ...careersForm, resume: null });
+                            } else {
+                              setCareersForm({ ...careersForm, resume: file });
+                            }
+                          }}
+                          className="w-full px-4 py-2 rounded-xl border border-hairline bg-surface text-ink text-[13px] focus:outline-none file:mr-4 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[12px] file:font-semibold file:bg-hairline file:text-ink hover:file:bg-hairline/80 cursor-pointer"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-mono uppercase tracking-wider text-ink-2 mb-1.5 font-semibold">
+                        Why do you want to join EAURA?
+                      </label>
+                      <textarea
+                        required
+                        rows={3}
+                        value={careersForm.whyJoin}
+                        onChange={(e) => setCareersForm({ ...careersForm, whyJoin: e.target.value })}
+                        placeholder="What drives you to build products with us?"
+                        className="w-full px-4 py-2.5 rounded-xl border border-hairline bg-surface text-ink text-[14px] focus:outline-none focus:border-clay/40 resize-none transition-all duration-200"
+                      />
+                    </div>
+
+                    <div className="mt-2 text-[12px] text-ink-2 font-mono flex flex-col gap-1">
+                      <div>hiring contact: <a href="mailto:info@eauraone.com" className="text-clay hover:underline">info@eauraone.com</a></div>
+                      <div>tel: <a href="tel:+918639657245" className="text-clay hover:underline">+91 86396 57245</a></div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={careersStatus === "submitting"}
+                      className="mt-2 w-full group inline-flex items-center justify-center rounded-xl bg-ink text-bg py-4 text-[15px] font-semibold tracking-tight transition-all duration-200 hover:bg-clay hover:text-white disabled:bg-hairline disabled:text-ink-2 cursor-pointer shadow"
+                    >
+                      {careersStatus === "submitting" ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Submitting Application...
+                        </>
+                      ) : (
+                        <>
+                          Submit Application
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                        </>
+                      )}
+                    </button>
+                  </form>
                 </>
               ) : (
                 <motion.div
