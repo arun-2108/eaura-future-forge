@@ -41,6 +41,7 @@ const DEPARTMENT_ORDER = [
   "Product & Design",
   "Operations & Business",
   "Marketing & Community",
+  "Team Members",
   "Advisors & Mentors",
   "Interns",
 ];
@@ -75,6 +76,43 @@ const team: TeamMember[] = [
     description:
       "Coordinates engineering, compiler frameworks, deep learning libraries, and hardware integration.",
     linkedin: "https://www.linkedin.com/in/rushyanth-reddy-67a436335/",
+  },
+
+  // ── Team Members ── Add your members here ──
+  {
+    name: "Member Name",
+    role: "Role / Position",
+    department: "Team Members",
+    description: "Short description of their responsibilities at EAURA.",
+    linkedin: "",
+  },
+  {
+    name: "Member Name",
+    role: "Role / Position",
+    department: "Team Members",
+    description: "Short description of their responsibilities at EAURA.",
+    linkedin: "",
+  },
+  {
+    name: "Member Name",
+    role: "Role / Position",
+    department: "Team Members",
+    description: "Short description of their responsibilities at EAURA.",
+    linkedin: "",
+  },
+  {
+    name: "Member Name",
+    role: "Role / Position",
+    department: "Team Members",
+    description: "Short description of their responsibilities at EAURA.",
+    linkedin: "",
+  },
+  {
+    name: "Member Name",
+    role: "Role / Position",
+    department: "Team Members",
+    description: "Short description of their responsibilities at EAURA.",
+    linkedin: "",
   },
 ];
 
@@ -272,9 +310,11 @@ function DepartmentSection({
   return (
     <section aria-label={dept} className="mb-20 last:mb-0">
       <SectionDivider label={dept} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="flex flex-wrap justify-center gap-6">
         {members.map((member, idx) => (
-          <MemberCard key={`${member.name}-${idx}`} member={member} index={idx} />
+          <div key={`${member.name}-${idx}`} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)] max-w-[280px]">
+            <MemberCard member={member} index={idx} />
+          </div>
         ))}
       </div>
     </section>
