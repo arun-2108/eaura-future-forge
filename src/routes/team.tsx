@@ -101,10 +101,13 @@ const team: TeamMember[] = [
     linkedin: "",
   },
   {
-    name: "Member Name",
-    role: "Role / Position",
+    name: "Praveen kumar TMR",
+    role: "Technical Advisor",
     department: "Team Members",
-    description: "Short description of their responsibilities at EAURA.",
+    image: "/team/praveen.jpg",
+    imagePosition: "center 38%",
+    imageScale: 1.35,
+    description: "Supports product development through technical expertise and strategic guidance.",
     linkedin: "",
   },
   {
@@ -178,12 +181,11 @@ function SectionDivider({ label }: { label: string }) {
 }
 
 function MemberCard({ member, index }: { member: TeamMember; index: number }) {
-  const initials = member.name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+  const parts = member.name.split(" ");
+  const initials = (parts.length > 1
+    ? parts[0][0] + parts[parts.length - 1][0]
+    : parts[0][0]
+  ).toUpperCase();
 
   return (
     <motion.div
@@ -205,7 +207,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
       <div className="pt-10 pb-7 px-6 flex flex-col items-center w-full">
         {/* Profile picture */}
         <div className="relative mb-5">
-          <div 
+          <div
             className="h-[120px] w-[120px] rounded-full overflow-hidden border-2 border-hairline shadow-md group-hover:shadow-lg group-hover:border-clay/25 transition-all duration-300"
             style={{ backgroundColor: member.containerBg || "transparent" }}
           >
@@ -219,7 +221,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
                   e.currentTarget.nextElementSibling?.classList.remove("hidden");
                 }}
                 className="w-full h-full object-cover transition-all duration-500 origin-center group-hover:scale-[1.05]"
-                style={{ 
+                style={{
                   objectPosition: member.imagePosition || "top",
                   transform: `scale(${member.imageScale || 1})`,
                 }}
