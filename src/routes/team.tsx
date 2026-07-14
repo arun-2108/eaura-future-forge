@@ -56,8 +56,8 @@ const team: TeamMember[] = [
     role: "Founder & Chief Executive Officer",
     department: "Executive Leadership",
     image: "/team/arunkumar.jpg",
-    imagePosition: "center 22%",
-    imageScale: 1.65,
+    imagePosition: "center 28%",
+    imageScale: 1.25,
     description:
       "Sets long-term vision, drives technology strategy, and leads product engineering across EAURA.",
     linkedin: "https://www.linkedin.com/in/arunkumar-sundaravel/",
