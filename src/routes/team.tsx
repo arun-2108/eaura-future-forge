@@ -12,7 +12,7 @@ export const Route = createFileRoute("/team")({
       {
         name: "description",
         content:
-          "Meet the people building the future of Artificial Intelligence, Robotics, Automation and Intelligent Systems at EAURA.",
+          "Meet the people behind EAURA—builders, thinkers, and innovators united by a shared vision to create meaningful impact.",
       },
     ],
   }),
@@ -26,6 +26,9 @@ interface TeamMember {
   role: string;
   department: string;
   image?: string;
+  imagePosition?: string;
+  imageScale?: number;
+  containerBg?: string;
   description: string;
   linkedin?: string;
   github?: string;
@@ -80,17 +83,21 @@ const team: TeamMember[] = [
 
   // ── Team Members ── Add your members here ──
   {
-    name: "Member Name",
-    role: "Role / Position",
+    name: "Rishitha",
+    role: "UI/UX Designer",
     department: "Team Members",
-    description: "Short description of their responsibilities at EAURA.",
+    image: "/team/rishitha.jpg",
+    description: "Designs intuitive, beautiful user interfaces and crafts seamless user experiences for EAURA's platforms.",
     linkedin: "",
   },
   {
-    name: "Member Name",
-    role: "Role / Position",
+    name: "Madhulekha",
+    role: "Full Stack Developer",
     department: "Team Members",
-    description: "Short description of their responsibilities at EAURA.",
+    image: "/team/madhulekha_white.jpg",
+    imagePosition: "center 42%",
+    imageScale: 0.88,
+    description: "Develops robust, scalable front-end and back-end architectures driving EAURA's web applications.",
     linkedin: "",
   },
   {
@@ -198,7 +205,10 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
       <div className="pt-10 pb-7 px-6 flex flex-col items-center w-full">
         {/* Profile picture */}
         <div className="relative mb-5">
-          <div className="h-[120px] w-[120px] rounded-full overflow-hidden border-2 border-hairline shadow-md group-hover:shadow-lg group-hover:border-clay/25 transition-all duration-300">
+          <div 
+            className="h-[120px] w-[120px] rounded-full overflow-hidden border-2 border-hairline shadow-md group-hover:shadow-lg group-hover:border-clay/25 transition-all duration-300"
+            style={{ backgroundColor: member.containerBg || "transparent" }}
+          >
             {member.image ? (
               <img
                 src={member.image}
@@ -208,7 +218,11 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
                   e.currentTarget.style.display = "none";
                   e.currentTarget.nextElementSibling?.classList.remove("hidden");
                 }}
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover transition-all duration-500 origin-center group-hover:scale-[1.05]"
+                style={{ 
+                  objectPosition: member.imagePosition || "top",
+                  transform: `scale(${member.imageScale || 1})`,
+                }}
               />
             ) : null}
             {/* Fallback initials */}
@@ -371,30 +385,9 @@ function TeamPage() {
               Our Team
             </h1>
             <p className="mt-5 mx-auto max-w-2xl text-[17px] md:text-[19px] leading-[1.65] text-ink-2 tracking-[-0.01em]">
-              Meet the people building the future of Artificial Intelligence,
-              Robotics, Automation and Intelligent Systems at EAURA.
+              Meet the people behind EAURA—builders, thinkers, and innovators united by a shared vision to create meaningful impact.
             </p>
           </div>
-
-          {/* Stats bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-10 inline-flex items-center gap-8 border border-hairline rounded-full px-8 py-3 bg-surface/60 backdrop-blur-sm text-[13px] text-ink-2 font-mono"
-          >
-            <span>
-              <span className="font-bold text-ink text-[15px]">{team.length}</span>{" "}
-              Team Members
-            </span>
-            <div className="h-4 w-[1px] bg-hairline" />
-            <span>
-              <span className="font-bold text-ink text-[15px]">{grouped.size}</span>{" "}
-              Departments
-            </span>
-            <div className="h-4 w-[1px] bg-hairline" />
-            <span>Growing</span>
-          </motion.div>
         </motion.div>
 
         {/* Separator */}
@@ -402,7 +395,7 @@ function TeamPage() {
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 1.1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 max-w-4xl mx-auto h-[1px] bg-gradient-to-r from-transparent via-hairline to-transparent"
+          className="mt-12 max-w-4xl mx-auto h-[1px] bg-gradient-to-r from-transparent via-hairline to-transparent"
         />
       </header>
 

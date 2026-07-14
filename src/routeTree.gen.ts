@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as NovaRouteImport } from './routes/nova'
 import { Route as ElekkiRouteImport } from './routes/elekki'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NovaRoute = NovaRouteImport.update({
   id: '/nova',
   path: '/nova',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/elekki': typeof ElekkiRoute
   '/nova': typeof NovaRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/elekki': typeof ElekkiRoute
   '/nova': typeof NovaRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/elekki': typeof ElekkiRoute
   '/nova': typeof NovaRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/elekki' | '/nova'
+  fullPaths: '/' | '/elekki' | '/nova' | '/team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/elekki' | '/nova'
-  id: '__root__' | '/' | '/elekki' | '/nova'
+  to: '/' | '/elekki' | '/nova' | '/team'
+  id: '__root__' | '/' | '/elekki' | '/nova' | '/team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ElekkiRoute: typeof ElekkiRoute
   NovaRoute: typeof NovaRoute
+  TeamRoute: typeof TeamRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/nova': {
       id: '/nova'
       path: '/nova'
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ElekkiRoute: ElekkiRoute,
   NovaRoute: NovaRoute,
+  TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
