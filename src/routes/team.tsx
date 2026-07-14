@@ -362,7 +362,7 @@ function TeamPage() {
       </div>
 
       {/* Page Header */}
-      <header className="relative z-10 pt-36 pb-20 text-center px-6">
+      <header className="relative z-10 pt-36 pb-8 text-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -395,7 +395,7 @@ function TeamPage() {
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
           transition={{ duration: 1.1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-12 max-w-4xl mx-auto h-[1px] bg-gradient-to-r from-transparent via-hairline to-transparent"
+          className="mt-8 max-w-4xl mx-auto h-[1px] bg-gradient-to-r from-transparent via-hairline to-transparent"
         />
       </header>
 
