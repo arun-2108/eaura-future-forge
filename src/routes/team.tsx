@@ -55,7 +55,9 @@ const team: TeamMember[] = [
     name: "Arunkumar Sundaravel",
     role: "Founder & Chief Executive Officer",
     department: "Executive Leadership",
-    image: "/directors/Director_1.jpg",
+    image: "/team/arunkumar.jpg",
+    imagePosition: "center 22%",
+    imageScale: 1.65,
     description:
       "Sets long-term vision, drives technology strategy, and leads product engineering across EAURA.",
     linkedin: "https://www.linkedin.com/in/arunkumar-sundaravel/",
