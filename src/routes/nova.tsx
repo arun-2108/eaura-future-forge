@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import {
@@ -167,14 +167,14 @@ function NovaShowcase() {
   };
 
   const getEmotionColor = (emotion: string) => {
-    if (!emotion) return "text-gray-600";
+    if (!emotion) return "text-ink-2/50";
     const em = emotion.toLowerCase();
-    if (em.includes("happy") || em.includes("excited")) return "text-emerald-600";
-    if (em.includes("sad")) return "text-blue-600";
-    if (em.includes("angry") || em.includes("disgusted")) return "text-red-500";
-    if (em.includes("calm")) return "text-cyan-600";
-    if (em.includes("neutral")) return "text-slate-500";
-    return "text-gray-500";
+    if (em.includes("happy") || em.includes("excited")) return "text-emerald-400";
+    if (em.includes("sad")) return "text-blue-400";
+    if (em.includes("angry") || em.includes("disgusted")) return "text-red-400";
+    if (em.includes("calm")) return "text-accent-cyan";
+    if (em.includes("neutral")) return "text-ink-2/60";
+    return "text-ink-2/40";
   };
 
   const runSimulation = (promptText: string) => {
@@ -232,22 +232,22 @@ function NovaShowcase() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f] antialiased overflow-x-hidden relative selection:bg-blue-500/10 selection:text-blue-700">
+    <div className="min-h-screen bg-bg text-ink antialiased overflow-x-hidden relative selection:bg-accent-cyan/10 selection:text-accent-cyan">
       <Nav />
 
       {/* Decorative background glows */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[8%] left-1/4 w-[700px] h-[700px] rounded-full bg-[radial-gradient(closest-side,rgba(0,113,227,0.04),transparent_80%)] pointer-events-none" />
-        <div className="absolute bottom-[15%] right-1/4 w-[600px] h-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(6,182,212,0.03),transparent_80%)] pointer-events-none" />
+        <div className="absolute top-[8%] left-1/4 w-[700px] h-[700px] rounded-full bg-[radial-gradient(closest-side,rgba(6,182,212,0.06),transparent_80%)] pointer-events-none" />
+        <div className="absolute bottom-[15%] right-1/4 w-[600px] h-[600px] rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.05),transparent_80%)] pointer-events-none" />
       </div>
 
       <AnimatePresence mode="wait">
         {!isBooted ? (
-          /* ── BOOT ANIMATION OVERLAY (LIGHT THEME) ── */
+          /* ── BOOT ANIMATION OVERLAY (DARK THEME) ── */
           <motion.div
             key="boot"
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-[#f5f5f7] flex flex-col items-center justify-center p-6"
+            className="fixed inset-0 z-50 bg-bg flex flex-col items-center justify-center p-6"
           >
             <div className="max-w-md w-full flex flex-col items-center text-center">
               {/* Spinning Loader */}
@@ -255,20 +255,20 @@ function NovaShowcase() {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 rounded-full border-t-2 border-b-2 border-blue-500/20"
+                  className="absolute inset-0 rounded-full border-t-2 border-b-2 border-accent-cyan/20"
                 />
                 <motion.div
                   animate={{ scale: [1, 1.08, 1] }}
                   transition={{ duration: 1.8, repeat: Infinity }}
-                  className="h-9 w-9 rounded-full bg-blue-500/5 border border-blue-500/15 grid place-items-center"
+                  className="h-9 w-9 rounded-full bg-accent-cyan/5 border border-accent-cyan/15 grid place-items-center"
                 >
-                  <Bot className="h-4.5 w-4.5 text-blue-500" />
+                  <Bot className="h-4.5 w-4.5 text-accent-cyan" />
                 </motion.div>
               </div>
 
-              <div className="w-full bg-white/70 border border-black/[0.05] rounded-3xl p-6 font-mono text-[11.5px] text-left leading-relaxed shadow-xl shadow-black/[0.02] backdrop-blur-md text-slate-600">
-                <div className="flex items-center gap-2 border-b border-black/[0.05] pb-2.5 mb-3.5 text-slate-400">
-                  <div className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse" />
+              <div className="w-full glass-card rounded-3xl p-6 font-mono text-[11.5px] text-left leading-relaxed text-ink-2">
+                <div className="flex items-center gap-2 border-b border-white/5 pb-2.5 mb-3.5 text-ink-2/40">
+                  <div className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-pulse" />
                   <span>NOVA // INITIALIZATION</span>
                 </div>
                 
@@ -278,7 +278,7 @@ function NovaShowcase() {
                       key={idx}
                       initial={{ opacity: 0, x: -3 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className={idx === bootStep ? "text-blue-600 font-semibold" : "text-slate-500"}
+                      className={idx === bootStep ? "text-accent-cyan font-semibold" : "text-ink-2/50"}
                     >
                       {log}
                     </motion.div>
@@ -288,7 +288,7 @@ function NovaShowcase() {
             </div>
           </motion.div>
         ) : (
-          /* ── MAIN IMMERSIVE SHOWCASE (LIGHT THEME) ── */
+          /* ── MAIN IMMERSIVE SHOWCASE (DARK THEME) ── */
           <motion.div
             key="showcase"
             initial={{ opacity: 0 }}
@@ -297,14 +297,14 @@ function NovaShowcase() {
           >
             {/* Left sidebar controller */}
             <div className="flex flex-col gap-6 text-left">
-              <div className="border border-black/[0.05] rounded-3xl p-6 bg-white/60 shadow-[0_4px_30px_rgba(0,0,0,0.02)] backdrop-blur-md">
+              <div className="glass-card rounded-3xl p-6">
                 <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-blue-500 to-cyan-500 grid place-items-center text-white shadow shadow-blue-500/20">
+                  <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-accent-cyan to-blue-500 grid place-items-center text-white shadow shadow-accent-cyan/20">
                     <Bot className="h-4.5 w-4.5" />
                   </div>
                   <div>
-                    <h2 className="font-display font-bold text-[16px] text-[#1d1d1f]">NOVA OS</h2>
-                    <p className="text-[9.5px] font-mono text-blue-600">STATUS: CORE ACTIVE</p>
+                    <h2 className="font-display font-bold text-[16px] text-ink">NOVA OS</h2>
+                    <p className="text-[9.5px] font-mono text-accent-cyan">STATUS: CORE ACTIVE</p>
                   </div>
                 </div>
 
@@ -321,8 +321,8 @@ function NovaShowcase() {
                       onClick={() => setActiveTab(tab.id as any)}
                       className={`flex items-center gap-3 w-full px-4 py-3 rounded-xl font-medium text-[13.5px] transition-all duration-300 border cursor-pointer ${
                         activeTab === tab.id
-                          ? "bg-blue-500/5 border-blue-500/10 text-blue-600 shadow-sm"
-                          : "border-transparent text-slate-500 hover:text-[#1d1d1f] hover:bg-black/[0.01]"
+                          ? "bg-accent-cyan/5 border-accent-cyan/15 text-accent-cyan shadow-sm"
+                          : "border-transparent text-ink-2/50 hover:text-ink hover:bg-white/5"
                       }`}
                     >
                       <tab.icon className="h-4 w-4" />
@@ -333,18 +333,18 @@ function NovaShowcase() {
               </div>
 
               {/* Edge AI Stat Card */}
-              <div className="border border-black/[0.05] rounded-3xl p-5 bg-white/40 font-mono text-[11.5px] text-slate-400 flex flex-col gap-3">
-                <div className="flex justify-between items-center text-slate-600">
+              <div className="glass-card rounded-3xl p-5 font-mono text-[11.5px] text-ink-2/50 flex flex-col gap-3">
+                <div className="flex justify-between items-center text-ink-2/40">
                   <span>Edge Processing</span>
-                  <span className="text-emerald-600 font-bold">100% Local</span>
+                  <span className="text-emerald-400 font-bold">100% Local</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Model latency</span>
-                  <span className="text-slate-800">12ms</span>
+                  <span className="text-ink">12ms</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span>RAM footprint</span>
-                  <span className="text-slate-800">1.8 GB</span>
+                  <span className="text-ink">1.8 GB</span>
                 </div>
               </div>
             </div>
@@ -417,18 +417,18 @@ function NovaShowcase() {
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.04 }}
-                        className="group relative border border-black/[0.05] rounded-3xl p-6 md:p-8 bg-white/50 hover:bg-white/90 hover:border-blue-500/20 shadow-sm hover:shadow-[0_12px_24px_rgba(0,0,0,0.02)] transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between"
+                        className="group relative rounded-3xl p-6 md:p-8 glass-card hover:border-accent-cyan/20 transition-all duration-300 cursor-pointer overflow-hidden flex flex-col justify-between"
                       >
-                        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-blue-500/[0.02] to-transparent rounded-bl-full pointer-events-none group-hover:from-blue-500/[0.05] transition-all duration-300" />
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-accent-cyan/[0.02] to-transparent rounded-bl-full pointer-events-none group-hover:from-accent-cyan/[0.05] transition-all duration-300" />
                         <div>
-                          <div className="h-11 w-11 rounded-2xl bg-black/[0.02] border border-black/[0.04] group-hover:border-blue-500/20 group-hover:bg-blue-50/50 grid place-items-center text-slate-500 group-hover:text-blue-600 transition-all duration-300 mb-6">
+                          <div className="h-11 w-11 rounded-2xl bg-white/5 border border-white/5 group-hover:border-accent-cyan/20 group-hover:bg-accent-cyan/5 grid place-items-center text-ink-2 group-hover:text-accent-cyan transition-all duration-300 mb-6">
                             <card.Icon className="h-4.5 w-4.5" />
                           </div>
-                          <p className="text-[10px] font-mono tracking-wider text-blue-600 uppercase font-semibold">{card.tag}</p>
-                          <h3 className="font-display font-bold text-[18px] text-[#1d1d1f] mt-1.5">{card.title}</h3>
-                          <p className="text-[13.5px] leading-relaxed text-slate-500 font-normal mt-2.5">{card.desc}</p>
+                          <p className="text-[10px] font-mono tracking-wider text-accent-cyan uppercase font-semibold">{card.tag}</p>
+                          <h3 className="font-display font-bold text-[18px] text-ink mt-1.5">{card.title}</h3>
+                          <p className="text-[13.5px] leading-relaxed text-ink-2/70 font-normal mt-2.5">{card.desc}</p>
                         </div>
-                        <div className="mt-8 flex items-center text-[12px] font-semibold text-slate-400 group-hover:text-blue-600 transition-colors duration-300">
+                        <div className="mt-8 flex items-center text-[12px] font-semibold text-ink-2/40 group-hover:text-accent-cyan transition-colors duration-300">
                           Inspect Specs
                           <ChevronRight className="ml-1 h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                         </div>
@@ -448,13 +448,13 @@ function NovaShowcase() {
                     className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 text-left"
                   >
                     {/* Live Waveform Orb Block */}
-                    <div className="border border-black/[0.05] rounded-3xl p-6 md:p-8 bg-white/50 backdrop-blur-md flex flex-col justify-between items-center text-center min-h-[500px]">
-                      <div className="w-full border-b border-black/[0.05] pb-4 flex items-center justify-between text-left">
+                    <div className="glass-card rounded-3xl p-6 md:p-8 flex flex-col justify-between items-center text-center min-h-[500px]">
+                      <div className="w-full border-b border-white/5 pb-4 flex items-center justify-between text-left">
                         <div>
-                          <h3 className="font-display font-bold text-[18px] text-[#1d1d1f]">Voice Emotion Detector</h3>
-                          <p className="text-[12px] text-slate-500 font-normal mt-1">Talk to NOVA to run offline sentiment analytics.</p>
+                          <h3 className="font-display font-bold text-[18px] text-ink">Voice Emotion Detector</h3>
+                          <p className="text-[12px] text-ink-2/70 font-normal mt-1">Talk to NOVA to run offline sentiment analytics.</p>
                         </div>
-                        <span className="text-[10px] font-mono text-blue-600 border border-blue-500/20 bg-blue-500/5 px-2 py-0.5 rounded-full uppercase font-semibold">Live Mode</span>
+                        <span className="text-[10px] font-mono text-accent-cyan border border-accent-cyan/20 bg-accent-cyan/5 px-2 py-0.5 rounded-full uppercase font-semibold">Live Mode</span>
                       </div>
 
                       {/* Translucent voice orb bubble */}
@@ -472,7 +472,7 @@ function NovaShowcase() {
                           className={`absolute inset-0 rounded-full border transition-all duration-500 shadow-inner ${
                             recording
                               ? "bg-red-500/5 border-red-500/20 shadow-red-500/5"
-                              : "bg-gradient-to-tr from-blue-500/5 via-cyan-500/5 to-indigo-500/5 border-black/[0.04] shadow-black/[0.01]"
+                              : "bg-gradient-to-tr from-accent-cyan/5 via-blue-500/5 to-purple-500/5 border-white/5 shadow-black/[0.01]"
                           }`}
                         />
 
@@ -483,11 +483,11 @@ function NovaShowcase() {
                           className={`h-24 w-24 rounded-full flex flex-col items-center justify-center border transition-all duration-350 cursor-pointer shadow-lg hover:shadow-xl ${
                             recording
                               ? "bg-red-500 hover:bg-red-600 border-red-500 text-white"
-                              : "bg-white border-black/[0.05] hover:border-blue-500/20 text-slate-700 hover:text-blue-600"
+                              : "bg-white/5 border-white/10 hover:border-accent-cyan/20 text-ink-2 hover:text-accent-cyan"
                           }`}
                         >
                           {voiceLoading ? (
-                            <Loader2 className="h-7 w-7 animate-spin text-blue-500" />
+                            <Loader2 className="h-7 w-7 animate-spin text-accent-cyan" />
                           ) : recording ? (
                             <>
                               <X className="h-6 w-6" />
@@ -520,7 +520,7 @@ function NovaShowcase() {
                             />
                           ))
                         ) : (
-                          <span className="text-[12.5px] text-slate-400 font-normal">Press button and start talking...</span>
+                          <span className="text-[12.5px] text-ink-2/40 font-normal">Press button and start talking...</span>
                         )}
                       </div>
                     </div>
@@ -530,7 +530,7 @@ function NovaShowcase() {
                       {voiceError && (
                         <div className="border border-red-500/20 bg-red-500/5 rounded-3xl p-5 flex items-start gap-3.5 text-left">
                           <AlertTriangle className="h-5 w-5 text-red-500 shrink-0 mt-0.5" />
-                          <div className="text-[13px] leading-relaxed text-red-600">
+                          <div className="text-[13px] leading-relaxed text-red-400">
                             <span className="font-bold block">Access Error</span>
                             {voiceError}
                           </div>
@@ -539,29 +539,29 @@ function NovaShowcase() {
 
                       {/* Simulation/Offline indicator if active */}
                       {isMockResult && (
-                        <div className="border border-blue-500/10 bg-blue-500/[0.02] rounded-3xl p-4 flex items-center gap-3 text-left">
-                          <ShieldCheck className="h-4.5 w-4.5 text-blue-500 shrink-0" />
-                          <p className="text-[12px] text-slate-500 leading-normal">
+                        <div className="border border-accent-cyan/15 bg-accent-cyan/5 rounded-3xl p-4 flex items-center gap-3 text-left">
+                          <ShieldCheck className="h-4.5 w-4.5 text-accent-cyan shrink-0" />
+                          <p className="text-[12px] text-ink-2/60 leading-normal">
                             FastAPI server offline. Initialized local fallback simulation parameters safely.
                           </p>
                         </div>
                       )}
 
                       {/* Display results */}
-                      <div className="border border-black/[0.05] rounded-3xl p-6 bg-white/50 backdrop-blur-md flex-grow flex flex-col justify-between text-left min-h-[300px]">
-                        <div className="text-[12px] font-mono text-slate-400 tracking-wider mb-6">DIAGNOSTIC OUTCOMES</div>
+                      <div className="glass-card rounded-3xl p-6 flex-grow flex flex-col justify-between text-left min-h-[300px]">
+                        <div className="text-[12px] font-mono text-ink-2/40 tracking-wider mb-6">DIAGNOSTIC OUTCOMES</div>
                         
                         {voiceLoading ? (
                           <div className="my-auto flex flex-col items-center text-center gap-3">
-                            <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
-                            <p className="text-[13.5px] text-slate-500">Processing raw voice data...</p>
+                            <Loader2 className="h-8 w-8 animate-spin text-accent-cyan" />
+                            <p className="text-[13.5px] text-ink-2/60">Processing raw voice data...</p>
                           </div>
                         ) : result ? (
                           <div className="flex flex-col gap-6">
                             {result.is_owner_voice === false ? (
                               <div className="border border-amber-500/20 bg-amber-500/5 rounded-2xl p-4 flex items-start gap-3 text-[13px]">
-                                <AlertTriangle className="h-4.5 w-4.5 text-amber-600 shrink-0 mt-0.5" />
-                                <div className="text-amber-700 leading-normal">
+                                <AlertTriangle className="h-4.5 w-4.5 text-amber-500 shrink-0 mt-0.5" />
+                                <div className="text-amber-300 leading-normal">
                                   <span className="font-bold block">🚫 Unauthorized Voice Print</span>
                                   Emotion detection is skipped because the input voice does not match the owner's voice print.
                                 </div>
@@ -569,15 +569,15 @@ function NovaShowcase() {
                             ) : (
                               <>
                                 <div>
-                                  <span className="text-[11px] font-mono text-slate-400 block tracking-wider uppercase">📝 TRANSCRIPTION</span>
-                                  <p className="text-[15.5px] leading-relaxed text-[#1d1d1f] font-medium mt-2">
+                                  <span className="text-[11px] font-mono text-ink-2/40 block tracking-wider uppercase">📝 TRANSCRIPTION</span>
+                                  <p className="text-[15.5px] leading-relaxed text-ink font-medium mt-2">
                                     "{result.text || "No speech detected."}"
                                   </p>
                                 </div>
 
                                 {result.emotion && result.emotion !== "no_speech_detected" && (
                                   <div>
-                                    <span className="text-[11px] font-mono text-slate-400 block tracking-wider uppercase">😊 DETECTED SENTIMENT</span>
+                                    <span className="text-[11px] font-mono text-ink-2/40 block tracking-wider uppercase">😊 DETECTED SENTIMENT</span>
                                     <p className={`text-[24px] font-display font-black tracking-tight mt-1.5 ${getEmotionColor(result.emotion)}`}>
                                       {result.emotion.charAt(0).toUpperCase() + result.emotion.slice(1)}
                                     </p>
@@ -587,7 +587,7 @@ function NovaShowcase() {
                             )}
                           </div>
                         ) : (
-                          <div className="my-auto text-center text-slate-400 italic text-[13px]">
+                          <div className="my-auto text-center text-ink-2/40 italic text-[13px]">
                             Awaiting voice diagnostics output. Tap the microphone and speak to trigger.
                           </div>
                         )}
@@ -607,14 +607,14 @@ function NovaShowcase() {
                     className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 text-left"
                   >
                     {/* Simulator Control Area */}
-                    <div className="border border-black/[0.05] rounded-3xl p-6 md:p-8 bg-white/50 backdrop-blur-md flex flex-col justify-between min-h-[500px]">
+                    <div className="glass-card rounded-3xl p-6 md:p-8 flex flex-col justify-between min-h-[500px]">
                       <div>
-                        <div className="flex items-center justify-between border-b border-black/[0.05] pb-4 mb-6">
-                          <h3 className="font-display font-bold text-[18px] text-[#1d1d1f]">Live Simulator</h3>
-                          <span className="text-[10px] font-mono text-blue-600 border border-blue-500/20 bg-blue-500/5 px-2.5 py-0.5 rounded-full uppercase font-semibold">Interactive</span>
+                        <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+                          <h3 className="font-display font-bold text-[18px] text-ink">Live Simulator</h3>
+                          <span className="text-[10px] font-mono text-accent-cyan border border-accent-cyan/20 bg-accent-cyan/5 px-2.5 py-0.5 rounded-full uppercase font-semibold">Interactive</span>
                         </div>
                         
-                        <p className="text-[13.5px] text-slate-500 leading-relaxed mb-6">
+                        <p className="text-[13.5px] text-ink-2/70 leading-relaxed mb-6">
                           Select one of the structured template sequences to test how the NOVA core processes parameters locally.
                         </p>
 
@@ -628,19 +628,19 @@ function NovaShowcase() {
                               onClick={() => runSimulation(promptText)}
                               className={`w-full p-4 rounded-2xl border text-left text-[13.5px] transition-all duration-300 flex items-center justify-between cursor-pointer ${
                                 selectedPrompt === promptText
-                                  ? "border-blue-500 bg-blue-500/5 text-blue-700"
-                                  : "border-black/[0.04] bg-black/[0.01] text-slate-600 hover:bg-black/[0.03] hover:text-[#1d1d1f]"
+                                  ? "border-accent-cyan bg-accent-cyan/5 text-accent-cyan"
+                                  : "border-white/5 bg-white/5 text-ink-2/70 hover:bg-white/10 hover:text-ink"
                               }`}
                             >
                               <span>"{promptText}"</span>
-                              <Play className="h-3.5 w-3.5 text-blue-500 opacity-60" />
+                              <Play className="h-3.5 w-3.5 text-accent-cyan opacity-60" />
                             </button>
                           ))}
                         </div>
                       </div>
 
                       {/* Visual Orb Waveform while processing */}
-                      <div className="mt-8 border-t border-black/[0.05] pt-6 flex items-center gap-6">
+                      <div className="mt-8 border-t border-white/5 pt-6 flex items-center gap-6">
                         <div className="relative h-14 w-14 flex items-center justify-center shrink-0">
                           <motion.div
                             animate={{
@@ -650,31 +650,31 @@ function NovaShowcase() {
                             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                             className={`absolute inset-0 rounded-full border transition-colors duration-300 ${
                               simStep === "listening" ? "border-red-500/30 bg-red-500/5" :
-                              simStep === "processing" ? "border-blue-500/30 bg-blue-500/5" :
-                              "border-black/[0.05] bg-black/[0.02]"
+                              simStep === "processing" ? "border-accent-cyan/30 bg-accent-cyan/5" :
+                              "border-white/5 bg-white/5"
                             }`}
                           />
                           <div className={`h-8 w-8 rounded-full transition-colors duration-300 flex items-center justify-center ${
                             simStep === "listening" ? "bg-red-500/10" :
-                            simStep === "processing" ? "bg-blue-500/10" :
-                            "bg-black/[0.04]"
+                            simStep === "processing" ? "bg-accent-cyan/10" :
+                            "bg-white/5"
                           }`}>
                             <Mic className={`h-4 w-4 ${
                               simStep === "listening" ? "text-red-500 animate-pulse" :
-                              simStep === "processing" ? "text-blue-600" :
-                              "text-slate-400"
+                              simStep === "processing" ? "text-accent-cyan" :
+                              "text-ink-2/40"
                             }`} />
                           </div>
                         </div>
 
                         <div className="text-[13px]">
-                          <p className="font-semibold text-[#1d1d1f]">
+                          <p className="font-semibold text-ink">
                             {simStep === "idle" && "Select a task query above"}
                             {simStep === "listening" && "Listening to parameters..."}
                             {simStep === "processing" && "Generating planning schema..."}
                             {simStep === "complete" && "Plan compiled successfully!"}
                           </p>
-                          <p className="text-slate-400 text-[11.5px] mt-0.5 font-normal">
+                          <p className="text-ink-2/40 text-[11.5px] mt-0.5 font-normal">
                             {simStep === "idle" && "Click a button to start"}
                             {simStep === "listening" && "Awaiting voice vector parsing"}
                             {simStep === "processing" && "Local compiler is running test cases"}
@@ -687,38 +687,38 @@ function NovaShowcase() {
                     {/* Console & Execution Results */}
                     <div className="flex flex-col gap-6">
                       {/* Telemetry Console */}
-                      <div className="border border-black/[0.05] rounded-3xl p-5 bg-white/70 shadow-sm font-mono text-[11px] text-slate-600 flex flex-col gap-2 min-h-[220px]">
-                        <div className="flex justify-between items-center text-slate-400 border-b border-black/[0.05] pb-2 mb-2">
+                      <div className="glass-card rounded-3xl p-5 font-mono text-[11px] text-ink-2/70 flex flex-col gap-2 min-h-[220px]">
+                        <div className="flex justify-between items-center text-ink-2/40 border-b border-white/5 pb-2 mb-2">
                           <span>SYSTEM LOGS</span>
                           <span>PORT: 5174</span>
                         </div>
                         {simulationLogs.length === 0 ? (
-                          <div className="text-slate-400 italic">No instructions running. Select a template to boot logs.</div>
+                          <div className="text-ink-2/40 italic">No instructions running. Select a template to boot logs.</div>
                         ) : (
                           simulationLogs.map((log, idx) => (
                             <motion.div
                               key={idx}
                               initial={{ opacity: 0, x: -3 }}
                               animate={{ opacity: 1, x: 0 }}
-                              className={log.includes("✔") ? "text-emerald-600 font-bold" : "text-slate-600"}
+                              className={log.includes("✔") ? "text-emerald-400 font-bold" : "text-ink-2/70"}
                             >
                               {log}
                             </motion.div>
                           ))
                         )}
                         {simStep === "processing" && (
-                          <div className="flex items-center gap-2 text-blue-600 mt-1 font-semibold">
-                            <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-ping" />
+                          <div className="flex items-center gap-2 text-accent-cyan mt-1 font-semibold">
+                            <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
                             <span>Computing parameters...</span>
                           </div>
                         )}
                       </div>
 
                       {/* Resulting plan */}
-                      <div className="border border-black/[0.05] rounded-3xl p-6 bg-white/50 backdrop-blur-md flex-grow flex flex-col justify-between">
-                        <div className="text-[11px] font-mono text-slate-400 mb-4 font-semibold">COMPILED SCHEMAS</div>
+                      <div className="glass-card rounded-3xl p-6 flex-grow flex flex-col justify-between">
+                        <div className="text-[11px] font-mono text-ink-2/40 mb-4 font-semibold">COMPILED SCHEMAS</div>
                         {simulatedSchedule.length === 0 ? (
-                          <div className="text-slate-400 italic my-auto">Awaiting schema output...</div>
+                          <div className="text-ink-2/40 italic my-auto">Awaiting schema output...</div>
                         ) : (
                           <div className="flex flex-col gap-3.5">
                             {simulatedSchedule.map((item, idx) => (
@@ -727,13 +727,13 @@ function NovaShowcase() {
                                 initial={{ opacity: 0, y: 5 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: idx * 0.08 }}
-                                className="p-4 bg-white/80 border border-black/[0.04] rounded-2xl flex items-center justify-between shadow-sm"
+                                className="p-4 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between"
                               >
                                 <div>
-                                  <h4 className="font-semibold text-[#1d1d1f] text-[13.5px]">{item.task}</h4>
-                                  <p className="text-[11.5px] text-slate-500 mt-0.5 font-normal">{item.desc}</p>
+                                  <h4 className="font-semibold text-ink text-[13.5px]">{item.task}</h4>
+                                  <p className="text-[11.5px] text-ink-2/70 mt-0.5 font-normal">{item.desc}</p>
                                 </div>
-                                <span className="font-mono text-[10px] text-blue-600 font-bold border border-blue-500/10 bg-blue-500/5 px-2 py-0.5 rounded-lg shrink-0">{item.time}</span>
+                                <span className="font-mono text-[10px] text-accent-cyan font-bold border border-accent-cyan/15 bg-accent-cyan/5 px-2 py-0.5 rounded-lg shrink-0">{item.time}</span>
                               </motion.div>
                             ))}
                           </div>
@@ -751,14 +751,14 @@ function NovaShowcase() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -15 }}
                     transition={{ duration: 0.4 }}
-                    className="border border-black/[0.05] rounded-3xl p-6 md:p-8 bg-white/50 backdrop-blur-md max-w-3xl mx-auto"
+                    className="glass-card rounded-3xl p-6 md:p-8 max-w-3xl mx-auto"
                   >
-                    <div className="flex items-center justify-between border-b border-black/[0.05] pb-4 mb-8">
-                      <h3 className="font-display font-bold text-[18px] text-[#1d1d1f]">Memory Timeline</h3>
-                      <span className="text-[10px] font-mono text-blue-600 font-semibold">PERSISTENT EXPERIENCE ENGINE</span>
+                    <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
+                      <h3 className="font-display font-bold text-[18px] text-ink">Memory Timeline</h3>
+                      <span className="text-[10px] font-mono text-accent-cyan font-semibold">PERSISTENT EXPERIENCE ENGINE</span>
                     </div>
 
-                    <div className="relative pl-6 border-l border-black/[0.05] flex flex-col gap-8">
+                    <div className="relative pl-6 border-l border-white/5 flex flex-col gap-8">
                       {[
                         {
                           time: "YESTERDAY",
@@ -789,16 +789,16 @@ function NovaShowcase() {
                       ].map((section) => (
                         <div key={section.time} className="relative group">
                           {/* Bullet marker */}
-                          <div className="absolute -left-[30px] top-1.5 h-2 w-2 rounded-full bg-slate-300 border border-bg group-hover:bg-blue-500 group-hover:border-blue-500/20 transition-all duration-300" />
+                          <div className="absolute -left-[30px] top-1.5 h-2 w-2 rounded-full bg-white/10 border border-bg group-hover:bg-accent-cyan group-hover:border-accent-cyan/20 transition-all duration-300" />
                           
                           <div>
-                            <span className="text-[9.5px] font-mono font-bold tracking-wider text-blue-600">{section.time}</span>
-                            <span className="text-[11px] text-slate-400 ml-3 font-normal">{section.date}</span>
+                            <span className="text-[9.5px] font-mono font-bold tracking-wider text-accent-cyan">{section.time}</span>
+                            <span className="text-[11px] text-ink-2/40 ml-3 font-normal">{section.date}</span>
                           </div>
 
                           <div className="mt-3 flex flex-col gap-3">
                             {section.items.map((item, idx) => (
-                              <div key={idx} className="p-4 bg-white/70 border border-black/[0.04] rounded-2xl text-[13.5px] leading-relaxed text-slate-600 shadow-sm font-normal">
+                              <div key={idx} className="p-4 bg-white/5 border border-white/5 rounded-2xl text-[13.5px] leading-relaxed text-ink-2/70 shadow-sm font-normal">
                                 {item}
                               </div>
                             ))}
@@ -822,11 +822,19 @@ function NovaShowcase() {
                     {/* Left: Copy & Specifications */}
                     <div className="flex flex-col gap-6">
                       <div>
-                        <p className="text-[10px] font-mono tracking-widest text-blue-600 uppercase font-semibold">Interactive Render</p>
-                        <h3 className="font-display font-bold text-[32px] text-[#1d1d1f] mt-1 leading-tight">NOVA N1 Edge</h3>
-                        <p className="text-[14.5px] leading-relaxed text-slate-500 mt-4">
+                        <p className="text-[10px] font-mono tracking-widest text-accent-cyan uppercase font-semibold">Interactive Render</p>
+                        <h3 className="font-display font-bold text-[32px] text-ink mt-1 leading-tight">NOVA N1 Edge</h3>
+                        <p className="text-[14.5px] leading-relaxed text-ink-2/70 mt-4 mb-6">
                           Experience local intelligence with zero latency. The Eaura N1 Edge chip is custom-designed to host large neural parameter cycles on-device, completely bypassing cloud round-trips.
                         </p>
+                        <Link 
+                          to="/nova-exploded"
+                          className="inline-flex items-center gap-2 bg-white/5 border border-white/10 hover:border-accent-cyan/30 text-ink-2 hover:text-white px-5 py-2.5 rounded-full font-medium text-[13px] transition-all duration-300 shadow-xl group"
+                        >
+                          <Activity className="h-4 w-4 text-accent-cyan group-hover:animate-pulse" />
+                          Launch 3D Exploded View
+                          <ArrowRight className="h-4 w-4 ml-1 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                        </Link>
                       </div>
 
                       <div className="flex flex-col gap-4">
@@ -834,9 +842,9 @@ function NovaShowcase() {
                           { title: "N1 Neural Engine", desc: "Structured for offline sequence telemetry processing and zero-knowledge vector lookups." },
                           { title: "Zero-Latency Input", desc: "Local digital signal processing paths handle verbal inputs in sub-50ms cycles." }
                         ].map((spec) => (
-                          <div key={spec.title} className="p-4 bg-white/50 border border-black/[0.05] rounded-2xl">
-                            <h4 className="font-bold text-[13.5px] text-[#1d1d1f]">{spec.title}</h4>
-                            <p className="text-[12.5px] leading-relaxed text-slate-500 mt-1 font-normal">{spec.desc}</p>
+                          <div key={spec.title} className="p-4 bg-white/5 border border-white/5 rounded-2xl">
+                            <h4 className="font-bold text-[13.5px] text-ink">{spec.title}</h4>
+                            <p className="text-[12.5px] leading-relaxed text-ink-2/70 mt-1 font-normal">{spec.desc}</p>
                           </div>
                         ))}
                       </div>
@@ -844,13 +852,13 @@ function NovaShowcase() {
 
                     {/* Right: 3D Render Canvas */}
                     <div className="relative aspect-square w-full max-w-[420px] mx-auto flex items-center justify-center">
-                      <div className="absolute inset-0 bg-[radial-gradient(closest-side,rgba(0,113,227,0.03),transparent_80%)] rounded-full blur-2xl pointer-events-none" />
+                      <div className="absolute inset-0 bg-[radial-gradient(closest-side,rgba(6,182,212,0.05),transparent_80%)] rounded-full blur-2xl pointer-events-none" />
                       
                       <div
                         ref={cardRef}
                         onMouseMove={handleMouseMove}
                         onMouseLeave={handleMouseLeave}
-                        className="relative w-72 h-72 rounded-[40px] border border-black/[0.06] bg-white/80 shadow-xl shadow-black/[0.02] overflow-hidden cursor-grab flex items-center justify-center group backdrop-blur-md"
+                        className="relative w-72 h-72 rounded-[40px] border border-white/10 bg-gradient-to-br from-[#0c1424]/90 to-[#05070a]/90 backdrop-blur-xl shadow-2xl overflow-hidden cursor-grab flex items-center justify-center group"
                         style={{
                           perspective: 1000
                         }}
@@ -863,9 +871,9 @@ function NovaShowcase() {
                           }}
                           className="w-full h-full flex flex-col justify-between p-8"
                         >
-                          <div className="flex justify-between items-center border-b border-black/[0.05] pb-4">
-                            <span className="font-mono text-[9px] text-slate-400">EAURA.HARDWARE.N1</span>
-                            <span className="text-[9px] font-mono text-blue-600 font-bold border border-blue-500/10 bg-blue-500/5 px-2 py-0.5 rounded-full">EDGE ACTIVE</span>
+                          <div className="flex justify-between items-center border-b border-white/5 pb-4">
+                            <span className="font-mono text-[9px] text-ink-2/40">EAURA.HARDWARE.N1</span>
+                            <span className="text-[9px] font-mono text-accent-cyan font-bold border border-accent-cyan/15 bg-accent-cyan/5 px-2 py-0.5 rounded-full">EDGE ACTIVE</span>
                           </div>
 
                           {/* Glowing Processor Core */}
@@ -873,16 +881,16 @@ function NovaShowcase() {
                             <motion.div
                               animate={{ scale: [1, 1.04, 1] }}
                               transition={{ duration: 4, repeat: Infinity }}
-                              className="h-20 w-20 rounded-2xl bg-gradient-to-tr from-blue-500 to-cyan-400 p-[1.5px] shadow-[0_4px_20px_rgba(59,130,246,0.15)]"
+                              className="h-20 w-20 rounded-2xl bg-gradient-to-tr from-accent-cyan to-blue-500 p-[1.5px] shadow-[0_4px_20px_rgba(6,182,212,0.15)]"
                             >
-                              <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center border border-black/[0.03]">
-                                <Cpu className="h-8 w-8 text-blue-500" />
+                              <div className="w-full h-full bg-[#05070a] rounded-2xl flex items-center justify-center border border-white/5">
+                                <Cpu className="h-8 w-8 text-accent-cyan" />
                               </div>
                             </motion.div>
-                            <span className="font-mono text-[9.5px] text-slate-400 tracking-wider mt-4">N1 NEURAL ENGINE</span>
+                            <span className="font-mono text-[9.5px] text-ink-2/40 tracking-wider mt-4">N1 NEURAL ENGINE</span>
                           </div>
 
-                          <div className="border-t border-black/[0.05] pt-4 flex justify-between text-[8px] font-mono text-slate-400">
+                          <div className="border-t border-white/5 pt-4 flex justify-between text-[8px] font-mono text-ink-2/40">
                             <span>Symmetric Keys: Encrypted</span>
                             <span>S/N: 9283-F1B8</span>
                           </div>

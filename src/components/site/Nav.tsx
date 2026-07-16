@@ -57,9 +57,9 @@ export function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-350 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-bg/80 backdrop-blur-xl border-b border-hairline py-3 shadow-[0_1px_0_rgba(0,0,0,0.04)]"
+          ? "bg-[#05070A]/75 backdrop-blur-md border-b border-white/5 py-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]"
           : "bg-transparent border-b border-transparent py-5"
       }`}
     >

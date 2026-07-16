@@ -72,7 +72,7 @@ export function AbstractTechVisualization() {
 
       // 1. Draw subtle background coordinate grid (light mode)
       const gridSize = 64;
-      ctx.strokeStyle = "rgba(0, 0, 0, 0.02)";
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.015)";
       ctx.lineWidth = 0.5;
 
       for (let x = 0; x < dimensions.width; x += gridSize) {
@@ -104,7 +104,7 @@ export function AbstractTechVisualization() {
             const dist = Math.sqrt(distSq);
             // Blend from Apple blue to slate gray for connection lines
             const alpha = (1 - dist / maxDist) * 0.08;
-            ctx.strokeStyle = `rgba(0, 113, 227, ${alpha})`;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
             ctx.beginPath();
             ctx.moveTo(nodeA.x, nodeA.y);
             ctx.lineTo(nodeB.x, nodeB.y);
@@ -153,14 +153,14 @@ export function AbstractTechVisualization() {
         node.alpha += (node.targetAlpha - node.alpha) * 0.05;
 
         // Draw particle node (dark charcoal for light mode contrast)
-        ctx.fillStyle = `rgba(29, 29, 31, ${node.alpha * 0.45})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${node.alpha * 0.45})`;
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
         ctx.fill();
 
         // Subtle core point for nodes near cursor (Apple blue glow center)
         if (node.alpha > 0.35) {
-          ctx.fillStyle = "rgba(0, 113, 227, 0.25)";
+          ctx.fillStyle = "rgba(6, 182, 212, 0.25)";
           ctx.beginPath();
           ctx.arc(node.x, node.y, node.radius * 2.2, 0, Math.PI * 2);
           ctx.fill();
@@ -170,8 +170,8 @@ export function AbstractTechVisualization() {
       // 4. Draw mouse proximity highlight glow (extremely subtle light blue)
       if (mouse.x > -500 && mouse.y > -500) {
         const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 180);
-        gradient.addColorStop(0, "rgba(0, 113, 227, 0.02)");
-        gradient.addColorStop(1, "rgba(0, 113, 227, 0)");
+        gradient.addColorStop(0, "rgba(6, 182, 212, 0.04)");
+        gradient.addColorStop(1, "rgba(6, 182, 212, 0)");
         ctx.fillStyle = gradient;
         ctx.beginPath();
         ctx.arc(mouse.x, mouse.y, 180, 0, Math.PI * 2);

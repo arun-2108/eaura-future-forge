@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TeamRouteImport } from './routes/team'
+import { Route as NovaExplodedRouteImport } from './routes/nova-exploded'
 import { Route as NovaRouteImport } from './routes/nova'
 import { Route as ElekkiRouteImport } from './routes/elekki'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,6 +18,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NovaExplodedRoute = NovaExplodedRouteImport.update({
+  id: '/nova-exploded',
+  path: '/nova-exploded',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NovaRoute = NovaRouteImport.update({
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/elekki': typeof ElekkiRoute
   '/nova': typeof NovaRoute
+  '/nova-exploded': typeof NovaExplodedRoute
   '/team': typeof TeamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/elekki': typeof ElekkiRoute
   '/nova': typeof NovaRoute
+  '/nova-exploded': typeof NovaExplodedRoute
   '/team': typeof TeamRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/elekki': typeof ElekkiRoute
   '/nova': typeof NovaRoute
+  '/nova-exploded': typeof NovaExplodedRoute
   '/team': typeof TeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/elekki' | '/nova' | '/team'
+  fullPaths: '/' | '/elekki' | '/nova' | '/nova-exploded' | '/team'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/elekki' | '/nova' | '/team'
-  id: '__root__' | '/' | '/elekki' | '/nova' | '/team'
+  to: '/' | '/elekki' | '/nova' | '/nova-exploded' | '/team'
+  id: '__root__' | '/' | '/elekki' | '/nova' | '/nova-exploded' | '/team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ElekkiRoute: typeof ElekkiRoute
   NovaRoute: typeof NovaRoute
+  NovaExplodedRoute: typeof NovaExplodedRoute
   TeamRoute: typeof TeamRoute
 }
 
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/team'
       fullPath: '/team'
       preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nova-exploded': {
+      id: '/nova-exploded'
+      path: '/nova-exploded'
+      fullPath: '/nova-exploded'
+      preLoaderRoute: typeof NovaExplodedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nova': {
@@ -106,6 +123,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ElekkiRoute: ElekkiRoute,
   NovaRoute: NovaRoute,
+  NovaExplodedRoute: NovaExplodedRoute,
   TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport
